@@ -73,6 +73,57 @@
         </nav>
 
         <main class="py-4">
+            <div class="container-fluid">
+                <div class="row">
+                        <aside class="col-md-3 item1">
+                            <div class="container mt-4">
+                                <center>
+                                    <a href="">Admin</a>
+                                </center>
+                            </div>
+                            <div class="mx-1 mt-2">
+                                <ul class="nav flex-column">
+                                    <li class="nav-link">
+                                        <a href="" class="nav-link font">
+                                            &nbsp;&nbsp;&nbsp;<span>Home</span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-link">
+                                        <a href="" class="nav-link font">
+                                            &nbsp;&nbsp;&nbsp;<span>Roles</span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-link">
+                                        <a href="" class="nav-link font">
+                                            &nbsp;&nbsp;&nbsp;<span>Usuarios</span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-link">
+                                        <a href="" class="nav-link font">
+                                            &nbsp;&nbsp;&nbsp;<span>Empresas</span>
+                                        </a>
+                                    </li>
+            
+                                </ul>
+                            </div>
+                            <div class="card text-white mb-3" style="margin-top: 20px;">
+                                <div class=" black card-body">
+                                  
+                                </div>
+                            </div>
+                        </aside>
+                        <div class="col-md-9 item2">
+                        @if($message = Session::get('Mensaje'))
+                            <div class="alert alert-success">
+                                <ul>
+                                    <h5>Confirmación:</h5>
+                                    <span>{{ $message }}</span>
+                                </ul>
+                            </div>
+                        @endif
             @yield('content')
         </main>
     </div>
