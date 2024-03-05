@@ -9,7 +9,7 @@
                 <div class="card-body text-dark ">
 
                     
-                    <form action="" method="POST">
+                    <form action="{{ route('editusers.edit')}}" method="POST">
                     @csrf
 
                         <div class="mb-3">
