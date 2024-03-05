@@ -23,3 +23,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
 Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'create'])->name('createroles.create');
+
+Route::get('/user/create/profile', function () {
+    return view('common.createusers');
+});
+
+Route::get('/user/create/resume', function () {
+    return view('common.createresume');
+});
+
+Route::get('/user/edit/profile', function () {
+    return view('common.editusers');
+});
+
+Route::get('/user/edit/resume', function () {
+    return view('common.editresume');
+});
+
