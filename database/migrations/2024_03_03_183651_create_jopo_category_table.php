@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('job_position_id');
             $table->foreign('category_id')->references('id')->on('category');
             $table->foreign('job_position_id')->references('id')->on('job_position');
-            $table->string('is_active', 32)->default('ACTIVE');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

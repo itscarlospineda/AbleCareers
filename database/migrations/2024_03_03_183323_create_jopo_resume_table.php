@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('job_position_id');
             $table->foreign('resume_id')->references('id')->on('resume');
             $table->foreign('job_position_id')->references('id')->on('job_position');
-            $table->string('is_active', 32)->default('ACTIVE');
+            $table->string('is_active', 255)->default('ACTIVE');
             $table->timestamps();
         });
     }
