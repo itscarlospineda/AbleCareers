@@ -7,8 +7,9 @@
 <div class="col">
     <center>
         <img src="/banner.jpg" class="front" alt="" srcset="" width="100%" height="auto">
-        <h2> Somos la mejor opción para tu futuro!</h2>
+        <h2> ¡Somos la mejor opción para tu futuro!</h2>
         <p>Encuentra varias opciones de vacantes disponibles en la palma de tu mano.</p>
+        
     </center>
 </div>
 <div class="container offers">
@@ -38,6 +39,42 @@
             </div>
         </div>
     </div>
+
+    <!--<div class="row py-3">
+      <div class="col">
+          <div class="card">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-sm-6">
+                        <a href="/user/create/request" class="nav-link font2 button">
+                          <h5 class="card-title">¿Eres dueño o administrador de una empresa?</h5> <br><br><br>
+                          <p class="card-text">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores beneficios.</p>
+                          <p class="card-text">Haz clic aquí para aplicar.</p>
+                        </a>
+                      </div>
+                      <div class="col-sm-6 text-right">
+                        <img src="https://www.pascualparada.com/wp-content/uploads/2013/03/empresasRed.jpg" 
+                        class="card-img-right" alt="red-img">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>-->
+
+    <div class="container my-5">
+      <div class="card row flex-row-reverse" style="background-color: white">
+          <img class="col-lg-4 card-img-end img-fluid p-0" src="https://media.geeksforgeeks.org/wp-content/uploads/20230420093202/Internet-image-(2).webp" 
+            width="200px" height="200px"/>
+          <div class="col-lg-8 card-body">
+              <h1 class="card-title">¿Eres dueño o administrador de una empresa?</h1> <br>
+              <p class="card-text">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores beneficios. 
+                Haz clic aquí para aplicar.</p> <br>
+              <a href="/user/create/request" class="btn btn-danger"> <i class="bi bi-building-up"></i>&nbsp;Aplicar</a>
+          </div>
+      </div>
+    </div>
+
 </div>   
 
 <div class="offers">

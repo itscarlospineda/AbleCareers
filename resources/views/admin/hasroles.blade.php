@@ -8,7 +8,7 @@
             <div class="col">
                 <div class="card-body text-dark ">
 
-                    <form action="{{ route('createuserroles.create')}}" method="POST">
+                    <form action="{{ route('createhasroles.create')}}" method="POST">
                     @csrf
 
                         <div class="mb-3">

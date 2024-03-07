@@ -72,10 +72,10 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="">
             <div class="container-fluid">
                 <div class="row">
-                        <aside class="col-md-3 item1">
+                        <aside class="col-md-3 item1" style="background-color: rgb(231, 231, 231); height:100vh;">
                             <div class="container mt-4">
                                 <center>
                                     <a href="">Admin</a>
@@ -84,26 +84,44 @@
                             <div class="mx-1 mt-2">
                                 <ul class="nav flex-column">
                                     <li class="nav-link">
-                                        <a href="" class="nav-link font">
+                                        <a href="/admin/home" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Home</span>
                                         </a>
                                     </li>
                                     
                                     <li class="nav-link">
-                                        <a href="" class="nav-link font">
+                                        <a href="/admin/roles" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Roles</span>
                                         </a>
                                     </li>
             
                                     <li class="nav-link">
-                                        <a href="" class="nav-link font">
+                                        <a href="/admin/check/users" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Usuarios</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-link">
+                                        <a href="/admin/hasroles" class="nav-link font">
+                                            &nbsp;&nbsp;&nbsp;<span>Asignación de Usuarios</span>
                                         </a>
                                     </li>
             
                                     <li class="nav-link">
-                                        <a href="" class="nav-link font">
+                                        <a href="/admin/check/companies" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Empresas</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-link">
+                                        <a href="/admin/check/requests" class="nav-link font">
+                                            &nbsp;&nbsp;&nbsp;<span>Solicitud de Empresas</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-link">
+                                        <a href="#" class="nav-link font">
+                                            &nbsp;&nbsp;&nbsp;<span>Administración de Categorías</span>
                                         </a>
                                     </li>
             

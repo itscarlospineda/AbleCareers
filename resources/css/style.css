@@ -36,12 +36,12 @@ body{
 }
 .nav-link.font:hover{
     background-color: rgb(255, 255, 255);
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: #000000 !important;
     transition: .3s;
 }
 .nav-link.font2:hover{
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: #f05353 !important;
     transition: .3s;
 }

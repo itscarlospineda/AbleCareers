@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-            <div class="col">
+            <div class="col py-4">
                 <h1>Roles de Usuario</h1> <br>
             </div>
 
             <div class="col">
                 <div class="card-body text-dark ">
 
-                    <form action="" method="POST">
+                    <form action="{{ route('createroles.create')}}" method="POST">
                     @csrf
 
                         <div class="mb-3">
