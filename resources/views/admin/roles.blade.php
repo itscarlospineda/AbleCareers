@@ -8,7 +8,7 @@
             <div class="col">
                 <div class="card-body text-dark ">
 
-                    <form action="{{ route('createroles.create')}}" method="POST">
+                    <form action="" method="POST">
                     @csrf
 
                         <div class="mb-3">
