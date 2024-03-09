@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
+use App\Models\user_has_role;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 
 /**
@@ -23,7 +26,7 @@ class UserController extends Controller
         return view('user.index', compact('users'))
             ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -43,10 +46,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(User::$rules);
+        // Valida los datos del formulario
+        $validatedData = $request->validate(User::$rules);
 
-        $user = User::create($request->all());
+        // Crea un nuevo usuario con los datos proporcionados
+        $user = User::create($validatedData);
 
+        // Obtén el modelo de rol correspondiente (en este caso, asumimos que el rol con ID 1 es el predeterminado)
+        $defaultRole = Role::findOrFail(1);
+
+        // Crea una nueva entrada en la tabla user_has_role
+        user_has_role::create([
+            'user_id' => $user->id,
+            'role_id' => $defaultRole->id,
+        ]);
+
+        
+
+        // Redirige al usuario a la página de índice de usuarios con un mensaje de éxito
         return redirect()->route('users.index')
             ->with('success', 'User created successfully.');
     }
@@ -86,23 +103,29 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        request()->validate(User::$rules);
+        // Valida los datos del formulario
+        $validatedData = $request->validate(User::$rules);
 
-        $user->update($request->all());
+        // Actualiza el usuario con los datos proporcionados
+        $user->update($validatedData);
 
+        // Redirige al usuario a la página de índice de usuarios con un mensaje de éxito
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully');
     }
 
     /**
-     * @param int $user_id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * Remove the specified resource from storage.
+     *
+     * @param  int $user_id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($user_id)
     {
-        $user = User::find($user_id)->delete();
+        // Encuentra y elimina el usuario
+        User::find($user_id)->delete();
 
+        // Redirige al usuario a la página de índice de usuarios con un mensaje de éxito
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
     }
