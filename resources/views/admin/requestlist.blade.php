@@ -36,7 +36,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($user_requests as $user_request)
+                        @foreach ($userRequests as $user_request)
                         <tr>
                             <td class="fw-bold">{{ $user_request->id}}</td>
                             <td>{{ $user_request->info}}</td>
@@ -52,12 +52,12 @@
                             </td>
                         </tr>
                         @endforeach
-                        
+
                     </tbody>
                 </table>
                 </div>
               </div>
-            
+
           </div>
       </div>
     </section>
@@ -66,5 +66,5 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
   <script>let table = new DataTable('#example');</script>
-  
+
 @endsection

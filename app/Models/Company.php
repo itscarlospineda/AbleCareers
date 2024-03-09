@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Company extends Model
 {
-    
+    protected $table = 'company';
     static $rules = [
 		'comp_name' => 'required|string',
 		'comp_mail' => 'required|string',
@@ -53,7 +53,7 @@ class Company extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -61,6 +61,6 @@ class Company extends Model
     {
         //return $this->hasMany(\App\Models\JobPosition::class, 'id', 'company_id');
     }
-    
+
 
 }

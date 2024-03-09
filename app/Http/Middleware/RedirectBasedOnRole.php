@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Role; 
-use App\Models\user_has_role; 
+use App\Models\Role;
+use App\Models\user_has_role;
 
 class RedirectBasedOnRole
 {
@@ -31,7 +31,7 @@ class RedirectBasedOnRole
                             case 'superUsuario':
                                 return redirect()->route('admin.adminhome');
                             case 'postulante':
-                                return redirect()->route('home');
+                                return redirect()->route('user.userhome');
                             // Agrega más casos según los roles que tengas en tu sistema
                         }
                     }

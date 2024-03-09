@@ -42,9 +42,9 @@
                         <tr>
                             <td class="fw-bold">{{ $user->id}}</td>
                             <td>{{ $user->name}}</td>
-                            <td>{{ $user->lname}}</td>
-                            <td>{{ $user->phone}}</td>
-                            <td>{{ $user->mail}}</td>
+                            <td>{{ $user->lastName}}</td>
+                            <td>{{ $user->phoneNumber}}</td>
+                            <td>{{ $user->email}}</td>
                             <td>{{ $user->is_active}}</td>
                         </tr>
                         @endforeach
@@ -53,7 +53,7 @@
                 </table>
                 </div>
               </div>
-            
+
           </div>
       </div>
     </section>
@@ -62,5 +62,5 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
   <script>let table = new DataTable('#example');</script>
-  
+
 @endsection
