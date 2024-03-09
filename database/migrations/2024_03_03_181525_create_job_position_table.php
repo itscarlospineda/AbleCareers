@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('job_position', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 191);
-            $table->string('description', 191);
+            $table->string('name', 255);
+            $table->string('description', 255);
             $table->dateTime('post_date');
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('company');
-            $table->string('is_active', 32)->default('ACTIVE');
+            $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
     }

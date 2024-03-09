@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('company_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('comp_id');
             $table->foreign('comp_id')->references('id')->on('company');
-            $table->boolean('is_active')->default(true);
+            $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
     }

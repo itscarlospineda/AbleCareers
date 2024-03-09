@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('user_request', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-
-
-            $table->string('request_info');
-            $table->string('request_status');
-            $table->string('is_active', 255)->default('ACTIVE');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('request_info', 255);
+            $table->string('request_status', 30);
+            $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
     }

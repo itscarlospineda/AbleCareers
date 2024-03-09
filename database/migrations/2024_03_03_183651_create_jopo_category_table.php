@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jopo_category', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('job_position_id');
             $table->foreign('category_id')->references('id')->on('category');
             $table->foreign('job_position_id')->references('id')->on('job_position');
-            $table->boolean('is_active')->default(true);
+            $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
     }
