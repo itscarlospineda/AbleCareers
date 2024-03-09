@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('role', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
-            $table->string('desc', 255);
-            $table->boolean('is_active')->default(true);
+            $table->string('role_name',50);
+            $table->string('updated_at1',255);
+            $table->string('created_at1',255);
+            $table->boolean('is_actives');
+            $table->string('role_desc',255);
             $table->timestamps();
         });
     }
