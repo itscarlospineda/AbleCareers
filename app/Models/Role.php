@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    public $table = 'role';
-    use HasFactory;
-    protected $fillable = ['role_name','updated_at1','created_at1','role_desc'];
-    protected $casts = [
-        'is_active' => 'boolean',
+    protected $table = 'role'; // Especifica el nombre de la tabla
+
+    protected $fillable = [
+        'role_name', 'role_desc', 'is_active',
     ];
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_has_role', 'role_id', 'user_id');
+    }
 }

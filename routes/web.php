@@ -18,15 +18,16 @@ use App\Http\Controllers\UserRequestController;
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('login'); 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('role.redirect:superUsuario,postulante')->get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/admin/home', function () {
     return view('admin.adminhome');
-});
+})->name('admin.adminhome');
 
 Route::get('/admin/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
 Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'create'])->name('createroles.create');
