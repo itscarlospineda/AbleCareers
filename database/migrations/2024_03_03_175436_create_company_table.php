@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('comp_city', 255);
             $table->string('comp_depart', 255);
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('user_id')->on('users');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
