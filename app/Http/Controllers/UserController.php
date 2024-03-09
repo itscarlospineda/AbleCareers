@@ -21,12 +21,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate();
-
-        return view('user.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        $users = User::all();
+        return view('admin\userlist',compact('users'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -61,7 +59,7 @@ class UserController extends Controller
             'role_id' => $defaultRole->id,
         ]);
 
-        
+
 
         // Redirige al usuario a la página de índice de usuarios con un mensaje de éxito
         return redirect()->route('users.index')

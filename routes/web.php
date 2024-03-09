@@ -18,12 +18,21 @@ use App\Http\Controllers\UserRequestController;
 
 Route::get('/', function () {
     return view('auth.login');
-})->name('login'); 
+})->name('login');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware('role.redirect:superUsuario,postulante')->get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
 
 Route::get('/admin/home', function () {
     return view('admin.adminhome');
@@ -32,26 +41,27 @@ Route::get('/admin/home', function () {
 Route::get('/admin/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
 Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'create'])->name('createroles.create');
 
+Route::get('/admin/check/requests', [App\Http\Controllers\UserRequestController::class,'index'])->name('admin.company.request');
+
+Route::get('/admin/check/users', [App\Http\Controllers\UserController::class, 'index'])->name('admin.user.list');
+
+Route::get('/admin/check/companies', [App\Http\Controllers\CompanyController::class,'index'])->name('admin.company.list');
 
 Route::get('/admin/hasroles', function () {
     return view('admin.hasroles');
 });
 
-Route::get('/admin/check/requests', function () {
-    return view('admin.requestlist');
-});
-
-Route::get('/admin/check/users', function () {
-    return view('admin.userlist');
-});
-
-Route::get('/admin/check/companies', function () {
-    return view('admin.companylist');
-});
+/*
+|--------------------------------------------------------------------------
+| USER ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
 
 Route::get('/user/home', function () {
     return view('common.commonhome');
-});
+})->name('user.userhome');
 
 Route::get('/user/create/profile', function () {
     return view('common.createusers');

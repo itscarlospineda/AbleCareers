@@ -18,10 +18,9 @@ class UserRequestController extends Controller
      */
     public function index()
     {
-        $userRequests = UserRequest::paginate();
+        $userRequests = UserRequest::all();
 
-        return view('user-request.index', compact('userRequests'))
-            ->with('i', (request()->input('page', 1) - 1) * $userRequests->perPage());
+        return view('admin.requestlist',compact('userRequests'));
     }
 
     /**

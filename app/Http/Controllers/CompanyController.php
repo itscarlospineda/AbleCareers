@@ -18,10 +18,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::paginate();
-
-        return view('company.index', compact('companies'))
-            ->with('i', (request()->input('page', 1) - 1) * $companies->perPage());
+        $companies = Company::all();
+        return view('admin.companylist',compact('companies'));
     }
 
     /**
