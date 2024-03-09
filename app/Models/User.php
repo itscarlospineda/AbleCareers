@@ -12,6 +12,15 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'user_id';
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,5 +50,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+    ];
+
+
+    static $rules = [
+		'name' => 'required',
+		'email' => 'required',
+		'lastName' => 'required',
+		'phoneNumber' => 'required',
+        
     ];
 }

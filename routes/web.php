@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,7 @@ Route::get('/admin/home', function () {
 
 Route::get('/admin/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
 Route::post('/admin/roles', [App\Http\Controllers\RoleController::class, 'create'])->name('createroles.create');
+
 
 Route::get('/admin/hasroles', function () {
     return view('admin.hasroles');
