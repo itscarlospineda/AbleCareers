@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-            <div class="col">
+            <div class="col py-4">
                 <h1>Roles de Usuario</h1> <br>
             </div>
 
