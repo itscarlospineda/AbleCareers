@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('company', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 191);
-            $table->string('mail', 191);
-            $table->string('phone', 191);
-            $table->string('city', 191);
-            $table->string('depart', 191);
+            $table->string('comp_name', 255);
+            $table->string('comp_mail', 255);
+            $table->string('comp_phone', 255);
+            $table->string('comp_city', 255);
+            $table->string('comp_depart', 255);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('is_active', 32)->default('ACTIVE');
+            $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
     }
