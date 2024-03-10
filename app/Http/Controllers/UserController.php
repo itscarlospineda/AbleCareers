@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('is_active','!=','INACTIVE')->get();
         return view('admin\userlist',compact('users'));
     }
 
