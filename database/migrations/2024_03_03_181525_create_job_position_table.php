@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_position', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 255);
-            $table->string('description', 255);
-            $table->dateTime('post_date');
-            $table->unsignedBigInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('company');
-            $table->string('is_active', 25)->default('ACTIVE');
+        Schema::create('job__positions', function (Blueprint $table) {
+            $table->bigIncrements('jobpo_id');
+            $table->string('jobpo_name');
+            $table->text('jobpo_desc');
+            $table->string('jobpo_date');
+            $table->string('jobpo_state',30);
+            $table->unsignedBigInteger('comp_id');
+            $table->foreign('comp_id')->references('id')->on('company'); 
             $table->timestamps();
+
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_position');
+        Schema::dropIfExists('job__positions');
     }
 };
