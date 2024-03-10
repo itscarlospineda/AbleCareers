@@ -88,33 +88,33 @@
                                             &nbsp;&nbsp;&nbsp;<span>Home</span>
                                         </a>
                                     </li>
-                                    
+
                                     <li class="nav-link">
-                                        <a href="/admin/roles" class="nav-link font">
+                                        <a href="{{ route('admin.roles.index') }}" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Roles</span>
                                         </a>
                                     </li>
-            
+
                                     <li class="nav-link">
-                                        <a href="/admin/check/users" class="nav-link font">
+                                        <a href="{{route('admin.users.index')}}" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Usuarios</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="/admin/hasroles" class="nav-link font">
+                                        <a href="{{'COLOCAR ROL AQUI'}}" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Asignación de Usuarios</span>
                                         </a>
                                     </li>
-            
+
                                     <li class="nav-link">
-                                        <a href="/admin/check/companies" class="nav-link font">
+                                        <a href="{{route('admin.companies.index')}}" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Empresas</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="/admin/check/requests" class="nav-link font">
+                                        <a href="{{route('admin.requests.index')}}" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Solicitud de Empresas</span>
                                         </a>
                                     </li>
@@ -124,12 +124,12 @@
                                             &nbsp;&nbsp;&nbsp;<span>Administración de Categorías</span>
                                         </a>
                                     </li>
-            
+
                                 </ul>
                             </div>
                             <div class="card text-white mb-3" style="margin-top: 20px;">
                                 <div class=" black card-body">
-                                  
+
                                 </div>
                             </div>
                         </aside>
