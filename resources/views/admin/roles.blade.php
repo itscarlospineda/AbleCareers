@@ -8,7 +8,7 @@
             <div class="col">
                 <div class="card-body text-dark ">
 
-                    <form action="{{ route('createroles.create')}}" method="POST">
+                    <form action="{{ route('admin.roles.store')}}" method="POST">
                     @csrf
 
                         <div class="mb-3">
@@ -19,16 +19,16 @@
                             <label for="title" class="form-label">Descripción</label>
                             <input type="text" class="form-control" name="desc">
                         </div>
-            
+
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-floppy"></i>&nbsp;Guardar
-                        </button> 
+                        </button>
 
                     </form>
                 </div>
             </div>
         </div>
-    </div>       
+    </div>
 </div>
 
 @endsection

@@ -38,4 +38,8 @@ class RoleController extends Controller
 
         return redirect()->route('roles')->with($message='Mensaje','El registro ha sido ingresado de forma exitosa.');
     }
+
+    public function store(){
+        
+    }
 }

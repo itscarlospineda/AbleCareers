@@ -86,40 +86,40 @@
                             <div class="mx-1 mt-2">
                                 <ul class="nav flex-column">
                                     <li class="nav-link">
-                                        <a href="/user/home" class="nav-link font">
+                                        <a href="{{route('user.userhome')}}" class="nav-link font">
                                             <i class="bi bi-house-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Home</span>
                                         </a>
                                     </li>
-                                
+
                                     <li class="nav-link">
                                         <a href="" class="nav-link font">
                                             <i class="bi bi-briefcase-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Empleos</span>
                                         </a>
                                     </li>
-        
+
                                     <li class="nav-link">
                                         <a href="" class="nav-link font">
                                             <i class="bi bi-people-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Personas</span>
                                         </a>
                                     </li>
-        
+
                                     <li class="nav-link">
                                         <a href="" class="nav-link font">
                                             <i class="bi bi-file-earmark-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Posts</span>
                                         </a>
                                     </li>
-        
+
                                     <li class="nav-link">
                                         <a href="" class="nav-link font">
                                             <i class="bi bi-envelope-at-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Mensajes</span>
                                         </a>
                                     </li>
-        
+
                                     <li class="nav-link">
                                         <a href="" class="nav-link font">
                                             <i class="bi bi-bell-fill"></i>
@@ -130,10 +130,10 @@
                             </div>
                             <div class="card text-white mb-3" style="margin-top: 20px;">
                                 <div class="card-body">
-                                    
+
                                 </div>
                             </div>
-                        
+
                         </aside>
                         <div class="col-md-9 item2">
                         @if($message = Session::get('Mensaje'))

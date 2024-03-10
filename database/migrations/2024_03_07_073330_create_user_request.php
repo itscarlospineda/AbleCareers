@@ -11,22 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_has_role', function (Blueprint $table) {
+        Schema::create('user_request', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('role_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('role_id')->references('id')->on('role');
+            $table->string('request_info', 255);
+            $table->string('request_status', 30);
             $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
     }
 
-    /**
+    /**ph
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::dropIfExists('user_has_role');
+    {   Schema::table('user_request', function (Blueprint $table) {
+        // Eliminar la clave externa antes de eliminar la tabla
+        $table->dropForeign(['user_id']);
+    });
+    
+
+        Schema::dropIfExists('user_request');
     }
 };

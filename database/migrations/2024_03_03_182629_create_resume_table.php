@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('resume', function (Blueprint $table) {
             $table->id();
-            $table->string('info', 191);
-            $table->string('education', 191);
-            $table->string('work_experience', 191);
-            $table->string('extra', 191);
-            $table->string('reference', 191);
-            $table->string('photo', 191);
+            $table->string('info', 255);
+            $table->string('education', 255);
+            $table->string('work_experience', 255);
+            $table->string('extra', 255);
+            $table->string('reference', 255);
+            $table->string('photo', 255);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('is_active', 32)->default('ACTIVE');
+            $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
     }

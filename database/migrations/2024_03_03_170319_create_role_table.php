@@ -1,5 +1,7 @@
 <?php
 
+
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('role', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
-            $table->string('desc', 191);
-            $table->boolean('is_active')->default(true);
+            $table->string('role_name', 50);
+            $table->string('role_desc', 255);
+            $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
     }
@@ -28,3 +30,4 @@ return new class extends Migration
         Schema::dropIfExists('role');
     }
 };
+

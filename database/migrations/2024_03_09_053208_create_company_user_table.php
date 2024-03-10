@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jopo_category', function (Blueprint $table) {
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('job_position_id');
-            $table->foreign('category_id')->references('id')->on('category');
-            $table->foreign('job_position_id')->references('id')->on('job_position');
+        Schema::create('company_user', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('comp_id');
+            $table->foreign('comp_id')->references('id')->on('company');
             $table->string('is_active', 25)->default('ACTIVE');
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jopo_category');
+        Schema::dropIfExists('company_user');
     }
 };
