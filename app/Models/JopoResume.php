@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class JopoResume extends Model
 {
 
+    protected $table = 'jopo_resume';
+    
     static $rules = [
         'resume_id' => 'required',
         'job_position_id' => 'required'

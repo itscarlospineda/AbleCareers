@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job_Position extends Model
 {
+    protected $table = 'job_position';
     use HasFactory;
-    protected $table = 'job__positions';
     protected $primaryKey = 'jobpo_id';
 }
