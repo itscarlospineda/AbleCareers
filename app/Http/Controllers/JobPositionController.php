@@ -8,7 +8,7 @@ class JobPositionController extends Controller
 {
     public function readJobPosition()
 {
-    $Jobpo = \DB::table('job__positions')
+    $Jobpo = DB::table('job__positions')
     ->select('job__positions.*')
     ->orderBy('jobpo_id','DESC')
     ->get();

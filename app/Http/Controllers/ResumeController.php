@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Resume;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 /**
  * Class ResumeController
@@ -18,92 +20,83 @@ class ResumeController extends Controller
      */
     public function index()
     {
-        $resumes = Resume::paginate();
+        // Filtrar los resúmenes que estén marcados como activos
+        $resumes = Resume::where('is_active', 'ACTIVE')->get();
+        return view('resume.hresume', compact('resumes'));
 
-        return view('resume.index', compact('resumes'))
-            ->with('i', (request()->input('page', 1) - 1) * $resumes->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function pdf(){
+        $resumes = Resume::all();
+        $pdf = Pdf::loadView('resume.pdf',compact('resumes'));
+        return $pdf->stream();
+
+
+    }
+
     public function create()
     {
         $resume = new Resume();
-        return view('resume.create', compact('resume'));
+        return view('resume.crear', compact('resume'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        request()->validate(Resume::$rules);
-
-        $resume = Resume::create($request->all());
-
-        return redirect()->route('resumes.index')
-            ->with('success', 'Resume created successfully.');
+        $requestData = $request->all();
+        $fileName = time() . $request->file('photo')->getClientOriginalName();
+        $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+        $requestData["photo"] = 'storage/images/' . $fileName;
+        Resume::create($requestData);
+    
+        // Redirigir de vuelta a la página anterior
+     return back()->with('flash_message', 'Employee added successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $resume = Resume::find($id);
+    // public function show($id)
+    // {
+    //     $resume = Resume::find($id);
 
-        return view('resume.show', compact('resume'));
-    }
+    //     return view('resume.show', compact('resume'));
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $resume = Resume::find($id);
-
-        return view('resume.edit', compact('resume'));
+        $resume = Resume::findOrFail($id);
+        return view('resume.editar', compact('resume'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Resume $resume
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Resume $resume)
-    {
-        request()->validate(Resume::$rules);
 
-        $resume->update($request->all());
 
-        return redirect()->route('resumes.index')
-            ->with('success', 'Resume updated successfully');
+
+
+ 
+public function update(Request $request, $id)
+{
+    $resume = Resume::findOrFail($id);
+
+    $requestData = $request->all();
+
+    if ($request->hasFile('photo')) {
+        Storage::delete($resume->photo);
+        $fileName = time() . $request->file('photo')->getClientOriginalName();
+        $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+        $requestData["photo"] = '/storage/images/' . $fileName;
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
+    $resume->update($requestData);
+
+    return back()->with('flash_message', 'Resumen actualizado exitosamente.');
+}
+
+
+    
+    
     public function destroy($id)
     {
-        $resume = Resume::find($id)->delete();
-
-        return redirect()->route('resumes.index')
-            ->with('success', 'Resume deleted successfully');
+    $resume = Resume::findOrFail($id);
+    $resume->update(['is_active' => 'INACTIVE']);
+    
+    return back()->with('flash_message', 'Resumen eliminado exitosamente.');
     }
+
 }

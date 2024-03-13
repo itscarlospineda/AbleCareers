@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CompanyUser extends Model
 {
-    protected $table = 'category';
+    protected $table = 'company_user';
         
     static $rules = [
 		'user_id' => 'required',

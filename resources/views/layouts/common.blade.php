@@ -107,7 +107,7 @@
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="" class="nav-link font">
+                                        <a href="{{ route('resume.index') }}" class="nav-link font">
                                             <i class="bi bi-file-earmark-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Posts</span>
                                         </a>

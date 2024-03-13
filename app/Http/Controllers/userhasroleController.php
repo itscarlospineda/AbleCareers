@@ -52,7 +52,7 @@ class userhasroleController extends Controller
     public function destroy($id)
     {
         $tieneCargo = user_has_role::findOrFail($id);
-        $tieneCargo->delete();
+        // $tieneCargo->delete();
         return redirect()->route('user_has_role.index');
     }
 }

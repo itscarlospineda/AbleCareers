@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
 
 class Resume extends Model
 {
@@ -17,17 +17,26 @@ class Resume extends Model
 		'reference' => 'required|string',
 		'photo' => 'required|string',
 		'user_id' => 'required',
-		'is_active' => 'required|string',
     ];
 
-    protected $perPage = 20;
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($resume) {
+            $user = Auth::user(); // Obtener el usuario autenticado
+            $resume->user_id = $user->id; // Asignar el id del usuario autenticado al campo user_id
+        });
+    }
+
+
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['info','education','work_experience','extra','reference','photo','user_id','is_active'];
+    protected $fillable = ['info','education','work_experience','extra','reference','photo','user_id'];
 
 
     /**
