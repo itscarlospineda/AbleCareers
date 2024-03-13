@@ -18,7 +18,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::all(); //$resumes = Resume::where('is_active', 'ACTIVE')->get();
         return view('admin.companylist',compact('companies'));
     }
 
@@ -92,9 +92,5 @@ class CompanyController extends Controller
             ->with('success', 'Company updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
+    //update=desactive
 }

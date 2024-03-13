@@ -18,10 +18,10 @@ class CompanyUserController extends Controller
      */
     public function index()
     {
-        $companyUsers = CompanyUser::paginate();
+        $companyUsers = CompanyUser::paginate(); //$resumes = Resume::where('is_active', 'ACTIVE')->get();
 
-        return view('company-user.index', compact('companyUsers'))
-            ->with('i', (request()->input('page', 1) - 1) * $companyUsers->perPage());
+        return view('company-user.index', compact('companyUsers'));  
+            // ->with('i', (request()->input('page', 1) - 1) * $companyUsers->perPage());
     }
 
     /**
@@ -94,9 +94,5 @@ class CompanyUserController extends Controller
             ->with('success', 'CompanyUser updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
+    //update = desactive
 }
