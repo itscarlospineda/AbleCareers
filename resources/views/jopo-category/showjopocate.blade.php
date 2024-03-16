@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('template_title')
     {{ $jopoCategory->name ?? __('Show') . " " . __('Jopo Category') }}
