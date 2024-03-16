@@ -120,7 +120,7 @@
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="#" class="nav-link font">
+                                        <a href="{{ route('admin.category.index') }}" class="nav-link font">
                                             &nbsp;&nbsp;&nbsp;<span>Administración de Categorías</span>
                                         </a>
                                     </li>
