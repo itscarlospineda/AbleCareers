@@ -17,7 +17,7 @@
             <tr>
                 <td>{{ $resume->info }}</td>
                 <td>{{ $resume->education }}</td>
-                <td><img src="/storage{{ $resume->photo }}" alt="Foto del resumen" style="max-width: 100px; max-height: 100px;">
+                <td><img src="{{ asset("/$resume->photo") }}" alt="Foto del resumen" style="max-width: 100px; max-height: 100px;">
                 </td>
                 <td>
                     <a href="{{ route('resume.edit', ['id' => $resume->id]) }}" class="btn btn-outline-primary">Editar</a>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </div>
-                </td>                                    
+                </td>
             </tr>
             @endforeach
         </tbody>
