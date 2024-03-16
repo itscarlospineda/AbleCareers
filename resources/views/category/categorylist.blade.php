@@ -30,7 +30,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Activo</th>
+                            <th scope="col">Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,9 @@
                         <tr>
                             <td class="fw-bold">{{ $category->id}}</td>
                             <td>{{ $category->name}}</td>
-                            <td>{{ $category->is_active}}</td>
+                            <td>
+                                //AQUI FALTA BOTON DE EDITAR ya vendre
+                            </td>
                         </tr>
                         @endforeach
 

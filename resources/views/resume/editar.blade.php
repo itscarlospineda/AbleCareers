@@ -4,9 +4,9 @@
 <div class="col">
     <h1>Editar Resumen</h1>
     <br>
-    
+
     <!-- Formulario para actualizar los datos del resumen -->
-    <form action="{{ route('resume.update', $resume->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('resume.update_or_destroy', $resume->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -34,7 +34,9 @@
             <input type="file" class="form-control-file" id="photo" name="photo">
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="submit" class="btn btn-primary" name="action" value="update">Actualizar</button>
+        <button type="submit" class="btn btn-primary" name="action" value="destroy">Eliminar</button>
+
         <a href="{{ route('resume.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>

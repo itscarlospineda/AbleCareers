@@ -96,8 +96,8 @@ Route::get('/resume/create',[App\Http\Controllers\ResumeController::class, 'crea
 Route::post('/resume',[App\Http\Controllers\ResumeController::class, 'store'])->name('resume.store');
 // Route::get('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'show'])->name('resume.show');
 Route::get('/resume/{id}/edit',[App\Http\Controllers\ResumeController::class, 'edit'])->name('resume.edit');
-Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'update'])->name('resume.update');
-Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'destroy'])->name('resume.destroy');
+Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'update_or_destroy'])->name('resume.update_or_destroy');
+//Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'update'])->name('resume.update');
 
 
 /*

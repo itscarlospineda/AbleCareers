@@ -26,9 +26,10 @@ class ResumeController extends Controller
 
     }
 
-    public function pdf(){
+    public function pdf()
+    {
         $resumes = Resume::all();
-        $pdf = Pdf::loadView('resume.pdf',compact('resumes'));
+        $pdf = Pdf::loadView('resume.pdf', compact('resumes'));
         return $pdf->stream();
 
 
@@ -39,7 +40,7 @@ class ResumeController extends Controller
         $resume = new Resume();
         return view('resume.crear', compact('resume'));
     }
-    
+
     public function store(Request $request)
     {
         $requestData = $request->all();
@@ -47,9 +48,9 @@ class ResumeController extends Controller
         $path = $request->file('photo')->storeAs('images', $fileName, 'public');
         $requestData["photo"] = 'storage/images/' . $fileName;
         Resume::create($requestData);
-    
+
         // Redirigir de vuelta a la página anterior
-     return back()->with('flash_message', 'Employee added successfully.');
+        return back()->with('flash_message', 'Employee added successfully.');
     }
 
     // public function show($id)
@@ -69,34 +70,36 @@ class ResumeController extends Controller
 
 
 
- 
-public function update(Request $request, $id)
-{
-    $resume = Resume::findOrFail($id);
 
-    $requestData = $request->all();
-
-    if ($request->hasFile('photo')) {
-        Storage::delete($resume->photo);
-        $fileName = time() . $request->file('photo')->getClientOriginalName();
-        $path = $request->file('photo')->storeAs('images', $fileName, 'public');
-        $requestData["photo"] = '/storage/images/' . $fileName;
-    }
-
-    $resume->update($requestData);
-
-    return back()->with('flash_message', 'Resumen actualizado exitosamente.');
-}
-
-
-    
-    
-    public function destroy($id)
+    public function update_or_destroy(Request $request, $id)
     {
-    $resume = Resume::findOrFail($id);
-    $resume->update(['is_active' => 'INACTIVE']);
-    
-    return back()->with('flash_message', 'Resumen eliminado exitosamente.');
+        $action = $request->input('action');
+        $resume = Resume::findOrFail($id);
+        if ($action == 'update') {
+
+
+            $requestData = $request->all();
+
+            if ($request->hasFile('photo')) {
+                Storage::delete($resume->photo);
+                $fileName = time() . $request->file('photo')->getClientOriginalName();
+                $path = $request->file('photo')->storeAs('images', $fileName, 'public');
+                $requestData["photo"] = '/storage/images/' . $fileName;
+            }
+
+            $resume->update($requestData);
+
+            return back()->with('flash_message', 'Resumen actualizado exitosamente.');
+        }
+        if ($action == 'destroy') {
+            $resume->is_active = 'INACTIVE';
+            $resume->save();
+
+            return back()->with('flash_message', 'Resumen eliminado exitosamente.'); //TA PERFECTO, BELLO
+        }
+
     }
+
+
 
 }
