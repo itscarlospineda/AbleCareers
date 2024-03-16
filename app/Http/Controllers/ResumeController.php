@@ -6,6 +6,7 @@ use App\Models\Resume;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ResumeController
@@ -20,20 +21,29 @@ class ResumeController extends Controller
      */
     public function index()
     {
-        // Filtrar los resúmenes que estén marcados como activos
-        $resumes = Resume::where('is_active', 'ACTIVE')->get();
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+
+        // Filtrar los resúmenes que estén marcados como activos y relacionados con el usuario autenticado
+        $resumes = Resume::where('user_id', $user->id)
+                     ->where('is_active', 'ACTIVE')
+                     ->get();
+
         return view('resume.hresume', compact('resumes'));
-
     }
 
-    public function pdf()
+    public function pdf($id)
     {
-        $resumes = Resume::all();
-        $pdf = Pdf::loadView('resume.pdf', compact('resumes'));
+        // Obtener el resumen específico por su ID
+        $resume = Resume::findOrFail($id);
+        
+        // Cargar la vista PDF con el resumen obtenido
+        $pdf = PDF::loadView('resume.pdf', compact('resume'));
+        
+        // Devolver el PDF como una respuesta
         return $pdf->stream();
-
-
     }
+    
 
     public function create()
     {
@@ -95,7 +105,7 @@ class ResumeController extends Controller
             $resume->is_active = 'INACTIVE';
             $resume->save();
 
-            return back()->with('flash_message', 'Resumen eliminado exitosamente.'); //TA PERFECTO, BELLO
+            return redirect()->route('resume.index')->with('flash_message', 'Resumen eliminado exitosamente.');
         }
 
     }
