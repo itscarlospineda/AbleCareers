@@ -1,4 +1,4 @@
-@extends('layouts.app')
+i@extends('layouts.app')
 
 @section('template_title')
     {{ __('Update') }} Job Position
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Job Position</span>
+                        <span class="card-title">{{ __('Editar') }} Posicion de trabajo</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('job-positions.update', $jobPosition->id) }}"  role="form" enctype="multipart/form-data">
