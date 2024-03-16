@@ -26,8 +26,8 @@ class ResumeController extends Controller
 
         // Filtrar los resúmenes que estén marcados como activos y relacionados con el usuario autenticado
         $resumes = Resume::where('user_id', $user->id)
-                     ->where('is_active', 'ACTIVE')
-                     ->get();
+            ->where('is_active', 'ACTIVE')
+            ->get();
 
         return view('resume.hresume', compact('resumes'));
     }
@@ -36,14 +36,14 @@ class ResumeController extends Controller
     {
         // Obtener el resumen específico por su ID
         $resume = Resume::findOrFail($id);
-        
+
         // Cargar la vista PDF con el resumen obtenido
         $pdf = PDF::loadView('resume.pdf', compact('resume'));
-        
+
         // Devolver el PDF como una respuesta
         return $pdf->stream();
     }
-    
+
 
     public function create()
     {

@@ -110,6 +110,8 @@ Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'update
 
 Route::get('/category/categorylist', [App\Http\Controllers\CategoryController::class, 'readCategory'])->name('admin.category.index');
 Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'viewnewCategory'])->name('admin.category.create');
+Route::get('/category/{id}/edit',[App\Http\Controllers\CategoryController::class, 'edit']) -> name('admin.category.edit');
+Route::put('/category/{id}',[App\Http\Controllers\CategoryController::class,'update_or_destroy'])->name('admin.category.update_or_destroy');
 Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store'])->name('admin.category.store');
 
 
