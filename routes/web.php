@@ -108,5 +108,10 @@ Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'destro
 |
 */
 
+Route::get('/category/categorylist', [App\Http\Controllers\CategoryController::class, 'readCategory'])->name('admin.category.index');
+Route::get('/category/categorycreate', [App\Http\Controllers\CategoryController::class, 'viewnewCategory'])->name('admin.category.create');
+Route::post('/category/categorycreate', [App\Http\Controllers\CategoryController::class, 'createCategory'])->name('admin.category.create');
+
+
 //get /admin/category, name -> admin.category.index
 //get /admin/category/create, 
