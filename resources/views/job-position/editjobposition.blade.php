@@ -1,4 +1,4 @@
-i@extends('layouts.app')
+i@extends('layouts.admin')
 
 @section('template_title')
     {{ __('Update') }} Job Position
