@@ -16,20 +16,13 @@
             <div class="col">
                 <div class="card-body text-dark ">
 
-                    <form action="{{ route('admin.category.create')}}" method="POST">
+                    <form action="{{ route('admin.category.store')}}" method="POST">
                     @csrf
 
                         <div class="mb-3">
                             <label for="title" class="form-label">Nombre de categoria</label>
                             <input type="text" class="form-control" name="name">
                         </div>
-                        <div class="mb-3">
-                            
-                            <label for="title" class="form-label">Activo</label>
-                            <input type="text" class="form-control" name="is_active">
-                            
-                        </div>
-
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-floppy"></i>&nbsp;Guardar
                         </button>

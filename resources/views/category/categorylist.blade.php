@@ -35,7 +35,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($category as $category)
+                        @foreach ($categories as $category)
                         <tr>
                             <td class="fw-bold">{{ $category->id}}</td>
                             <td>{{ $category->name}}</td>
@@ -52,12 +52,11 @@
                         </button>
                 </div>
               </div>
-          
+
     </section>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
-  <script>let table = new DataTable('#example');</script>
 
 @endsection

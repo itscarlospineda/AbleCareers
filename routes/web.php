@@ -90,14 +90,14 @@ Route::get('/user/edit/resume', function () {
 |
 |
 */
-Route::get('/resume/pdf',[App\Http\Controllers\ResumeController::class, 'pdf'])->name('resume.pdf');  
-Route::get('/resume',[App\Http\Controllers\ResumeController::class, 'index'])->name('resume.index');  
-Route::get('/resume/create',[App\Http\Controllers\ResumeController::class, 'create'])->name('resume.create');  
-Route::post('/resume',[App\Http\Controllers\ResumeController::class, 'store'])->name('resume.store');  
-// Route::get('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'show'])->name('resume.show');  
+Route::get('/resume/pdf',[App\Http\Controllers\ResumeController::class, 'pdf'])->name('resume.pdf');
+Route::get('/resume',[App\Http\Controllers\ResumeController::class, 'index'])->name('resume.index');
+Route::get('/resume/create',[App\Http\Controllers\ResumeController::class, 'create'])->name('resume.create');
+Route::post('/resume',[App\Http\Controllers\ResumeController::class, 'store'])->name('resume.store');
+// Route::get('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'show'])->name('resume.show');
 Route::get('/resume/{id}/edit',[App\Http\Controllers\ResumeController::class, 'edit'])->name('resume.edit');
-Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'update'])->name('resume.update');  
-Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'destroy'])->name('resume.destroy');  
+Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'update'])->name('resume.update');
+Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'destroy'])->name('resume.destroy');
 
 
 /*
@@ -109,9 +109,9 @@ Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'destro
 */
 
 Route::get('/category/categorylist', [App\Http\Controllers\CategoryController::class, 'readCategory'])->name('admin.category.index');
-Route::get('/category/categorycreate', [App\Http\Controllers\CategoryController::class, 'viewnewCategory'])->name('admin.category.create');
-Route::post('/category/categorycreate', [App\Http\Controllers\CategoryController::class, 'createCategory'])->name('admin.category.create');
+Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'viewnewCategory'])->name('admin.category.create');
+Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store'])->name('admin.category.store');
 
 
 //get /admin/category, name -> admin.category.index
-//get /admin/category/create, 
+//get /admin/category/create,
