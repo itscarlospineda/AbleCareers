@@ -12,10 +12,10 @@
         <tr>
             <td>{{ $resume->info }}</td>
             <td>{{ $resume->education }}</td>
-            <td><img src="{{ asset('storage/images/' . $resume->photo) }}"  style="max-width: 100px; max-height: 100px;">
-            </td>                     
+            <td><img src="{{ asset("/$resume->photo") }}"  style="max-width: 100px; max-height: 100px;">
+            </td>
         </tr>
         @endforeach
     </tbody>
-    
+
 </table>
