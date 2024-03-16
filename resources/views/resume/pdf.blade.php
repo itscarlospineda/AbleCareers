@@ -1,5 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
 
-<table id="resumes-table" class="table table-striped table-hover">
+<table id="resumes-table">
     <thead>
         <tr>
             <th>Información</th>
@@ -8,14 +34,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($resumes as $resume)
         <tr>
             <td>{{ $resume->info }}</td>
             <td>{{ $resume->education }}</td>
-            <td><img src="{{ asset("/$resume->photo") }}"  style="max-width: 100px; max-height: 100px;">
-            </td>
+            <td><img src="{{ asset("/$resume->photo") }}"></td>
         </tr>
-        @endforeach
     </tbody>
-
 </table>
+
+</body>
+</html>

@@ -29,13 +29,16 @@
             <label for="reference">Referencia:</label>
             <input type="text" class="form-control" id="reference" name="reference" value="{{ $resume->reference }}">
         </div>
+        <br>
+        <br>
         <div class="form-group">
             <label for="photo">Foto:</label>
             <input type="file" class="form-control-file" id="photo" name="photo">
         </div>
         <br>
+        <br>
         <button type="submit" class="btn btn-primary" name="action" value="update">Actualizar</button>
-        <button type="submit" class="btn btn-primary" name="action" value="destroy">Eliminar</button>
+        <button type="submit" class="btn btn-danger" name="action" value="destroy">Eliminar</button>
 
         <a href="{{ route('resume.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
