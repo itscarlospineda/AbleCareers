@@ -60,7 +60,7 @@ Route::get('/admin/hasroles', function () {
 */
 
 Route::get('/user/home', function () {
-    return view('common.commonhome');
+    return view('home.commonhome');
 })->name('user.userhome');
 
 Route::get('/user/create/profile', function () {
