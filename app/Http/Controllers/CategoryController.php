@@ -20,8 +20,8 @@ class CategoryController extends Controller
             Honestamente seria demasiado decir que se le cambio. Todo estaba incorrecto, no existian validaciones y tampoco retornaba una vista de forma correcta (con el compact).
 
         */
-        $categories = Category::where('is_active','ACTIVE')->get();
-        return view('category.categorylist',compact('categories'));
+        $categories = Category::where('is_active', 'ACTIVE')->get();
+        return view('category.categorylist', compact('categories'));
     }
 
 
@@ -53,7 +53,7 @@ class CategoryController extends Controller
         $category->save();
 
 
-        return redirect()->route('admin.category.index')->with('success','Category created successfully.');
+        return redirect()->route('admin.category.index')->with('success', 'Category created successfully.');
 
     }
 
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     }
 
 
-    public function edit($category)
+    public function edit($id)
     {
         /*  Correcciones creadas en este método:
 
@@ -75,36 +75,24 @@ class CategoryController extends Controller
 
         */
 
-        $category = Category::find($category);
-        return view('editCategory', compact('category'));
+        $category = Category::findOrFail($id);
+        return view('category.category-edit', compact('category'));
     }
 
 
-    public function update(Category $category, Request $request)
-    {
-        /*  Correcciones creadas en este método:
-
-            Nombre del metodo: Tal y como se especifico en el documento de directices lo que sea para editar [de tipo put] algun registro se le nombrara "update".
-
-            Cambios en variables:
-            'is_active' es un campo que no debe pasarse para update si no es un metodo de tipo "destroy".
-
-            Cambios en el metodo:
-            Se ha agregado una funcion return el cual devuelve un estado de "success" cuando la categoria ha sido editada.
-        */
-
-        /* =========================================
-            Valida si el nombre de la categoria es por lo menos de 5 caracteres
-
-        */
-        $request->validate(
-            [
-                'name' => 'required|string|min:5',
-            ]
-        );
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->route('admin.category.index')->with('success','Category Updated');
+    public function update_or_destroy(Request $request,$id){
+        $action = $request->input('action');
+        $category = Category::findOrFail($id);
+        if ($action == 'update') {
+            $category->name = $request->input('name');
+            $category->save();
+            return back()->with('flash_message','Categoria actualizada exitosamente.');
+        }
+        if($action == 'destroy'){
+            $category->is_active = 'INACTIVE';
+            $category->save();
+            return redirect()->route('admin.category.index')->with('flash_message','Categoria eliminada exitosamente.');
+        }
     }
 }
 

@@ -1,8 +1,8 @@
 @extends('layouts.common')
 
 @section('content')
-<a href="{{ route('resume.create')}}">Crear</a>
-<div class="table-responsive">
+<a href="{{ route('resume.create')}}" class="btn btn-outline-success">Crear</a>
+<div class="table-responsive mt-3">
     <table id="resumes-table" class="table table-striped table-hover">
         <thead>
             <tr>
@@ -21,7 +21,7 @@
                 </td>
                 <td>
                     <a href="{{ route('resume.edit', ['id' => $resume->id]) }}" class="btn btn-outline-primary">Editar</a>
-                    <a href="{{ route('resume.pdf', ['id' => $resume->id]) }}" class="btn btn-outline-primary">Ver</a>
+                    <a href="{{ route('resume.pdf', ['id' => $resume->id]) }}" class="btn btn-outline-info">Ver</a>
                 </td>
             </tr>
             @endforeach

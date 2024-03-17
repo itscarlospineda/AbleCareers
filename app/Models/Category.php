@@ -11,5 +11,5 @@ class Category extends Model
 
     use HasFactory;
 
-    protected $primaryKey = 'cat_id';
+    protected $primaryKey = 'id';
 }

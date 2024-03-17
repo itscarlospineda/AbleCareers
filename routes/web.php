@@ -90,7 +90,7 @@ Route::get('/user/edit/resume', function () {
 |
 |
 */
-Route::get('/resume/pdf',[App\Http\Controllers\ResumeController::class, 'pdf'])->name('resume.pdf');
+Route::get('/resume/pdf/{id}', [App\Http\Controllers\ResumeController::class, 'pdf'])->name('resume.pdf');
 Route::get('/resume',[App\Http\Controllers\ResumeController::class, 'index'])->name('resume.index');
 Route::get('/resume/create',[App\Http\Controllers\ResumeController::class, 'create'])->name('resume.create');
 Route::post('/resume',[App\Http\Controllers\ResumeController::class, 'store'])->name('resume.store');
@@ -110,6 +110,8 @@ Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'update
 
 Route::get('/category/categorylist', [App\Http\Controllers\CategoryController::class, 'readCategory'])->name('admin.category.index');
 Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'viewnewCategory'])->name('admin.category.create');
+Route::get('/category/{id}/edit',[App\Http\Controllers\CategoryController::class, 'edit']) -> name('admin.category.edit');
+Route::put('/category/{id}',[App\Http\Controllers\CategoryController::class,'update_or_destroy'])->name('admin.category.update_or_destroy');
 Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store'])->name('admin.category.store');
 
 

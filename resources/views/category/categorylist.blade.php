@@ -40,7 +40,7 @@
                             <td class="fw-bold">{{ $category->id}}</td>
                             <td>{{ $category->name}}</td>
                             <td>
-                                //AQUI FALTA BOTON DE EDITAR ya vendre
+                                <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}" class="btn btn-outline-primary">Editar</a>
                             </td>
                         </tr>
                         @endforeach
