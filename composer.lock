@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1d2ff91d57a87c088c0d77c0494e657",
+    "content-hash": "e7b38387fe65b02ff6994e145290dfd4",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1229,7 +1229,7 @@
         },
         {
             "name": "jeroennoten/laravel-adminlte",
-            "version": "v3.9.5",
+            "version": "v3.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeroennoten/Laravel-AdminLTE.git",
@@ -1283,7 +1283,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jeroennoten/Laravel-AdminLTE/issues",
-                "source": "https://github.com/jeroennoten/Laravel-AdminLTE/tree/v3.9.5"
+                "source": "https://github.com/jeroennoten/Laravel-AdminLTE/tree/v3.10.0"
             },
             "time": "2024-03-08T13:43:37+00:00"
         },
