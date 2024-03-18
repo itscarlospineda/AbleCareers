@@ -7,24 +7,15 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        return view('admin.roles');
+        $roles = Role::where('is_active', true)->get();
+        return view('admin.roles', compact('roles'));
     }
 
     public function create(Request $request)
@@ -32,14 +23,29 @@ class RoleController extends Controller
         /* VALIDACIONES AQUI */
 
         $role = new Role();
-        $role->name = $request-> name;
-        $role->desc = $request-> desc;
+        $role->name = $request->name;
+        $role->desc = $request->desc;
         $role->save();
 
-        return redirect()->route('roles')->with($message='Mensaje','El registro ha sido ingresado de forma exitosa.');
+        return redirect()->route('roles')->with('message', 'El registro ha sido ingresado de forma exitosa.');
     }
 
-    public function store(){
+    public function update_or_destroy(Request $request, $id)
+    {
+        $action = $request->input('action');
+        $role = Role::findOrFail($id);
         
+        if ($action == 'update') {
+            /* VALIDACIONES PARA ACTUALIZACIÓN */
+            $role->name = $request->name;
+            $role->desc = $request->desc;
+            $role->save();
+            return back()->with('message', 'El rol ha sido actualizado exitosamente.');
+        } 
+        if ($action == 'destroy') {
+            $role->is_active = false;
+            $role->save();
+            return back()->with('message', 'El rol ha sido desactivado exitosamente.');
+        }
     }
 }
