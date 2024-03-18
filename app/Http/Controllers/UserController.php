@@ -57,12 +57,7 @@ class UserController extends Controller
         return view('user.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $user_id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($user_id)
     {
         $user = User::find($user_id);
@@ -83,7 +78,7 @@ class UserController extends Controller
             ->with('success', 'User updated successfully');
     }
 
-    
+
     public function destroy($user_id)
     {
         // Encuentra y elimina el usuario
