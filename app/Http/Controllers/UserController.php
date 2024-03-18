@@ -8,40 +8,24 @@ use App\Models\user_has_role;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 
-/**
- * Class UserController
- * @package App\Http\Controllers
- */
+
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $users = User::where('is_active','!=','INACTIVE')->get();
         return view('admin\userlist',compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $user = new User();
         return view('user.create', compact('user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         // Valida los datos del formulario
@@ -66,12 +50,6 @@ class UserController extends Controller
             ->with('success', 'User created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $user_id
-     * @return \Illuminate\Http\Response
-     */
     public function show($user_id)
     {
         $user = User::find($user_id);
@@ -92,13 +70,6 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  User $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         // Valida los datos del formulario
@@ -112,12 +83,7 @@ class UserController extends Controller
             ->with('success', 'User updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $user_id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($user_id)
     {
         // Encuentra y elimina el usuario

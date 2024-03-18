@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\UserRequest;
 use Illuminate\Http\Request;
 
-/**
- * Class UserRequestController
- * @package App\Http\Controllers
- */
 class UserRequestController extends Controller
 {
     public function index()
