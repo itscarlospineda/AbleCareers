@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
@@ -108,12 +109,65 @@ Route::put('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'update
 |
 */
 
-Route::get('/category/categorylist', [App\Http\Controllers\CategoryController::class, 'readCategory'])->name('admin.category.index');
-Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'viewnewCategory'])->name('admin.category.create');
+Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('admin.category.index');
+Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('admin.category.create');
 Route::get('/category/{id}/edit',[App\Http\Controllers\CategoryController::class, 'edit']) -> name('admin.category.edit');
 Route::put('/category/{id}',[App\Http\Controllers\CategoryController::class,'update_or_destroy'])->name('admin.category.update_or_destroy');
 Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store'])->name('admin.category.store');
 
 
-//get /admin/category, name -> admin.category.index
-//get /admin/category/create,
+/*
+|--------------------------------------------------------------------------
+| Company ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+Route::get('/company',[App\Http\Controllers\CompanyController::class,'index'])->name('company.index');
+Route::get('/company/create', [App\Http\Controllers\CompanyController::class,'create'])->name('company.create');
+Route::get('company/{id}/edit',[App\Http\Controllers\CompanyController::class,'edit'])->name('company.edit');
+Route::put('/company/{id}',[App\Http\Controllers\CompanyController::class,'update_or_destroy'])->name('company.update_or_destroy');
+Route::post('/company',[App\Http\Controllers\CompanyController::class,'store'])->name('company.store');
+
+
+/*
+|--------------------------------------------------------------------------
+| CompanyUser ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
+Route::get('/companyuser',[App\Http\Controllers\CompanyUserController::class,'index'])->name('companyuser.index');
+Route::get('/companyuser/create',[App\Http\Controllers\CompanyUserController::class,'create'])->name('companyuser.create');
+Route::get('companyuser/{id}/edit',[App\Http\Controllers\CompanyUserController::class,'edit'])->name('companyuser.edit');
+Route::put('/company/{id}',[App\Http\Controllers\CompanyUserController::class,'update_or_destroy'])->name('companyuser.update_or_destroy');
+Route::post('/company',[App\Http\Controllers\CompanyUserController::class,'store'])->name('companyuser.store');
+
+/*
+|--------------------------------------------------------------------------
+| JobPosition ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+Route::get('/jobposition',[App\Http\Controllers\JobPositionController::class,'index'])->name('jobposition.index');
+Route::get('/jobposition/create',[App\Http\Controllers\JobPositionController::class,'create'])->name('jobposition.create');
+Route::get('/jobposition/{id}/edit',[App\Http\Controllers\JobPositionController::class,'edit'])->name('jobposition.edit');
+Route::put('/jobposition/{id}',[App\Http\Controllers\JobPositionController::class,'update_or_destroy'])->name('jobposition.update_or_destroy');
+Route::post('/jobposition',[App\Http\Controllers\JobPositionController::class,'store'])->name('jobposition.store');
+
+/*
+|--------------------------------------------------------------------------
+| UserRequest ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
+Route::get('/userrequest',[App\Http\Controllers\UserRequestController::class,'index'])->name('userrequest.index');
+Route::get('/userrequest/create',[App\Http\Controllers\UserRequestController::class,'create'])->name('userrequest.create');
+Route::get('/userrequest/{id}/edit',[App\Http\Controllers\UserRequestController::class,'edit'])->name('userrequest.edit');
+Route::put('/userrequest/{id}',[App\Http\Controllers\UserRequestController::class,'update_or_destroy'])->name('userrequest.update_or_destroy');
+Route::post('/userrequest',[App\Http\Controllers\UserRequestController::class,'store'])->name('userrequest.store');
+

@@ -7,19 +7,14 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function viewNewCategory()
+    public function create()
     {
         return view("category\categorycreate");
     }
 
 
-    public function readCategory()
+    public function index()
     {
-        /*  Correcciones creadas en este método:
-
-            Honestamente seria demasiado decir que se le cambio. Todo estaba incorrecto, no existian validaciones y tampoco retornaba una vista de forma correcta (con el compact).
-
-        */
         $categories = Category::where('is_active', 'ACTIVE')->get();
         return view('category.categorylist', compact('categories'));
     }
@@ -27,22 +22,6 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        /*  Correcciones creadas en este método:
-
-            Nombre del metodo: Tal y como se especifico en el documento de directices lo que sea para crear algun registro se le nombrara "store".
-
-            Cambios en variables:
-            'is_active' es un campo que no debe pasarse para create, ya que en la migración fue creada para que el estado por defecto sea 'ACTIVE'.
-
-            Cambios en el metodo:
-            Se ha agregado una funcion return el cual devuelve un estado de "success" cuando la categoria ha sido creada.
-
-        */
-
-        /* =========================================
-            Valida si el nombre de la categoria es por lo menos de 5 caracteres
-
-        */
         $request->validate(
             [
                 'name' => 'required|string|min:5',
@@ -58,40 +37,26 @@ class CategoryController extends Controller
     }
 
 
-    public function viewUpdateCategory()
-    {
-        // $category = \DB::table('category')
-        //     ->orderBy('id', 'DESC')
-        //     ->get();
-        // return view("updateCategory")->with('category', $category);
-    }
-
-
     public function edit($id)
     {
-        /*  Correcciones creadas en este método:
-
-            Nombre del metodo: Tal y como se especifico en el documento de directices lo que sea para editar [de tipo get] algun registro se le nombrara "edit".
-
-        */
-
         $category = Category::findOrFail($id);
         return view('category.category-edit', compact('category'));
     }
 
 
-    public function update_or_destroy(Request $request,$id){
+    public function update_or_destroy(Request $request, $id)
+    {
         $action = $request->input('action');
         $category = Category::findOrFail($id);
         if ($action == 'update') {
             $category->name = $request->input('name');
             $category->save();
-            return back()->with('flash_message','Categoria actualizada exitosamente.');
+            return back()->with('flash_message', 'Categoria actualizada exitosamente.');
         }
-        if($action == 'destroy'){
+        if ($action == 'destroy') {
             $category->is_active = 'INACTIVE';
             $category->save();
-            return redirect()->route('admin.category.index')->with('flash_message','Categoria eliminada exitosamente.');
+            return redirect()->route('admin.category.index')->with('flash_message', 'Categoria eliminada exitosamente.');
         }
     }
 }

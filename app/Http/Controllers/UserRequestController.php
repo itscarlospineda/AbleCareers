@@ -11,98 +11,51 @@ use Illuminate\Http\Request;
  */
 class UserRequestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $userRequests = UserRequest::all();
-
-        return view('admin.requestlist',compact('userRequests'));
+        $userRequest = UserRequest::where('is_active', 'ACTIVE')->get();
+        return view('admin.requestlist', compact('userRequest'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $userRequest = new UserRequest();
-        return view('user-request.create', compact('userRequest'));
+        return view('');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate(UserRequest::$rules);
+        $userRequest = new UserRequest;
+        $userRequest->user_id = $request->user_id;
+        $userRequest->request_info = $request->request_info;
+        $userRequest->request_status = $request->request_status;
+        $userRequest->save();
 
-        $userRequest = UserRequest::create($request->all());
+        return view('', compact('userRequest'));
 
-        return redirect()->route('user-request.index')
-            ->with('success', 'UserRequest created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $userRequest = UserRequest::find($id);
-
-        return view('user-request.show', compact('userRequest'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $userRequest = UserRequest::find($id);
-
-        return view('user-request.edit', compact('userRequest'));
+        $userRequest = UserRequest::findOrFail($id);
+        return view('', compact('userRequest'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  UserRequest $userRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UserRequest $userRequest)
+    public function update_or_destroy(Request $request, $id)
     {
-        request()->validate(UserRequest::$rules);
-
-        $userRequest->update($request->all());
-
-        return redirect()->route('user-request.index')
-            ->with('success', 'UserRequest updated successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
-    public function destroy($id)
-    {
-        $userRequest = UserRequest::find($id)->delete();
-
-        return redirect()->route('user-request.index')
-            ->with('success', 'UserRequest deleted successfully');
+        $action = $request->input('action');
+        $userRequest = UserRequest::findOrFail($id);
+        if ($action == 'update') {
+            $userRequest->user_id = $request->user_id;
+            $userRequest->request_info = $request->request_info;
+            $userRequest->request_status = $request->request_status;
+            $userRequest->save();
+            return back()->with('flash_message','UserRequest actualizado exitosamente.');
+        }
+        if ($action == 'destroy') {
+            $userRequest->is_active = 'INACTIVE';
+            $userRequest->save();
+            return redirect()->route('userrequest.index')->with('flash_message','UserRequest eliminado exitosamente');
+        }
     }
 }

@@ -11,88 +11,57 @@ use Illuminate\Http\Request;
  */
 class CompanyUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $companyUsers = CompanyUser::paginate(); //$resumes = Resume::where('is_active', 'ACTIVE')->get();
-
-        return view('company-user.index', compact('companyUsers'));  
-            // ->with('i', (request()->input('page', 1) - 1) * $companyUsers->perPage());
+        $companyUsers = CompanyUser::where('is_active', 'ACTIVE')->get();
+        return view('', compact('companyUsers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        $companyUser = new CompanyUser();
-        return view('company-user.create', compact('companyUser'));
+        return view('');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         request()->validate(CompanyUser::$rules);
 
-        $companyUser = CompanyUser::create($request->all());
+        $companyUser = new CompanyUser;
+        $companyUser->user_id = $request->user_id;
+        $companyUser->comp_id = $request->comp_id;
+        $companyUser->save();
 
-        return redirect()->route('company-users.index')
-            ->with('success', 'CompanyUser created successfully.');
+
+        return redirect()->route('companyuser.index')->with('success', 'CompanyUser created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $companyUser = CompanyUser::find($id);
 
-        return view('company-user.show', compact('companyUser'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $companyUser = CompanyUser::find($id);
+        $companyUser = CompanyUser::findOrFail($id);
 
-        return view('company-user.edit', compact('companyUser'));
+        return view('companyUser.edit', compact('companyUser'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  CompanyUser $companyUser
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CompanyUser $companyUser)
+
+    public function update_or_destroy(Request $request, $id)
     {
-        request()->validate(CompanyUser::$rules);
-
-        $companyUser->update($request->all());
-
-        return redirect()->route('company-users.index')
-            ->with('success', 'CompanyUser updated successfully');
+        $action = $request->input('action');
+        $companyUser = CompanyUser::findOrFail($id);
+        if ($action == 'update') {
+            $companyUser->user_id = $request->user_id;
+            $companyUser->comp_id = $request->comp_id;
+            $companyUser->save();
+            return back()->with('flash_message', 'CompanyUser actualizado exitosamente.');
+        }
+        if ($action == 'destroy') {
+            $companyUser->is_active = 'INACTIVE';
+            $companyUser->save();
+            return redirect()->route('companyuser.index')->with('flash_message', 'CompanyUser eliminado exitosamente');
+        }
     }
 
-    //update = desactive
 }

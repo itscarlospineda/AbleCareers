@@ -11,50 +11,47 @@ use Illuminate\Http\Request;
  */
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $companies = Company::all(); //$resumes = Resume::where('is_active', 'ACTIVE')->get();
-        return view('admin.companylist',compact('companies'));
+        $companies = Company::where('is_active', 'ACTIVE')->get();
+        return view('admin.companylist', compact('companies'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        $company = new Company();
-        return view('company.create', compact('company'));
+        return view('admin.createcompany');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        request()->validate(Company::$rules);
+        $request->validate(
+            [
+                'comp_name' => 'required|string|min:5',
+                'comp_mail' => 'required|string|min:5',
+                'comp_phone' => 'required|string',
+                'comp_city' => 'required|string|min:5',
+                'comp_depart' => 'required|string|min:5',
+                'user_id' => 'required'
 
-        $company = Company::create($request->all());
+            ]
+        );
+        $company = new Company;
+        $company->comp_name = $request->comp_name;
+        $company->comp_mail = $request->comp_mail;
+        $company->comp_phone = $request->comp_phone;
+        $company->comp_city = $request->comp_city;
+        $company->comp_depart = $request->comp_depart;
+        $company->comp_depart = $request->comp_depart;
+        $company->user_id = $request->user_id;
 
-        return redirect()->route('companies.index')
-            ->with('success', 'Company created successfully.');
+        $company->save();
+        return redirect()->route('company.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $company = Company::find($id);
@@ -62,12 +59,7 @@ class CompanyController extends Controller
         return view('company.show', compact('company'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $company = Company::find($id);
@@ -75,22 +67,26 @@ class CompanyController extends Controller
         return view('company.edit', compact('company'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Company $company
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Company $company)
+
+    public function update_or_destroy(Request $request, $id)
     {
-        request()->validate(Company::$rules);
-
-        $company->update($request->all());
-
-        return redirect()->route('companies.index')
-            ->with('success', 'Company updated successfully');
+        $action = $request->input('action');
+        $company = Company::findOrFail($id);
+        if ($action == 'update') {
+            $company->comp_name = $request->comp_name;
+            $company->comp_mail = $request->comp_mail;
+            $company->comp_phone = $request->comp_phone;
+            $company->comp_city = $request->comp_city;
+            $company->comp_depart = $request->comp_depart;
+            $company->comp_depart = $request->comp_depart;
+            $company->user_id = $request->user_id;
+            $company->save();
+            return back()->with('flash_message', 'Compañia actualizada exitosamente');
+        }
+        if ($action == 'destroy') {
+            $company->is_active = 'INACTIVE';
+            $company->save();
+            return redirect()->route('company.index')->with('flash_message', 'Compañia eliminada exitosamente');
+        }
     }
-
-    //update=desactive
 }
