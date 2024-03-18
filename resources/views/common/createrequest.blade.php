@@ -8,7 +8,7 @@
             <div class="col card" style="background-color: rgb(233, 233, 233)">
                 <div class="card-body text-dark ">
 
-                    <form action=""{{ route('createrequests.create')}}" method="POST">
+                    <form action="{{ route('createrequests.create')}}" method="POST">
                     @csrf
 
                         <div class="mb-3">
