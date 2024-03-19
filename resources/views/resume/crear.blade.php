@@ -1,4 +1,10 @@
-@extends('layouts.common')
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
 @section('content')
 <div class="col">
@@ -37,4 +43,12 @@
         <a href="{{ route('resume.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop
