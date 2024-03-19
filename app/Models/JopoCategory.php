@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $updated_at
  *
  * @property Category $category
- * @property JobPosition $jobPosition
+ * @property Job_Position $jobPosition
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -22,7 +22,7 @@ class JopoCategory extends Model
 {
     protected $table = 'jopo_category';
 
-    
+
     static $rules = [
 		'category_id' => 'required',
 		'job_position_id' => 'required',
@@ -46,7 +46,7 @@ class JopoCategory extends Model
     {
         return $this->belongsTo(\App\Models\Category::class, 'category_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -54,6 +54,6 @@ class JopoCategory extends Model
     // {
     //     return $this->belongsTo(\App\Models\JobPosition::class, 'job_position_id', 'id');
     // }
-    
+
 
 }

@@ -29,12 +29,49 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
+
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            /**
+             * RUTAS DE ADMIN
+             */
+            Route::middleware('web')
+                ->prefix('admin')
+                ->group(base_path('routes/admin.php'));
+
+            /**
+             * RUTAS DE CEO
+             */
+            Route::middleware('web')
+                ->prefix('ceo')
+                ->group(base_path('routes/ceo.php'));
+
+            /**
+             * RUTAS DE MANAGER
+             */
+            Route::middleware('web')
+                ->prefix('manager')
+                ->group(base_path('routes/manager.php'));
+
+            /**
+             * RUTAS DE POSTULANTE
+             */
+            Route::middleware('web')
+                ->prefix('postulant')
+                ->group(base_path('routes/postulant.php'));
+
+            /**
+             * RUTAS DE RECLUTADOR
+             */
+            Route::middleware('web')
+                ->prefix('recruiter')
+                ->group(base_path('routes/recruiter.php'));
+
         });
     }
 }
