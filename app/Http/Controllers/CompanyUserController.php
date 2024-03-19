@@ -38,10 +38,20 @@ class CompanyUserController extends Controller
      */
     public function store(Request $request)
     {
+        /**
+         * Area de crear usuario
+         */
+
+
+        /**
+         * Area de crear user_has_role
+         */
+
+         
         request()->validate(CompanyUser::$rules);
 
         $companyUser = new CompanyUser;
-        $companyUser->user_id = $request->user_id;
+        $companyUser->user_id = $request->user_id; //!Hacer cambios
         $companyUser->comp_id = $request->comp_id;
         $companyUser->save();
 

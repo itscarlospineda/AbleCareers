@@ -13,6 +13,11 @@
  use App\Http\Controllers\UserRequestController;
 
 
+Route::get('/home',function(){
+    return view('home.ceohome');
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | CompanyUser ROUTES
