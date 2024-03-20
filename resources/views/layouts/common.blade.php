@@ -86,7 +86,7 @@
                             <div class="mx-1 mt-2">
                                 <ul class="nav flex-column">
                                     <li class="nav-link">
-                                        <a href="{{route('user.userhome')}}" class="nav-link font">
+                                        <a href="" class="nav-link font">
                                             <i class="bi bi-house-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Home</span>
                                         </a>
@@ -114,7 +114,7 @@
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="{{ route('resume.index') }}" class="nav-link font">
+                                        <a href="" class="nav-link font">
                                             <i class="bi bi-envelope-at-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Curriculum</span>
                                         </a>
