@@ -19,7 +19,7 @@ class CompanyUserController extends Controller
     public function index()
     {
         $companyUsers = CompanyUser::where('is_active', 'ACTIVE')->get();
-        return view('', compact('companyUsers'));
+        return view('companyuser.managerlist', compact('companyUsers'));
     }
 
     /**
