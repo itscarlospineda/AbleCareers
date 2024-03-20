@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="col">
-    <h1>Homepage Reclutador</h1> <br>
+    <h1>Editar Perfil CEO</h1> <br>
 </div>
 @endsection
