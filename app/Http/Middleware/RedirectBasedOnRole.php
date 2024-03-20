@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
+use App\Models\User;
 use App\Models\user_has_role;
 
 class RedirectBasedOnRole
@@ -16,27 +17,28 @@ class RedirectBasedOnRole
             // Obtiene el usuario autenticado
             $user = Auth::user();
 
-            // Obtiene los roles del usuario a través de la tabla user_has_role
-            $userRoles = user_has_role::where('user_id', $user->id)
-                ->join('role', 'user_has_role.role_id', '=', 'role.id')
-                ->pluck('role.role_name')
-                ->toArray();
+            $currentUser = User::findOrFail($user->id);
+            $userHighRole = $currentUser->roles()
+            ->where('role.is_active','ACTIVE')
+            ->orderBy('role_id','desc')
+            ->first();
 
-            // Verifica si el usuario tiene alguno de los roles permitidos
-            if (array_intersect($userRoles, $roles)) {
-                // Redirige según el primer rol que coincida con los roles permitidos
-                foreach ($userRoles as $userRole) {
-                    if (in_array($userRole, $roles)) {
-                        switch ($userRole) {
-                            case 'superUsuario':
-                                return redirect()->route('admin.adminhome');
-                            case 'postulante':
-                                return redirect()->route('user.userhome');
-                            // Agrega más casos según los roles que tengas en tu sistema
-                        }
-                    }
-                }
+            if ($userHighRole->id == 1) {
+                return redirect()->route('postulant.postulanthome');
             }
+            if ($userHighRole->id == 2) {
+                return redirect()->route('recruiter.recruiterhome');
+            }
+            if ($userHighRole->id == 3) {
+                return redirect()->route('manager.managerhome');
+            }
+            if ($userHighRole->id == 4) {
+                return redirect()->route('ceo.ceohome');
+            }
+            if ($userHighRole->id == 5) {
+                return redirect()->route('admin.adminhome');
+            }
+
         }
 
         // Si el usuario no tiene un rol asignado o no está autenticado,
