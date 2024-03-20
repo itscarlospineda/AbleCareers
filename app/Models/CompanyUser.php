@@ -22,11 +22,11 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyUser extends Model
 {
     protected $table = 'company_user';
-        
+
     static $rules = [
-		'user_id' => 'required',
-		'comp_id' => 'required',
-		'is_active' => 'required',
+        'user_id' => 'required',
+        'comp_id' => 'required',
+        'is_active' => 'required',
     ];
 
     protected $perPage = 20;
@@ -36,7 +36,7 @@ class CompanyUser extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','comp_id','is_active'];
+    protected $fillable = ['user_id', 'comp_id', 'is_active'];
 
 
     /**
@@ -46,14 +46,14 @@ class CompanyUser extends Model
     {
         return $this->belongsTo(\App\Models\Company::class, 'comp_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id', 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'user_id','id');
     }
-    
+
 
 }

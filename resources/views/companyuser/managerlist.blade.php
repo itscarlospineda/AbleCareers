@@ -31,16 +31,18 @@
                             <th scope="col">ID</th>
                             <th scope="col">Nombre usuario</th>
 
-                        
-                            <th scope="col">ID compañia</th>
+
+                            <th scope="col">Role</th>
                         </tr>
                     </thead>
                     <tbody>
                 @foreach ($companyUsers as $companyUser)
                         <tr>
                             <td class="fw-bold">{{ $companyUser->id}}</td>
-                            <td>{{ $companyUser->user_id}}</td>
-                             <td>{{ $companyUser->comp_id}}</td>
+                            <td>{{ $companyUser->user->name}}</td>
+                            @foreach ($companyUser->user->roles as $role)
+                            <td>{{ $role->role_name}}</td>
+                            @endforeach
                               <!-- Cambiar Ruta-->
                                      <td>       <a href="" class="btn btn-outline-primary">Editar</a></td>
 
