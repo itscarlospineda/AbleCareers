@@ -11,3 +11,9 @@
  use Illuminate\Support\Facades\Auth;
  use App\Http\Controllers\UserController;
  use App\Http\Controllers\UserRequestController;
+
+
+ 
+ Route::get('/home', function () {
+    return view('home.managerhome');
+})->name('manager.managerhome');

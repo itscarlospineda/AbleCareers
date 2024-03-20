@@ -13,6 +13,8 @@
  use App\Http\Controllers\UserRequestController;
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | CompanyUser ROUTES
@@ -20,6 +22,14 @@
 |
 |
 */
+
+
+Route::get('/home', function () {
+    return view('home.ceohome');
+})->name('ceo.ceohome');
+
+
+
 Route::get('/companyUser', [App\Http\Controllers\CompanyUserController::class, 'index'])->name('companyUser.index');
 Route::get('/companyUser/create', [App\Http\Controllers\CompanyUserController::class, 'create'])->name('companyUser.create');
 Route::get('companyUser/{id}/edit', [App\Http\Controllers\CompanyUserController::class, 'edit'])->name('companyUser.edit');

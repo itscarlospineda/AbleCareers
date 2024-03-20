@@ -19,6 +19,9 @@
 |
 |
 */
+Route::get('/home', function () {
+    return view('home.recruiterhome');
+})->name('recruiter.recruiterhome');
 
 Route::get('/jobPosition', [App\Http\Controllers\JobPositionController::class, 'index'])->name('jobPosition.index');
 Route::get('/jobPosition/create', [App\Http\Controllers\JobPositionController::class, 'create'])->name('jobPosition.create');

@@ -28,11 +28,16 @@ class RedirectBasedOnRole
                 foreach ($userRoles as $userRole) {
                     if (in_array($userRole, $roles)) {
                         switch ($userRole) {
+                            case 'postulante':
+                                return redirect()->route('postulant.postulanthome');
+                            case 'reclutador':
+                                return redirect()->route('recruiter.recruiterhome');
+                            case 'manager':
+                                return redirect()->route('manager.managerhome');
+                            case 'CEO':
+                                return redirect()->route('ceo.ceohome');
                             case 'superUsuario':
                                 return redirect()->route('admin.adminhome');
-                            case 'postulante':
-                                return redirect()->route('user.userhome');
-                            // Agrega más casos según los roles que tengas en tu sistema
                         }
                     }
                 }
