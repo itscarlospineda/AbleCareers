@@ -15,7 +15,23 @@
 
 Route::get('/home',function(){
     return view('home.ceohome');
-});
+})->name('ceo.ceohome');
+
+Route::get('/ceoedit',function(){
+    return view('ceo.ceoedit');
+})->name('ceo.ceoedit');
+
+Route::get('/empleadocreate', function () {
+    return view('ceo.empleadocreate');
+})->name('ceo.empleadocreate');
+
+Route::get('/postcreate', function () {
+    return view('ceo.postcreate');
+})->name('ceo.postcreate');
+
+Route::get('/postlist', function () {
+    return view('ceo.postlist');
+})->name('ceo.postlist');
 
 
 /*
