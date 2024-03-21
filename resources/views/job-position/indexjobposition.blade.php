@@ -31,6 +31,15 @@
                     @endif
 
                     <div class="card-body">
+                        <form action="{{ route('jobPosition.index') }}" method="GET">
+                            <select class="form-select" aria-label="Default select example" name="puesto">
+                                <option value="" selected>Seleccionar puesto</option>
+                                <option value="Disenador">Disenador</option>
+                                <option value="Desarrollador">Desarrollador</option>
+                                <option value="Limpieza">Limpieza</option>
+                              </select>
+                            <button type="sumbit" class="btn btn-secondary mt-3">Filtrar</button>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
