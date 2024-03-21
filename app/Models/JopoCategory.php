@@ -22,8 +22,10 @@ class JopoCategory extends Model
 {
     protected $table = 'jopo_category';
 
+    protected $primaryKey = 'id';
 
     static $rules = [
+        'id' => 'required',
 		'category_id' => 'required',
 		'job_position_id' => 'required',
 		'is_active' => 'required|string',
