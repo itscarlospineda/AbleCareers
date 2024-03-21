@@ -1,4 +1,6 @@
-@extends('layouts.common')
+@extends('adminlte::page')
+
+@section('title', 'AbleCareers - Create Resume')
 
 @section('content')
             <div class="col">
@@ -9,7 +11,7 @@
                 <div class="card-body text-dark ">
 
                     
-                <form action="{{ route('createresumes.create')}}" method="POST">
+                <form action="{{ route('resume.create')}}" method="POST">
                     @csrf
 
                         <div class="mb-3">
