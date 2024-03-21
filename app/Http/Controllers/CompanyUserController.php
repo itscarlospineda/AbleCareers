@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CompanyUser;
+use App\Models\User;
+use App\Models\user_has_role;
 use Illuminate\Http\Request;
 
 /**
@@ -79,7 +81,34 @@ class CompanyUserController extends Controller
     public function update_or_destroy(Request $request, $id)
     {
         $action = $request->input('action');
-        $companyUser = CompanyUser::findOrFail($id);
+        
+        $user= User::findOrFail($id);
+        if ($action == 'update')
+        {
+            $user->name = $request->name;
+            $user->lastName = $request->lastName; 
+            $user->save();        
+        }
+        if ($action == 'destroy')    
+        {
+            $user->is_active = "INACTIVE";
+            $user->save();
+        }
+
+
+        $user_has_role= user_has_role::where('user_id',$id)->firstOrFail();
+        if ($action == 'update')
+        {
+                $user_has_role->role_id= $request->role_id;
+        }
+        if ($action == 'destroy')    
+        {
+            $user_has_role->is_active = "INACTIVE";
+            $user_has_role->save();
+        }
+
+        
+        $companyUser = CompanyUser::where('user_id',$id)->firstOrFail();
         if ($action == 'update') {
             $companyUser->user_id = $request->user_id;
             $companyUser->comp_id = $request->comp_id;
