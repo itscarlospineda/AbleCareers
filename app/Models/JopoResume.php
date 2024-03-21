@@ -9,8 +9,11 @@ class JopoResume extends Model
 {
 
     protected $table = 'jopo_resume';
-    
+
+    protected $primaryKey = 'id';
+
     static $rules = [
+        'id' => 'required',
         'resume_id' => 'required',
         'job_position_id' => 'required'
     ];
