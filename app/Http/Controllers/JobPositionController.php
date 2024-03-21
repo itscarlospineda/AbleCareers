@@ -14,6 +14,14 @@ class JobPositionController extends Controller
     public function index(Request $request)
     {
         $jobPosition = Job_Position::where('is_active', 'ACTIVE')->paginate(10);
+        $query = Job_Position::where('is_active', 'ACTIVE');
+
+        if ($request->has('puesto') && $request->puesto != '') {
+            $query->where('name', $request->puesto);
+        }
+
+        $jobPosition = $query->paginate(10);
+
         return view('job-position.indexjobposition', compact('jobPosition'));
     }
 

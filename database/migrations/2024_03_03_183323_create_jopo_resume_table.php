@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jopo_resume', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('resume_id');
             $table->unsignedBigInteger('job_position_id');
             $table->foreign('resume_id')->references('id')->on('resume');
