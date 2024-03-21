@@ -23,7 +23,7 @@
 
 Route::get('/home', function () {
     return view('home.commonhome');
-})->name('user.userhome');
+})->name('postulant.postulanthome');
 
 Route::get('/create/profile', function () {
     return view('common.createusers');
