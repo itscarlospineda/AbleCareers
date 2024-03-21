@@ -80,6 +80,10 @@ class CompanyUserController extends Controller
      */
     public function update_or_destroy(Request $request, $id)
     {
+
+        /**
+         * Actualizar o inactivar mediante user_id
+         */ 
         $action = $request->input('action');
         
         $user= User::findOrFail($id);
@@ -106,8 +110,6 @@ class CompanyUserController extends Controller
             $user_has_role->is_active = "INACTIVE";
             $user_has_role->save();
         }
-
-        
         $companyUser = CompanyUser::where('user_id',$id)->firstOrFail();
         if ($action == 'update') {
             $companyUser->user_id = $request->user_id;
