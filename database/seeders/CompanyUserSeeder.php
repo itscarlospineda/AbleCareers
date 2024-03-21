@@ -20,7 +20,7 @@ class CompanyUserSeeder extends Seeder
         $numberOfCompanies = count($currentCompanies);
 
         $usersForCompany = user_has_role::where('is_active', 'ACTIVE')
-        ->whereIn('role_id',[3,4])
+        ->whereIn('role_id',[2,3])
         ->get();
 
         foreach ($usersForCompany as $user) {

@@ -9,5 +9,5 @@ class Job_Position extends Model
 {
     protected $table = 'job_position';
     use HasFactory;
-    protected $primaryKey = 'jobpo_id';
+    protected $primaryKey = 'id';
 }
