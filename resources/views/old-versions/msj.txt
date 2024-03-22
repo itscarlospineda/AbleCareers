@@ -1,0 +1,9 @@
+Descartados debido a la creación de CRUD de Resumes en 
+
+/*
+ *
+ *          VIEWS/RESUME/TODOS LOS ARCHIVOS
+ *
+*/
+
+pero almacenados en caso de cualquier eventualidad.

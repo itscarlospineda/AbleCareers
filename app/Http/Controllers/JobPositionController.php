@@ -25,6 +25,12 @@ class JobPositionController extends Controller
         return view('job-position.indexjobposition', compact('jobPosition'));
     }
 
+    public function list(Request $request)
+    {
+        $jobPosition = Job_Position::where('is_active', 'ACTIVE')->paginate(10);
+        return view('common.posts', compact('jobPosition'));
+    }
+
     /**
      * Redirecciona a la vista de creacion de JobPosition
      */

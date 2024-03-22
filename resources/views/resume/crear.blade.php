@@ -1,14 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Dashboard</h1>
-@stop
+@section('title', 'AbleCareers - Crear Resume')
 
 @section('content')
 <div class="col">
-    <h1>Nuevo Resume</h1>
+    <p class="h1">Nuevo Resume</p>
     <br>
     
     <!-- Formulario para capturar los datos del resumen -->

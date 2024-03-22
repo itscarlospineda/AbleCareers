@@ -312,7 +312,7 @@ return [
         ],
         [
             'text' => 'Home',
-            'url' => '/user/home',
+            'url' => '/postulant/home',
             'icon'        => 'far fa-fw fa-Home',
             'label_color' => 'success',
         ],
@@ -330,13 +330,13 @@ return [
         ],
         [
             'text' => 'Posts',
-            'url' => '',
+            'url' => 'postulant/browse/posts',
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
         [
             'text' => 'Curriculum',
-            'url' => '/resume',
+            'url' => 'postulant/resume',
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],

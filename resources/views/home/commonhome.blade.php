@@ -1,10 +1,7 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'AbleCareers - Postulant Home')
 
-@section('content_header')
-    <h1>Dashboard</h1>
-@stop
 
 @section('content')
 <div class="col">
@@ -76,7 +73,7 @@
               <h1 class="card-title">¿Eres dueño o administrador de una empresa?</h1> <br>
               <p class="card-text">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores beneficios. 
                 Haz clic aquí para aplicar.</p> <br>
-              <a href="/user/create/request" class="btn btn-danger"> <i class="bi bi-building-up"></i>&nbsp;Aplicar</a>
+              <a href="{{route('postulant.createrequest')}}" class="btn btn-danger"> <i class="bi bi-building-up"></i>&nbsp;Aplicar</a>
           </div>
       </div>
     </div>

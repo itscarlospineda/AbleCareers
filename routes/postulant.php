@@ -35,7 +35,7 @@ Route::get('/create/resume', function () {
 
 Route::get('/create/request', function () {
     return view('common.createrequest');
-});
+})->name('postulant.createrequest');;
 
 Route::get('/edit/profile', function () {
     return view('common.editusers');
@@ -45,6 +45,7 @@ Route::get('/edit/resume', function () {
     return view('common.editresume');
 });
 
+Route::get('/browse/posts',[App\Http\Controllers\JobPositionController::class, 'list'])->name('postslist');
 
 /*
 |--------------------------------------------------------------------------
