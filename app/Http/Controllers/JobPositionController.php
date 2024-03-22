@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job_Position;
+use App\Models\Resume;
+use Illuminate\Support\Facades\Auth;
 
 class JobPositionController extends Controller
 {
@@ -100,6 +102,28 @@ class JobPositionController extends Controller
             $jobPosition->save();
             return redirect()->route('jobPosition.index')->with('flash_message', 'JobPosition eliminado exitosamente');
         }
+    }
+
+    public function showPost()
+{
+    // Obtener las posiciones de trabajo activas
+    $jobPositions = Job_Position::where('is_active', 'ACTIVE')->get();
+
+    // Obtener los resúmenes activos del usuario autenticado
+    $user = Auth::user();
+    $resumes = Resume::where('user_id', $user->id)
+        ->where('is_active', 'ACTIVE')
+        ->get();
+
+    // Pasar las posiciones de trabajo y los resúmenes a la vista
+    return view('common.posts', compact('jobPositions', 'resumes'));
+    }
+
+    public function showDetails($id)
+    {
+        $jobPosition = Job_Position::findOrFail($id);
+        
+        return view('common.showpost', compact('jobPosition'));
     }
 
 }

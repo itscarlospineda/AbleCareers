@@ -11,6 +11,29 @@ class JopoResumeController extends Controller
      * Redirecciona a vista de todos los registros activos de JopoResume
      * @param $jopoResumes arreglo de todos los JopoResumes activos
      */
+
+     public function apply(Request $request)
+     {
+         // Validar la solicitud
+         $request->validate([
+             'resume_id' => 'required|exists:resume,id',
+             'job_position_id' => 'required|exists:job_position,id'
+         ]);
+     
+         // Obtener el ID del currículum y de la posición de trabajo
+         $resumeId = $request->resume_id;
+         $jobPositionId = $request->job_position_id;
+     
+         // Crear una nueva entrada en la tabla jopo_resume
+         $jopoResume = new JopoResume();
+         $jopoResume->resume_id = $resumeId;
+         $jopoResume->job_position_id = $jobPositionId;
+         $jopoResume->save();
+     
+         // Redirigir de vuelta con un mensaje de éxito
+         return redirect()->back()->with('success', '¡Aplicación exitosa a la posición de trabajo!');
+     }
+     
     public function index()
     {
         $jopoResumes = JopoResume::where('is_active', 'ACTIVE')->get();
