@@ -14,9 +14,11 @@
 
 
 
-Route::get('/home',function(){
-    return view('home.ceohome');
-})->name('ceo.ceohome');
+Route::get('/home',[App\Http\Controllers\CompanyUserController::class,'ceoIndex'])->name('ceo.ceohome');
+
+// Route::get('/home',function(){
+//     return view('home.ceohome');
+// })->name('ceo.ceohome');
 
 Route::get('/ceoedit',function(){
     return view('ceo.ceoedit');

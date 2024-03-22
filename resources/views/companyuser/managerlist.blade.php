@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                @foreach ($companyUsers as $companyUser)
+                @foreach ($activeCompanyRecruiters as $companyUser)
                         <tr>
                             <td class="fw-bold">{{ $companyUser->id}}</td>
                             <td>{{ $companyUser->user->name}}</td>

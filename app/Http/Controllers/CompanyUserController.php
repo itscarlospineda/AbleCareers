@@ -6,6 +6,7 @@ use App\Models\CompanyUser;
 use App\Models\User;
 use App\Models\user_has_role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class CompanyUserController
@@ -20,8 +21,59 @@ class CompanyUserController extends Controller
      */
     public function index()
     {
-        $companyUsers = CompanyUser::where('is_active', 'ACTIVE')->get();
-        return view('companyuser.managerlist', compact('companyUsers'));
+        $currentUserCompany = Auth::user();
+        $userCompanyUserAsUser = User::findOrFail($currentUserCompany->id);
+        $userHighRole = $userCompanyUserAsUser
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+
+
+        if ($userHighRole->id == 3) {
+            $userCompany = $userCompanyUserAsUser
+                ->companyUser()
+                ->where('user_id', $currentUserCompany->id)
+                ->where('is_active', 'ACTIVE')
+                ->first();
+
+            $activeCompanyRecruiters = CompanyUser::join('user_has_role', 'user_has_role.user_id', '=', 'company_user.user_id')
+                ->where('company_user.comp_id', $userCompany->comp_id)
+                ->where('user_has_role.role_id', 2)
+                ->get();
+
+            return view('companyuser.managerlist', compact('activeCompanyRecruiters'));
+        }
+        if ($userHighRole->id == 4) {
+
+            $userCompany = $userCompanyUserAsUser
+                ->company()
+                ->where('user_id', $currentUserCompany->id)
+                ->where('is_active', 'ACTIVE')
+                ->first();
+
+            $activeCompanyUsers = CompanyUser::all()->where('comp_id', $userCompany->id);
+            return view('home.ceohome', compact('activeCompanyUsers'));
+        }
+    }
+
+    /**
+     * Redirecciona a la vista de todos los registros activos
+     * para la company a la que este ligado el usuario CEO
+     * @param $currentCeo captura los datos del usuario autenticado
+     * @param $ceoAsUser convierte el usuario capturado a un modelo de tipo User
+     * @param $currentCeoCompany se obtiene un modelo Company con las credenciales del CEO
+     * @param $activeCompanyUsers obtiene el listado de usuarios activos segun la company del CEO
+     */
+    public function ceoIndex()
+    {
+        $currentCeo = Auth::user();
+        $ceoAsUser = User::findOrFail($currentCeo->id);
+        $currentCeoCompany = $ceoAsUser->company()->where('user_id', $currentCeo->id)
+            ->where('is_active', 'ACTIVE')
+            ->first();
+        $activeCompanyUsers = CompanyUser::all()->where('comp_id', $currentCeoCompany->id);
+        return view('home.ceohome', compact('activeCompanyUsers'));
     }
 
     /**
@@ -49,7 +101,7 @@ class CompanyUserController extends Controller
          * Area de crear user_has_role
          */
 
-         
+
         request()->validate(CompanyUser::$rules);
 
         $companyUser = new CompanyUser;
@@ -83,34 +135,30 @@ class CompanyUserController extends Controller
 
         /**
          * Actualizar o inactivar mediante user_id
-         */ 
+         */
         $action = $request->input('action');
-        
-        $user= User::findOrFail($id);
-        if ($action == 'update')
-        {
+
+        $user = User::findOrFail($id);
+        if ($action == 'update') {
             $user->name = $request->name;
-            $user->lastName = $request->lastName; 
-            $user->save();        
+            $user->lastName = $request->lastName;
+            $user->save();
         }
-        if ($action == 'destroy')    
-        {
+        if ($action == 'destroy') {
             $user->is_active = "INACTIVE";
             $user->save();
         }
 
 
-        $user_has_role= user_has_role::where('user_id',$id)->firstOrFail();
-        if ($action == 'update')
-        {
-                $user_has_role->role_id= $request->role_id;
+        $user_has_role = user_has_role::where('user_id', $id)->firstOrFail();
+        if ($action == 'update') {
+            $user_has_role->role_id = $request->role_id;
         }
-        if ($action == 'destroy')    
-        {
+        if ($action == 'destroy') {
             $user_has_role->is_active = "INACTIVE";
             $user_has_role->save();
         }
-        $companyUser = CompanyUser::where('user_id',$id)->firstOrFail();
+        $companyUser = CompanyUser::where('user_id', $id)->firstOrFail();
         if ($action == 'update') {
             $companyUser->user_id = $request->user_id;
             $companyUser->comp_id = $request->comp_id;
