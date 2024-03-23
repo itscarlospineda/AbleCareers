@@ -44,7 +44,8 @@
                                                 <td>{{ $role->role_name }}</td>
                                             @endforeach
                                             <!-- Cambiar Ruta-->
-                                            <td> <a href="" class="btn btn-outline-primary">Editar</a></td>
+                                            <td> <a href="{{ route('ceo.empleadoedit') }}" class="btn btn-primary">Actualizar</a>
+                                            <button type="submit" class="btn btn-danger" name="action" value="destroy">Eliminar</button></td>
 
                                             <td>
                                             </td>

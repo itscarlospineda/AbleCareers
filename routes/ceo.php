@@ -24,9 +24,20 @@ Route::get('/ceoedit',function(){
     return view('ceo.ceoedit');
 })->name('ceo.ceoedit');
 
+Route::get('/companyedit',function(){
+    return view('ceo.companyedit');
+})->name('ceo.companyoedit');
+
 Route::get('/empleadocreate', function () {
     return view('ceo.empleadocreate');
 })->name('ceo.empleadocreate');
+
+Route::get('/empleadoedit', function () {
+    return view('ceo.empleadoedit');
+})->name('ceo.empleadoedit');
+
+//Route::get('/ceo/{id}/empleadoedit', [App\Http\Controllers\CompanyUserController::class, 'edit'])->name('ceo.empleadoedit');
+//Colocar ruta con ID
 
 Route::get('/postcreate', function () {
     return view('ceo.postcreate');

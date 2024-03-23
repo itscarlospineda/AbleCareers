@@ -113,11 +113,16 @@
                                         </a>
                                     </li>
 
-                                    <li class="nav-link">
-                                        <a href="{{ route('ceo.ceoedit') }}" class="nav-link font">
-                                            <i class="bi bi-envelope-at-fill"></i>
-                                            &nbsp;&nbsp;&nbsp;<span>Editar Perfil</span>
-                                        </a>
+                                    <li class="nav-link dropdown"> 
+                                    <a id="navbarDropdownEditarPerfil" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <i class="bi bi-envelope-at-fill"></i>
+                                        &nbsp;&nbsp;&nbsp;<span>Modificar</span>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownEditarPerfil">
+                                                <a class="dropdown-item" href="ceoedit"> Usuario (CEO) 👤</a> 
+                                                <a class="dropdown-item" href="companyedit"> Company 🏢</a> 
+                                            </div>
+                                            
                                     </li>
 
                                
