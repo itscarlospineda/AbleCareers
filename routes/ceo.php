@@ -14,17 +14,26 @@
 
 
 
-Route::get('/home',function(){
-    return view('home.ceohome');
-})->name('ceo.ceohome');
+Route::get('/home',[App\Http\Controllers\CompanyUserController::class,'index'])->name('ceo.ceohome');
+
+// Route::get('/home',function(){
+//     return view('home.ceohome');
+// })->name('ceo.ceohome');
 
 Route::get('/ceoedit',function(){
     return view('ceo.ceoedit');
 })->name('ceo.ceoedit');
 
-Route::get('/empleadocreate', function () {
-    return view('ceo.empleadocreate');
-})->name('ceo.empleadocreate');
+Route::get('/companyedit',function(){
+    return view('ceo.companyedit');
+})->name('ceo.companyoedit');
+
+Route::get('/empleadoedit', function () {
+    return view('ceo.empleadoedit');
+})->name('ceo.empleadoedit');
+
+//Route::get('/ceo/{id}/empleadoedit', [App\Http\Controllers\CompanyUserController::class, 'edit'])->name('ceo.empleadoedit');
+//Colocar ruta con ID
 
 Route::get('/postcreate', function () {
     return view('ceo.postcreate');
@@ -34,19 +43,16 @@ Route::get('/postlist', function () {
     return view('ceo.postlist');
 })->name('ceo.postlist');
 
+//-----CREACION DE USUARIO [USERCOMPANY]
+Route::get('/createuser',[App\Http\Controllers\CompanyUserController::class,'create'])->name('ceo.create');
+Route::post('/createuser',[App\Http\Controllers\CompanyUserController::class,'store'])->name('ceo.store');
 
 
 /*
 |--------------------------------------------------------------------------
-| CompanyUser ROUTES
+| LUGAR DE PRUEBAS
 |--------------------------------------------------------------------------
 |
 |
 */
-
-
-Route::get('/companyUser', [App\Http\Controllers\CompanyUserController::class, 'index'])->name('companyUser.index');
-Route::get('/companyUser/create', [App\Http\Controllers\CompanyUserController::class, 'create'])->name('companyUser.create');
-Route::get('companyUser/{id}/edit', [App\Http\Controllers\CompanyUserController::class, 'edit'])->name('companyUser.edit');
-Route::put('/company/{id}', [App\Http\Controllers\CompanyUserController::class, 'update_or_destroy'])->name('companyUser.update_or_destroy');
-Route::post('/company', [App\Http\Controllers\CompanyUserController::class, 'store'])->name('companyUser.store');
+//Route::get('/tests',[App\Http\Controllers\CompanyUserController::class,'test']);

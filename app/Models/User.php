@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -13,7 +14,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    
+
     /**
      * The primary key associated with the table.
      *
@@ -30,14 +31,19 @@ class User extends Authenticatable
      */
 
 
-     public function roles(): BelongsToMany
+    public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'user_has_role', 'user_id', 'role_id');
     }
 
 
     protected $fillable = [
-        'name', 'lastName', 'email', 'phoneNumber', 'password', 'is_active',
+        'name',
+        'lastName',
+        'email',
+        'phoneNumber',
+        'password',
+        'is_active',
     ];
 
     /**
@@ -62,10 +68,20 @@ class User extends Authenticatable
 
 
     static $rules = [
-		'name' => 'required',
-		'email' => 'required',
-		'lastName' => 'required',
-		'phoneNumber' => 'required',
-        
+        'name' => 'required',
+        'email' => 'required',
+        'lastName' => 'required',
+        'phoneNumber' => 'required',
+
     ];
+
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
+
+    public function companyUser(){
+        return $this->hasOne(CompanyUser::class);
+    }
+
 }
