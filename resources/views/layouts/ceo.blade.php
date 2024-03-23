@@ -100,7 +100,7 @@
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="{{ route('ceo.postlist') }}" class="nav-link font">
+                                        <a href="{{ route('ceo.postlist.showpost') }}" class="nav-link font">
                                             <i class="bi bi-people-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Ver Posts Creados</span>
                                         </a>
