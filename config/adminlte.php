@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Able</b>Careers',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -154,8 +154,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -196,7 +196,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-success elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -297,7 +297,7 @@ return [
         // Navbar items:
         [
             'type' => 'navbar-search',
-            'text' => 'search',
+            'text' => 'Search',
             'topnav_right' => true,
         ],
         [
@@ -308,42 +308,42 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Search',
         ],
         [
-            'text' => 'Home',
+            'text' => 'Dashboard',
             'url' => '/postulant/home',
-            'icon'        => 'far fa-fw fa-Home',
+            'icon'        => 'fas fa-fw fa-home',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Empleos',
+            'text' => 'Empresas',
             'url' => '',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-building',
             'label_color' => 'success',
         ],
         [
             'text' => 'Personas',
             'url' => '',
-            'icon'        => 'far fa-fw fa-users',
+            'icon'        => 'fas fa-fw fa-users',
             'label_color' => 'success',
         ],
         [
             'text' => 'Posts',
             'url' => 'postulant/browse/posts',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-clipboard',
             'label_color' => 'success',
         ],
         [
             'text' => 'Curriculum',
             'url' => 'postulant/resume',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-envelope',
             'label_color' => 'success',
         ],
         [
             'text' => 'Notificaciones',
             'url' => '',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-bell',
              'label' => 4,
             'label_color' => 'success',
         ],

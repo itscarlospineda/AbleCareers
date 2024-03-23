@@ -31,13 +31,14 @@ class ResumeController extends Controller
     public function pdf($id)
     {
         // Obtener el resumen específico por su ID
-        $resume = Resume::findOrFail($id);
-
+        //$resume = Resume::findOrFail($id);
+        $resumes = Resume::all();
+        return view('common.showresume')->with('resumes',$resumes);
         // Cargar la vista PDF con el resumen obtenido
-        $pdf = PDF::loadView('resume.pdf', compact('resume'));
+        //$pdf = PDF::loadView('common.showresume', compact('resume'));
 
         // Devolver el PDF como una respuesta
-        return $pdf->stream();
+        //return $pdf->stream();
     }
 
 
