@@ -1,7 +1,7 @@
-@extends('layouts.common')
+@extends('layouts.recruiter')
 
 @section('content')
 <div class="col">
-    <h1>Homepage Recrutador</h1> <br>
+    <h1>Homepage Reclutador</h1> <br>
 </div>
 @endsection
