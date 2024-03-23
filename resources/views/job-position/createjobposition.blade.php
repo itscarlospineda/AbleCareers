@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.recruiter')
 
 @section('template_title')
     {{ __('Create') }} Job Position
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Crear') }} Posicion de trabajo</span>
+                        <span class="card-title">{{ __('Crear') }} Vacante</span>
                     </div>
 
                     <div class="card-body">
@@ -25,15 +25,11 @@
                                 <input type="text" class="form-control" name="jobpo_name">
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="form-label">Descripcion</label>
+                                <label for="title" class="form-label">Descripción</label>
                                 <input type="text" class="form-control" name="jobpo_desc">
                             </div>
                             <div class="mb-3">
-                                <label for="title" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" name="jobpo_date">
-                            </div>
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Compania</label>
+                                <label for="title" class="form-label">Compañía</label>
                                 <input type="text" class="form-control" name="jobpo_company">
                             </div>
 

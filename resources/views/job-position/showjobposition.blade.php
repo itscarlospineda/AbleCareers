@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.recruiter')
 
 @section('template_title')
     {{ $jobPosition->name ?? __('Show') . " " . __('Job Position') }}

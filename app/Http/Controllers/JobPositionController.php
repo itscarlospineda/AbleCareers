@@ -8,6 +8,7 @@ use App\Models\Resume;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+
 class JobPositionController extends Controller
 {
     /**
@@ -16,16 +17,15 @@ class JobPositionController extends Controller
      */
     public function index(Request $request)
     {
-        $jobPosition = Job_Position::where('is_active', 'ACTIVE')->paginate(10);
         $query = Job_Position::where('is_active', 'ACTIVE');
 
         if ($request->has('puesto') && $request->puesto != '') {
             $query->where('name', $request->puesto);
         }
 
-        $jobPosition = $query->paginate(10);
+        $jobPositions = $query->get();
 
-        return view('job-position.indexjobposition', compact('jobPosition'));
+        return view('job-position.indexjobposition', compact('jobPositions'));
     }
 
     public function list(Request $request)
@@ -53,7 +53,6 @@ class JobPositionController extends Controller
             [
                 'jobpo_name' => 'required|string|min:5',
                 'jobpo_desc' => 'required|string|min:5',
-                'jobpo_date' => 'required|string|min:5',
                 'jobpo_company' => 'required|string'
 
             ]
@@ -62,7 +61,6 @@ class JobPositionController extends Controller
         $jobpo = new Job_Position;
         $jobpo->name = $request->jobpo_name;
         $jobpo->description = $request->jobpo_desc;
-        $jobpo->post_date = $request->jobpo_date;
         $jobpo->company_id = $request->jobpo_company;
         $jobpo->save();
 
@@ -73,6 +71,13 @@ class JobPositionController extends Controller
      * Redirecciona a la vista de editar JobPosition
      */
     public function edit($id)
+    {
+        $jobPosition = Job_Position::FindOrFail($id);
+
+        return view('job-position.editjobposition', compact('jobPosition'));
+    }
+
+    public function editProfile($id)
     {
         $jobPosition = Job_Position::FindOrFail($id);
 
@@ -92,7 +97,6 @@ class JobPositionController extends Controller
         if ($action == 'update') {
             $jobPosition->name = $request->jobpo_name;
             $jobPosition->description = $request->jobpo_desc;
-            $jobPosition->post_date = $request->jobpo_date;
             $jobPosition->company_id = $request->jobpo_company;
             $jobPosition->save();
 
@@ -126,8 +130,8 @@ class JobPositionController extends Controller
         $userAsUser = User::findOrFail($user->id);
         // Obtener las posiciones de trabajo activas
         $jobPositions = Job_Position::where('is_active', 'ACTIVE')
-        ->where('company_id',$userAsUser->company->id)
-        ->get();
+            ->where('company_id', $userAsUser->company->id)
+            ->get();
 
         // Pasar las posiciones de trabajo y los resúmenes a la vista
         return view('ceo.postlist', compact('jobPositions'));
@@ -139,5 +143,4 @@ class JobPositionController extends Controller
 
         return view('common.showpost', compact('jobPosition'));
     }
-
 }

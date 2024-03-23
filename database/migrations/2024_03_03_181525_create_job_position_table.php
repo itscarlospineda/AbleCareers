@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('description', 255);
-            $table->dateTime('post_date');
+            $table->dateTime('post_date')->default(now());
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('company');
             $table->string('is_active', 25)->default('ACTIVE');
