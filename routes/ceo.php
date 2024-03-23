@@ -14,7 +14,7 @@
 
 
 
-Route::get('/home',[App\Http\Controllers\CompanyUserController::class,'ceoIndex'])->name('ceo.ceohome');
+Route::get('/home',[App\Http\Controllers\CompanyUserController::class,'index'])->name('ceo.ceohome');
 
 // Route::get('/home',function(){
 //     return view('home.ceohome');
@@ -27,10 +27,6 @@ Route::get('/ceoedit',function(){
 Route::get('/companyedit',function(){
     return view('ceo.companyedit');
 })->name('ceo.companyoedit');
-
-Route::get('/empleadocreate', function () {
-    return view('ceo.empleadocreate');
-})->name('ceo.empleadocreate');
 
 Route::get('/empleadoedit', function () {
     return view('ceo.empleadoedit');
@@ -48,7 +44,8 @@ Route::get('/postlist', function () {
 })->name('ceo.postlist');
 
 //-----CREACION DE USUARIO [USERCOMPANY]
-
+Route::get('/createuser',[App\Http\Controllers\CompanyUserController::class,'create'])->name('ceo.create');
+Route::post('/createuser',[App\Http\Controllers\CompanyUserController::class,'store'])->name('ceo.store');
 
 
 /*

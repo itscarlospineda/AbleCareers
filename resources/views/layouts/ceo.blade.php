@@ -93,7 +93,7 @@
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="{{ route('ceo.empleadocreate') }}" class="nav-link font">
+                                        <a href="{{ route('ceo.create') }}" class="nav-link font">
                                             <i class="bi bi-briefcase-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Crear Empleado</span>
                                         </a>
@@ -113,19 +113,19 @@
                                         </a>
                                     </li>
 
-                                    <li class="nav-link dropdown"> 
+                                    <li class="nav-link dropdown">
                                     <a id="navbarDropdownEditarPerfil" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <i class="bi bi-envelope-at-fill"></i>
                                         &nbsp;&nbsp;&nbsp;<span>Modificar</span>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownEditarPerfil">
-                                                <a class="dropdown-item" href="ceoedit"> Usuario (CEO) 👤</a> 
-                                                <a class="dropdown-item" href="companyedit"> Company 🏢</a> 
+                                                <a class="dropdown-item" href="ceoedit"> Usuario (CEO) 👤</a>
+                                                <a class="dropdown-item" href="companyedit"> Company 🏢</a>
                                             </div>
-                                            
+
                                     </li>
 
-                               
+
                                 </ul>
                             </div>
                             <div class="card text-white mb-3" style="margin-top: 20px;">

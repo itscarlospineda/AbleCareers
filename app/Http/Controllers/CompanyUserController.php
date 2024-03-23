@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CompanyUser;
+use App\Models\Role;
 use App\Models\User;
 use App\Models\user_has_role;
 use Carbon\Carbon;
@@ -60,30 +61,14 @@ class CompanyUserController extends Controller
     }
 
     /**
-     * Redirecciona a la vista de todos los registros activos
-     * para la company a la que este ligado el usuario CEO
-     * @param $currentCeo captura los datos del usuario autenticado
-     * @param $ceoAsUser convierte el usuario capturado a un modelo de tipo User
-     * @param $currentCeoCompany se obtiene un modelo Company con las credenciales del CEO
-     * @param $activeCompanyUsers obtiene el listado de usuarios activos segun la company del CEO
-     */
-    public function ceoIndex()
-    {
-        $currentCeo = Auth::user();
-        $ceoAsUser = User::findOrFail($currentCeo->id);
-        $currentCeoCompany = $ceoAsUser->company()->where('user_id', $currentCeo->id)
-            ->where('is_active', 'ACTIVE')
-            ->first();
-        $activeCompanyUsers = CompanyUser::all()->where('comp_id', $currentCeoCompany->id);
-        return view('home.ceohome', compact('activeCompanyUsers'));
-    }
-
-    /**
      * Redirecciona a la vista de creacion de CompanyUser
      */
     public function create()
     {
-        return view('');
+        $roles = Role::where('is_active','ACTIVE')
+        ->whereIn('id',[2,3])
+        ->get();
+        return view('ceo.empleadocreate',compact('roles'));
     }
 
 
@@ -105,9 +90,10 @@ class CompanyUserController extends Controller
         $userCompany = null;
 
         $user = new User;
-        $user->name = 'Tests';
-        $user->lastName = 'TEST';
-        $user->email = 'test@test.com';
+        $user->name = $request->name;
+        $user->lastName = $request->lastName;
+        $user->email = $request->email;
+        $user->phoneNumber = $request->phoneNumber;
         $user->password = Hash::make('password');
         $user->created_at = Carbon::now();
         $user->save();
@@ -148,7 +134,7 @@ class CompanyUserController extends Controller
             $companyUser->save();
         }
 
-        return redirect()->route('companyUser.index')->with('success', 'CompanyUser created successfully.');
+        return redirect()->route('ceo.ceohome')->with('success', 'CompanyUser created successfully.');
     }
 
     /**
