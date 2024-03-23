@@ -1,4 +1,4 @@
-@extends('layouts.common')
+@extends('adminlte::page')
 
 @section('content')
             <div class="col">
@@ -8,7 +8,7 @@
             <div class="col card" style="background-color: rgb(233, 233, 233)">
                 <div class="card-body text-dark ">
 
-                    <form action="{{ route('createrequests.create')}}" method="POST">
+                    <form action="{{ route('postulant.createrequest')}}" method="POST">
                     @csrf
 
                         <div class="mb-3">
@@ -19,17 +19,17 @@
                             <label for="title" class="form-label">Estatus</label>
                             <textarea style="height: 150px; resize:none" name="status" class="form-control" aria-label="With textarea"></textarea>
                         </div>
-            
+
                         <a href="/user/home" class="btn btn-danger"><i class="bi bi-x-circle"></i>&nbsp;Cancelar</a>
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-floppy"></i>&nbsp;Guardar
-                        </button> 
+                        </button>
 
                     </form>
                 </div>
             </div>
         </div>
-    </div>       
+    </div>
 </div>
 
 @endsection

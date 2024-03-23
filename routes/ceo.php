@@ -39,9 +39,10 @@ Route::get('/postcreate', function () {
     return view('ceo.postcreate');
 })->name('ceo.postcreate');
 
-Route::get('/postlist', function () {
-    return view('ceo.postlist');
-})->name('ceo.postlist');
+
+
+//-----VISTA DE POSTS
+Route::get('/postlist',[App\Http\Controllers\JobPositionController::class,'ceoShowPost'])->name('ceo.postlist.showpost');
 
 //-----CREACION DE USUARIO [USERCOMPANY]
 Route::get('/createuser',[App\Http\Controllers\CompanyUserController::class,'create'])->name('ceo.create');
