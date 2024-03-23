@@ -61,3 +61,23 @@ Route::post('/resume', [App\Http\Controllers\ResumeController::class, 'store'])-
 // Route::get('/resume/{id}',[App\Http\Controllers\ResumeController::class, 'show'])->name('resume.show');
 Route::get('/resume/{id}/edit', [App\Http\Controllers\ResumeController::class, 'edit'])->name('resume.edit');
 Route::put('/resume/{id}', [App\Http\Controllers\ResumeController::class, 'update_or_destroy'])->name('resume.update_or_destroy');
+
+/*
+|--------------------------------------------------------------------------
+| JOP_POSITION ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+Route::get('/browse/posts', [App\Http\Controllers\JobPositionController::class, 'showPost'])->name('postslist');
+Route::get('/browse/posts/{id}', [App\Http\Controllers\JobPositionController::class, 'showDetails'])->name('jobpositions.showdetails');
+
+/*
+|--------------------------------------------------------------------------
+| JopoResumeController ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
+Route::post('/jobpositions/apply', [App\Http\Controllers\JopoResumeController::class, 'apply'])->name('jobpositions.apply');
