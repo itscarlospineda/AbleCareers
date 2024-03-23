@@ -14,10 +14,8 @@
 
 
 
-Route::get('/home', function () {
-    return view('home.managerhome');
-})->name('manager.managerhome');
-Route::get('/recl', [App\Http\Controllers\CompanyUserController::class, 'index'])->name('manager.reclutador.index');
+
+Route::get('/home', [App\Http\Controllers\CompanyUserController::class, 'index'])->name('manager.managerhome');
 Route::get('/compusrcreate', [App\Http\Controllers\CompanyUserController::class, 'create'])->name('manager.reclutador.create');
 Route::get('/compus/{id}/edit',[App\Http\Controllers\CompanyUserController::class, 'edit']) -> name('manager.reclutador.edit');
 Route::put('/{id}',[App\Http\Controllers\CompanyUserController::class,'update_or_destroy'])->name('manager.reclutador.update_or_destroy');

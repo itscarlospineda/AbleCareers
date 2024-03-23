@@ -65,10 +65,10 @@ class CompanyUserController extends Controller
      */
     public function create()
     {
-        $roles = Role::where('is_active','ACTIVE')
-        ->whereIn('id',[2,3])
-        ->get();
-        return view('ceo.empleadocreate',compact('roles'));
+        $roles = Role::where('is_active', 'ACTIVE')
+            ->whereIn('id', [2, 3])
+            ->get();
+        return view('ceo.empleadocreate', compact('roles'));
     }
 
 

@@ -86,41 +86,41 @@
                             <div class="mx-1 mt-2">
                                 <ul class="nav flex-column">
                                     <li class="nav-link">
-                                        <a href="{{route('ceo.ceohome')}}" class="nav-link font">
+                                        <a href="" class="nav-link font">
                                             <i class="bi bi-house-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Home</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="{{ route('ceo.empleadocreate') }}" class="nav-link font">
+                                        <a href="" class="nav-link font">
                                             <i class="bi bi-briefcase-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Crear Reclutador</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="{{ route('ceo.postlist') }}" class="nav-link font">
+                                        <a href="" class="nav-link font">
                                             <i class="bi bi-people-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Ver Posts</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="{{ route('ceo.postcreate') }}" class="nav-link font">
+                                        <a href="" class="nav-link font">
                                             <i class="bi bi-file-earmark-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Crear Posts</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="{{ route('ceo.postcreate') }}" class="nav-link font">
+                                        <a href="" class="nav-link font">
                                             <i class="bi bi-file-earmark-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Editar Perfil</span>
                                         </a>
                                     </li>
 
-                               
+
                                 </ul>
                             </div>
                             <div class="card text-white mb-3" style="margin-top: 20px;">
