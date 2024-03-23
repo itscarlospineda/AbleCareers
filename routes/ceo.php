@@ -47,19 +47,15 @@ Route::get('/postlist', function () {
     return view('ceo.postlist');
 })->name('ceo.postlist');
 
+//-----CREACION DE USUARIO [USERCOMPANY]
+
 
 
 /*
 |--------------------------------------------------------------------------
-| CompanyUser ROUTES
+| LUGAR DE PRUEBAS
 |--------------------------------------------------------------------------
 |
 |
 */
-
-
-Route::get('/companyUser', [App\Http\Controllers\CompanyUserController::class, 'index'])->name('companyUser.index');
-Route::get('/companyUser/create', [App\Http\Controllers\CompanyUserController::class, 'create'])->name('companyUser.create');
-Route::get('companyUser/{id}/edit', [App\Http\Controllers\CompanyUserController::class, 'edit'])->name('companyUser.edit');
-Route::put('/company/{id}', [App\Http\Controllers\CompanyUserController::class, 'update_or_destroy'])->name('companyUser.update_or_destroy');
-Route::post('/company', [App\Http\Controllers\CompanyUserController::class, 'store'])->name('companyUser.store');
+//Route::get('/tests',[App\Http\Controllers\CompanyUserController::class,'test']);

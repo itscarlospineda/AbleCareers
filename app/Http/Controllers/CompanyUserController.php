@@ -94,32 +94,61 @@ class CompanyUserController extends Controller
      */
     public function store(Request $request)
     {
-        /**
-         * Area de crear usuario
-         */
+        $currentUserCompany = Auth::user();
+        $userCompanyUserAsUser = User::findOrFail($currentUserCompany->id);
+        $userHighRole = $userCompanyUserAsUser
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+
+        $userCompany = null;
+
         $user = new User;
-        $user->name = $request->name;
-        $user->lastName = $request->lastName;
-        $user->email = $request->email;
+        $user->name = 'Tests';
+        $user->lastName = 'TEST';
+        $user->email = 'test@test.com';
         $user->password = Hash::make('password');
         $user->created_at = Carbon::now();
         $user->save();
 
-        return $user->id;
-        // /**
-        //  * Area de crear user_has_role
-        //  */
 
+        if ($userHighRole->id == 3) {
+            $userCompany = $userCompanyUserAsUser
+                ->companyUser()
+                ->where('user_id', $currentUserCompany->id)
+                ->where('is_active', 'ACTIVE')
+                ->first();
 
-        // request()->validate(CompanyUser::$rules);
+            $userHasRole = new user_has_role;
+            $userHasRole->user_id = $user->id;
+            $userHasRole->role_id = 2;
+            $userHasRole->save();
 
-        // $companyUser = new CompanyUser;
-        // $companyUser->user_id = $request->user_id; //!Hacer cambios
-        // $companyUser->comp_id = $request->comp_id;
-        // $companyUser->save();
+            $companyUser = new CompanyUser;
+            $companyUser->comp_id = $userCompany->id;
+            $companyUser->user_id = $user->id;
+            $companyUser->save();
+        }
+        if ($userHighRole->id == 4) {
+            $userCompany = $userCompanyUserAsUser
+                ->company()
+                ->where('user_id', $currentUserCompany->id)
+                ->where('is_active', 'ACTIVE')
+                ->first();
 
+            $userHasRole = new user_has_role;
+            $userHasRole->user_id = $user->id;
+            $userHasRole->role_id = $request->role_id;
+            $userHasRole->save();
 
-        // return redirect()->route('companyUser.index')->with('success', 'CompanyUser created successfully.');
+            $companyUser = new CompanyUser;
+            $companyUser->comp_id = $userCompany->id;
+            $companyUser->user_id = $user->id;
+            $companyUser->save();
+        }
+
+        return redirect()->route('companyUser.index')->with('success', 'CompanyUser created successfully.');
     }
 
     /**
