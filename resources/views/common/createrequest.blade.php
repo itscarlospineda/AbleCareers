@@ -20,7 +20,7 @@
                             <textarea style="height: 150px; resize:none" name="status" class="form-control" aria-label="With textarea"></textarea>
                         </div>
 
-                        <a href="/user/home" class="btn btn-danger"><i class="bi bi-x-circle"></i>&nbsp;Cancelar</a>
+                        <a href="/postulant/home" class="btn btn-danger"><i class="bi bi-x-circle"></i>&nbsp;Cancelar</a>
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-floppy"></i>&nbsp;Guardar
                         </button>
