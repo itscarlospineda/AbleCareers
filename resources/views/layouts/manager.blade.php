@@ -12,9 +12,11 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js','resources/css/style.css'])
 </head>
 <body>
     <div id="app">
@@ -75,53 +77,58 @@
         <main class="">
             <div class="container-fluid">
                 <div class="row">
-                        <aside class="col-md-3 item1" style="background-color: rgb(231, 231, 231); height:100vh;">
-                            <div class="container mt-4">
-                                <center>
-                                    <a href="">Manager</a>
-                                </center>
-                            </div>
+                    <aside class="col-md-3 item1">
+                        <div class="container mt-4">
+                            <center>
+                                <a href=""><img src="/logo.png" alt="" srcset="" width="50%" height="auto"></a>
+                            </center>
+                        </div>
                             <div class="mx-1 mt-2">
                                 <ul class="nav flex-column">
                                     <li class="nav-link">
-                                        <a href="/manager/home" class="nav-link font">
+                                        <a href="" class="nav-link font">
+                                            <i class="bi bi-house-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Home</span>
                                         </a>
                                     </li>
 
                                     <li class="nav-link">
-                                        <a href="{{ route('manager.reclutador.index') }}" class="nav-link font">
-                                            &nbsp;&nbsp;&nbsp;<span>Reclutadores</span>
-                                        </a>
-                                    </li>
-                                                        <!-- Cambiar Ruta-->
-
-                                    <li class="nav-link">
-                                        <a href="{{route('manager.reclutador.create')}}" class="nav-link font">
+                                        <a href="" class="nav-link font">
+                                            <i class="bi bi-briefcase-fill"></i>
                                             &nbsp;&nbsp;&nbsp;<span>Crear Reclutador</span>
                                         </a>
                                     </li>
-                                                        <!-- Cambiar Ruta a los 2-->
 
                                     <li class="nav-link">
-                                        <a href="{{route('manager.puestos.index')}}" class="nav-link font">
-                                            &nbsp;&nbsp;&nbsp;<span>Puestos</span>
+                                        <a href="" class="nav-link font">
+                                            <i class="bi bi-people-fill"></i>
+                                            &nbsp;&nbsp;&nbsp;<span>Ver Posts</span>
                                         </a>
                                     </li>
+
                                     <li class="nav-link">
-                                        <a href="{{route('manager.puestos.create')}}" class="nav-link font">
-                                            &nbsp;&nbsp;&nbsp;<span>Crear Puesto</span>
+                                        <a href="" class="nav-link font">
+                                            <i class="bi bi-file-earmark-fill"></i>
+                                            &nbsp;&nbsp;&nbsp;<span>Crear Posts</span>
                                         </a>
                                     </li>
-                                    
+
+                                    <li class="nav-link">
+                                        <a href="" class="nav-link font">
+                                            <i class="bi bi-file-earmark-fill"></i>
+                                            &nbsp;&nbsp;&nbsp;<span>Editar Perfil</span>
+                                        </a>
+                                    </li>
+
 
                                 </ul>
                             </div>
                             <div class="card text-white mb-3" style="margin-top: 20px;">
-                                <div class=" black card-body">
+                                <div class="card-body">
 
                                 </div>
                             </div>
+
                         </aside>
                         <div class="col-md-9 item2">
                         @if($message = Session::get('Mensaje'))

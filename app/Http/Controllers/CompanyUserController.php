@@ -65,10 +65,10 @@ class CompanyUserController extends Controller
      */
     public function create()
     {
-        $roles = Role::where('is_active','ACTIVE')
-        ->whereIn('id',[2,3])
-        ->get();
-        return view('ceo.empleadocreate',compact('roles'));
+        $roles = Role::where('is_active', 'ACTIVE')
+            ->whereIn('id', [2, 3])
+            ->get();
+        return view('ceo.empleadocreate', compact('roles'));
     }
 
 
@@ -166,6 +166,9 @@ class CompanyUserController extends Controller
         if ($action == 'update') {
             $user->name = $request->name;
             $user->lastName = $request->lastName;
+            $user->email = $request->email;
+            $user->phoneNumber = $request->phoneNumber;
+            $user->password = $request->password;
             $user->save();
         }
         if ($action == 'destroy') {
