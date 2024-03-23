@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CompanyUser;
 use App\Models\User;
 use App\Models\user_has_role;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class CompanyUserController
@@ -95,22 +97,29 @@ class CompanyUserController extends Controller
         /**
          * Area de crear usuario
          */
+        $user = new User;
+        $user->name = $request->name;
+        $user->lastName = $request->lastName;
+        $user->email = $request->email;
+        $user->password = Hash::make('password');
+        $user->created_at = Carbon::now();
+        $user->save();
+
+        return $user->id;
+        // /**
+        //  * Area de crear user_has_role
+        //  */
 
 
-        /**
-         * Area de crear user_has_role
-         */
+        // request()->validate(CompanyUser::$rules);
+
+        // $companyUser = new CompanyUser;
+        // $companyUser->user_id = $request->user_id; //!Hacer cambios
+        // $companyUser->comp_id = $request->comp_id;
+        // $companyUser->save();
 
 
-        request()->validate(CompanyUser::$rules);
-
-        $companyUser = new CompanyUser;
-        $companyUser->user_id = $request->user_id; //!Hacer cambios
-        $companyUser->comp_id = $request->comp_id;
-        $companyUser->save();
-
-
-        return redirect()->route('companyUser.index')->with('success', 'CompanyUser created successfully.');
+        // return redirect()->route('companyUser.index')->with('success', 'CompanyUser created successfully.');
     }
 
     /**
