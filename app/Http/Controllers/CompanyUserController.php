@@ -166,6 +166,9 @@ class CompanyUserController extends Controller
         if ($action == 'update') {
             $user->name = $request->name;
             $user->lastName = $request->lastName;
+            $user->email = $request->email;
+            $user->phoneNumber = $request->phoneNumber;
+            $user->password = $request->password;
             $user->save();
         }
         if ($action == 'destroy') {
