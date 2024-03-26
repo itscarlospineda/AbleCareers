@@ -45,7 +45,7 @@ class CompanyUserController extends Controller
                 ->where('user_has_role.role_id', 2)
                 ->get();
 
-            return view('companyuser.managerlist', compact('activeCompanyRecruiters'));
+            return view('home.managerhome', compact('activeCompanyRecruiters'));
         }
         if ($userHighRole->id == 4) {
 
