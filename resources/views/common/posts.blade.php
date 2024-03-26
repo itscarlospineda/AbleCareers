@@ -3,9 +3,10 @@
 @section('title', 'AbleCareers - Browse Posts')
 
 @section('content')
-<div class="col-md-12" style="padding-top: 20px; padding-left: 30px;">
+<div class="col-md-12 mt-2" style="padding-top: 20px; padding-left: 30px;">
     <div class="col">
         <p class="h1">Posts</p>
+        <p class="h5">Encuentra variedad de plazas vacantes en esta página.</p>
     </div>
 
     @foreach ($jobPositions as $jobPos)

@@ -1,43 +1,51 @@
 @extends('adminlte::page')
 
-@section('title', 'AbleCareers - Postulant Home')
+@section('title', 'Postulant Home')
 
 
 @section('content')
-<div class="col">
-    <h1>Homepage</h1> <br>
+<head>
+
+</head>
+<div class="container  mt-5 pt-5">
+  <div class="row gy-3">
+    <div class="col-md-6">
+      <center>
+        <img src="https://img.freepik.com/free-photo/view-professional-handshake-business-people_23-2150917092.jpg"
+        class="front" alt="" srcset="" width="300px" height="auto" style="border-radius: 10px;">
+      </center>
+      </div>
+    <div class="col-md-6">
+      <br><br><br>
+        <p class="h1"> ¡Somos la mejor opción para tu futuro!</p>
+        <p class="h5">Encuentra varias opciones de vacantes disponibles en la palma de tu mano.</p>
+    </div>
+  </div>
 </div>
-<div class="col">
-    <center>
-        <img src="/banner.jpg" class="front" alt="" srcset="" width="100%" height="auto">
-        <h2> ¡Somos la mejor opción para tu futuro!</h2>
-        <p>Encuentra varias opciones de vacantes disponibles en la palma de tu mano.</p>
-        
-    </center>
-</div>
+
 <div class="container offers">
-    <div class="row">
+    <div class="row my-5">
         <div class="col-lg">
             <div class="card card-body">
                 <a href="#" class="nav-link font2 button">
-                    <h5 class="card-title">Aplicantes</h5> 
-                    <h4 class="card-text">7</h4>
+                    <h5 class="card-title">Aplicantes</h5>
+                    <h4 class="card-text">50</h4>
                 </a>
             </div>
         </div>
         <div class="col">
             <div class="card card-body">
                 <a href="#" class="nav-link font2 button">
-                    <h5 class="card-title">Empresas Afiliadas</h5> 
-                    <h4 class="card-text">3</h4>
+                    <h5 class="card-title">Empresas Afiliadas</h5>
+                    <h4 class="card-text">25</h4>
                 </a>
             </div>
         </div>
         <div class="col">
             <div class="card card-body">
                 <a href="#" class="nav-link font2 button">
-                    <h5 class="card-title">Vacantes Disponibles</h5> 
-                    <h4 class="card-text">10</h4>
+                    <h5 class="card-title">Vacantes Disponibles</h5>
+                    <h4 class="card-text">15</h4>
                 </a>
             </div>
         </div>
@@ -56,7 +64,7 @@
                         </a>
                       </div>
                       <div class="col-sm-6 text-right">
-                        <img src="https://www.pascualparada.com/wp-content/uploads/2013/03/empresasRed.jpg" 
+                        <img src="https://www.pascualparada.com/wp-content/uploads/2013/03/empresasRed.jpg"
                         class="card-img-right" alt="red-img">
                       </div>
                   </div>
@@ -67,20 +75,32 @@
 
     <div class="container my-5">
       <div class="card row flex-row-reverse" style="background-color: white">
-          <img class="col-lg-4 card-img-end img-fluid p-0" src="https://media.geeksforgeeks.org/wp-content/uploads/20230420093202/Internet-image-(2).webp" 
+          <img class="col-lg-4 card-img-end img-fluid p-0" src="https://media.geeksforgeeks.org/wp-content/uploads/20230420093202/Internet-image-(2).webp"
             width="200px" height="200px"/>
           <div class="col-lg-8 card-body">
-              <h1 class="card-title">¿Eres dueño o administrador de una empresa?</h1> <br>
-              <p class="card-text">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores beneficios. 
+              <p class="h3">¿Eres dueño o administrador de una empresa?</p> <br>
+              <p class="card-text">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores beneficios.
                 Haz clic aquí para aplicar.</p> <br>
               <a href="{{route('postulant.createrequest')}}" class="btn btn-danger"> <i class="bi bi-building-up"></i>&nbsp;Aplicar</a>
           </div>
       </div>
     </div>
 
-</div>   
+    <div class="container my-5">
+      <div class="card row flex-row-reverse" style="background-color: white">
+          <img class="col-lg-4 card-img-end img-fluid p-0" src="https://www.unitedway.org.hn/sites/unitedwayorghn/files/4_0.png"
+            width="200px" height="200px"/>
+          <div class="col-lg-8 card-body">
+              <p class="h3">Empresas Afiliadas</p> <br>
+              <p class="card-text">Encuentra cuáles son las empresas aliadas a la plataforma y analiza las plazas disponibles de cada una.</p> <br>
+              <a href="#" class="btn btn-danger"> <i class="bi bi-building-up"></i>&nbsp;Ver Más</a>
+          </div>
+      </div>
+    </div>
 
-<div class="offers">
+</div>
+
+<!--<div class="offers">
     <center>
         <h1 style="margin-bottom: 30px;">Ofertas Recientes</h1>
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -122,11 +142,11 @@
             </button>
           </div>
     </center>
-    
-</div>
+
+</div>-->
 
 </div>
-</div>       
+</div>
 </div>
 @stop
 

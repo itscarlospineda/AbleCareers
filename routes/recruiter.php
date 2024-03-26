@@ -28,5 +28,6 @@ Route::get('/jobPosition/create', [App\Http\Controllers\JobPositionController::c
 Route::get('/jobPosition/{id}/edit', [App\Http\Controllers\JobPositionController::class, 'edit'])->name('jobPosition.edit');
 Route::put('/jobPosition/{id}', [App\Http\Controllers\JobPositionController::class, 'update_or_destroy'])->name('jobPosition.update_or_destroy');
 Route::post('/jobPosition', [App\Http\Controllers\JobPositionController::class, 'store'])->name('jobPosition.store');
+Route::get('/jobPosition/{id}/editProfile', [App\Http\Controllers\JobPositionController::class, 'editProfile'])->name('jobPosition.editProfile');
 
 

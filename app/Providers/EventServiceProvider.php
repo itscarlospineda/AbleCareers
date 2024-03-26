@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Filters\MenuFilter;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -25,7 +28,18 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
+            $event->menu->menu = [];
+            $user = Auth::user();
+
+            $menuBuilder = new MenuFilter($user);
+            $newMenu = $menuBuilder->buildMenu();
+
+            foreach($newMenu as $menuItem){
+                $event->menu->add($menuItem);
+            }
+
+        });
     }
 
     /**

@@ -1,4 +1,7 @@
-@extends('layouts.admin')
+@extends('adminlte::page')
+
+@section('title', 'SuperUser Home')
+
 
 @section('content')
             <div class="col py-4">
@@ -6,7 +9,14 @@
             </div>
 
         </div>
-    </div>       
+    </div>
 </div>
+@stop
 
-@endsection
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop

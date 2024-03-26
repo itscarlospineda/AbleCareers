@@ -21,6 +21,8 @@
 |
 */
 
+
+
 Route::get('/home', function () {
     return view('home.commonhome');
 })->name('postulant.postulanthome');
