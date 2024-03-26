@@ -1,4 +1,7 @@
-@extends('layouts.ceo')
+@extends('adminlte::page')
+
+@section('title', 'CEO Home')
+
 
 @section('content')
 
@@ -19,10 +22,10 @@
                 <div class="card border-dark">
                     <!--<div class="card-header"><h5 class="card-title">Solicitudes de Empresa</h5></div>
 
-                  <div class="container mt-3">
-                        <a class="btn btn-success col-auto" href="/createcategories">
-                            <i class="bi bi-journal-arrow-up"></i>&nbsp;Crear Nuevo</a>
-                  </div>-->
+                      <div class="container mt-3">
+                            <a class="btn btn-success col-auto" href="/createcategories">
+                                <i class="bi bi-journal-arrow-up"></i>&nbsp;Crear Nuevo</a>
+                      </div>-->
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -44,8 +47,11 @@
                                                 <td>{{ $role->role_name }}</td>
                                             @endforeach
                                             <!-- Cambiar Ruta-->
-                                            <td> <a href="{{ route('ceo.empleadoedit') }}" class="btn btn-primary">Actualizar</a>
-                                            <button type="submit" class="btn btn-danger" name="action" value="destroy">Eliminar</button></td>
+                                            <td> <a href="{{ route('ceo.empleadoedit') }}"
+                                                    class="btn btn-primary">Actualizar</a>
+                                                <button type="submit" class="btn btn-danger" name="action"
+                                                    value="destroy">Eliminar</button>
+                                            </td>
 
                                             <td>
                                             </td>
@@ -61,4 +67,12 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop

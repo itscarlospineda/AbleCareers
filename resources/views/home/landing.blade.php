@@ -20,20 +20,20 @@
             <div class="container-fluid">
                 <div class="d-flex justify-content-between fw-bold align-items-center">
                     <a class="navbar-brand gradient" href="#">AbleCareers</a>
-                
+
                     <ul class="nav d-flex justify-content-center ">
                         <li class="nav-item"><a href="" class="nav-link text-white">Posts</a></li>
                         <li class="nav-item"><a href="" class="nav-link text-white">Empresas</a></li>
                         <li class="nav-item"><a href="" class="nav-link text-white">Acerca de Nosotros</a></li>
                     </ul>
-                
+
                     <ul class="nav d-flex flex-row ">
-                        <li class="nav-item"><a href="" class="nav-link text-white">Login</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-white">Register</a></li>
+                        <li class="nav-item"><a href="{{route('login')}}" class="nav-link text-white">Login</a></li>
+                        <li class="nav-item"><a href="{{route('register')}}" class="nav-link text-white">Register</a></li>
                     </ul>
                 </div>
-                
-                
+
+
             </div>
         </nav>
 
@@ -51,7 +51,7 @@
             </center>
         </div>
     </div>
-    
+
     <div class="container mt-5 pt-5" style="min-height: 100vh;">
         <div class="row gy-3">
 

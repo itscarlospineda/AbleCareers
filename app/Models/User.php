@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -75,12 +76,24 @@ class User extends Authenticatable
 
     ];
 
+    public function adminlte_desc()
+    {
+        $user = Auth::user();
+        $currentUser = User::findOrFail($user->id);
+        $userHighRole = $currentUser->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+        return $userHighRole->role_name;
+    }
+
     public function company()
     {
         return $this->hasOne(Company::class);
     }
 
-    public function companyUser(){
+    public function companyUser()
+    {
         return $this->hasOne(CompanyUser::class);
     }
 

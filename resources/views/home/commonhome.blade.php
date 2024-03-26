@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AbleCareers - Postulant Home')
+@section('title', 'Postulant Home')
 
 
 @section('content')
@@ -11,8 +11,8 @@
   <div class="row gy-3">
     <div class="col-md-6">
       <center>
-        <img src="https://img.freepik.com/free-photo/view-professional-handshake-business-people_23-2150917092.jpg" 
-        class="front" alt="" srcset="" width="300px" height="auto" style="border-radius: 10px;"> 
+        <img src="https://img.freepik.com/free-photo/view-professional-handshake-business-people_23-2150917092.jpg"
+        class="front" alt="" srcset="" width="300px" height="auto" style="border-radius: 10px;">
       </center>
       </div>
     <div class="col-md-6">
@@ -28,7 +28,7 @@
         <div class="col-lg">
             <div class="card card-body">
                 <a href="#" class="nav-link font2 button">
-                    <h5 class="card-title">Aplicantes</h5> 
+                    <h5 class="card-title">Aplicantes</h5>
                     <h4 class="card-text">50</h4>
                 </a>
             </div>
@@ -36,7 +36,7 @@
         <div class="col">
             <div class="card card-body">
                 <a href="#" class="nav-link font2 button">
-                    <h5 class="card-title">Empresas Afiliadas</h5> 
+                    <h5 class="card-title">Empresas Afiliadas</h5>
                     <h4 class="card-text">25</h4>
                 </a>
             </div>
@@ -44,7 +44,7 @@
         <div class="col">
             <div class="card card-body">
                 <a href="#" class="nav-link font2 button">
-                    <h5 class="card-title">Vacantes Disponibles</h5> 
+                    <h5 class="card-title">Vacantes Disponibles</h5>
                     <h4 class="card-text">15</h4>
                 </a>
             </div>
@@ -64,7 +64,7 @@
                         </a>
                       </div>
                       <div class="col-sm-6 text-right">
-                        <img src="https://www.pascualparada.com/wp-content/uploads/2013/03/empresasRed.jpg" 
+                        <img src="https://www.pascualparada.com/wp-content/uploads/2013/03/empresasRed.jpg"
                         class="card-img-right" alt="red-img">
                       </div>
                   </div>
@@ -75,11 +75,11 @@
 
     <div class="container my-5">
       <div class="card row flex-row-reverse" style="background-color: white">
-          <img class="col-lg-4 card-img-end img-fluid p-0" src="https://media.geeksforgeeks.org/wp-content/uploads/20230420093202/Internet-image-(2).webp" 
+          <img class="col-lg-4 card-img-end img-fluid p-0" src="https://media.geeksforgeeks.org/wp-content/uploads/20230420093202/Internet-image-(2).webp"
             width="200px" height="200px"/>
           <div class="col-lg-8 card-body">
               <p class="h3">¿Eres dueño o administrador de una empresa?</p> <br>
-              <p class="card-text">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores beneficios. 
+              <p class="card-text">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores beneficios.
                 Haz clic aquí para aplicar.</p> <br>
               <a href="{{route('postulant.createrequest')}}" class="btn btn-danger"> <i class="bi bi-building-up"></i>&nbsp;Aplicar</a>
           </div>
@@ -88,7 +88,7 @@
 
     <div class="container my-5">
       <div class="card row flex-row-reverse" style="background-color: white">
-          <img class="col-lg-4 card-img-end img-fluid p-0" src="https://www.unitedway.org.hn/sites/unitedwayorghn/files/4_0.png" 
+          <img class="col-lg-4 card-img-end img-fluid p-0" src="https://www.unitedway.org.hn/sites/unitedwayorghn/files/4_0.png"
             width="200px" height="200px"/>
           <div class="col-lg-8 card-body">
               <p class="h3">Empresas Afiliadas</p> <br>
@@ -98,7 +98,7 @@
       </div>
     </div>
 
-</div>   
+</div>
 
 <!--<div class="offers">
     <center>
@@ -142,11 +142,11 @@
             </button>
           </div>
     </center>
-    
+
 </div>-->
 
 </div>
-</div>       
+</div>
 </div>
 @stop
 

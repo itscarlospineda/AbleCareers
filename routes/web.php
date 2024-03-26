@@ -17,15 +17,19 @@ use App\Http\Controllers\UserRequestController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Route::get('/register', function(){
+    return view('auth.register');
+})->name('register');
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role.redirect');
 Route::middleware('role.redirect:superUsuario,postulante')->get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/landing', function () {
+Route::get('/', function () {
     return view('home.landing');
 });
