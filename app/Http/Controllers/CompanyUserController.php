@@ -55,8 +55,10 @@ class CompanyUserController extends Controller
                 ->where('is_active', 'ACTIVE')
                 ->first();
 
-            $activeCompanyUsers = CompanyUser::all()->where('comp_id', $userCompany->id);
-            return view('home.ceohome', compact('activeCompanyUsers'));
+            $activeCompanyUsers = CompanyUser::all()
+                ->where('comp_id', $userCompany->id)
+                ->where('is_active', 'ACTIVE');
+            return view('ceo.ceo-showEmployees', compact('activeCompanyUsers'));
         }
     }
 
@@ -134,7 +136,8 @@ class CompanyUserController extends Controller
             $companyUser->save();
         }
 
-        return redirect()->route('ceo.ceohome')->with('success', 'CompanyUser created successfully.');
+        toastr()->success('Empleado creado exitosamente', 'Crear Empleado');
+        return redirect()->route('ceo.ceohome');
     }
 
     /**
@@ -142,9 +145,17 @@ class CompanyUserController extends Controller
      */
     public function edit($id)
     {
-        $companyUser = CompanyUser::findOrFail($id);
-
-        return view('companyUser.edit', compact('companyUser'));
+        $employee = CompanyUser::findOrFail($id);
+        $roles = Role::where('is_active', 'ACTIVE')
+            ->whereIn('id', [2, 3])
+            ->get();
+        $employeeRole = $employee
+            ->user
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+        return view('ceo.empleadoedit', compact('employee', 'roles', 'employeeRole'));
     }
 
 
@@ -156,46 +167,54 @@ class CompanyUserController extends Controller
      */
     public function update_or_destroy(Request $request, $id)
     {
-
-        /**
-         * Actualizar o inactivar mediante user_id
-         */
         $action = $request->input('action');
+        $resetPassword = $request->input('resetPassword');
 
-        $user = User::findOrFail($id);
+        $companyUser = CompanyUser::findOrFail($id);
+        $user = $companyUser->user;
+        $userRole = $user
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+        $userHasRole = user_has_role::all()
+            ->where('user_id', $user->id)
+            ->where('role_id', $userRole->id)
+            ->first();
+
         if ($action == 'update') {
+            //AREA FOR UPDATE USER
             $user->name = $request->name;
             $user->lastName = $request->lastName;
-            $user->email = $request->email;
             $user->phoneNumber = $request->phoneNumber;
-            $user->password = $request->password;
+            $user->email = $request->email;
+            if ($resetPassword) {
+                toastr()->success('Empleado actualizado exitosamente. Clave reestablecida', 'Editar Empleado');
+                $user->password = Hash::make('password');
+            } else {
+                toastr()->success('Empleado actualizado exitosamente', 'Editar Empleado');
+            }
+
+            //AREA FOR UPDATE USER_HAS_ROLE
+            $userHasRole->role_id = $request->role_id;
+
             $user->save();
-        }
-        if ($action == 'destroy') {
-            $user->is_active = "INACTIVE";
-            $user->save();
-        }
+            $userHasRole->save();
 
 
-        $user_has_role = user_has_role::where('user_id', $id)->firstOrFail();
-        if ($action == 'update') {
-            $user_has_role->role_id = $request->role_id;
+            return redirect()->route('ceo.showEmployees');
         }
         if ($action == 'destroy') {
-            $user_has_role->is_active = "INACTIVE";
-            $user_has_role->save();
-        }
-        $companyUser = CompanyUser::where('user_id', $id)->firstOrFail();
-        if ($action == 'update') {
-            $companyUser->user_id = $request->user_id;
-            $companyUser->comp_id = $request->comp_id;
-            $companyUser->save();
-            return redirect()->route('companyUser.index')->with('flash_message', 'CompanyUser actualizado exitosamente');
-        }
-        if ($action == 'destroy') {
+            $user->is_active = 'INACTIVE';
+            $userHasRole->is_active = 'INACTIVE';
             $companyUser->is_active = 'INACTIVE';
+
+            $user->save();
+            $userHasRole->save();
             $companyUser->save();
-            return redirect()->route('companyUser.index')->with('flash_message', 'CompanyUser eliminado exitosamente');
+
+            toastr()->success('Empleado eliminado exitosamente', 'Eliminar Empleado');
+            return redirect()->route('ceo.showEmployees');
         }
     }
 

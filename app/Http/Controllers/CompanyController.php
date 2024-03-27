@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyUser;
+use App\Models\Job_Position;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class CompanyController
@@ -75,11 +80,12 @@ class CompanyController extends Controller
     /**
      * Redirecciona a la vista de edtiar company
      */
-    public function edit($id)
+    public function edit()
     {
-        $company = Company::find($id);
+        $user = Auth::user();
+        $company = Company::find($user->id)->first();
 
-        return view('company.edit', compact('company'));
+        return view('ceo.companyedit', compact('company'));
     }
 
     /**
@@ -108,5 +114,103 @@ class CompanyController extends Controller
             $company->save();
             return redirect()->route('company.index')->with('flash_message', 'Compañia eliminada exitosamente');
         }
+    }
+
+    public function ceoHomePage()
+    {
+        $currentUserCompany = Auth::user();
+        $userCompanyUserAsUser = User::findOrFail($currentUserCompany->id);
+        $userHighRole = $userCompanyUserAsUser
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+        $userCompany = $userCompanyUserAsUser
+            ->company()
+            ->where('user_id', $currentUserCompany->id)
+            ->where('is_active', 'ACTIVE')
+            ->first();
+
+        $activeCompanyUsers = CompanyUser::all()
+            ->where('comp_id', $userCompany->id)
+            ->where('is_active', 'ACTIVE');
+
+        $employeesCount = $activeCompanyUsers->count();
+
+        $existingPosts = Job_Position::all()
+            ->where('company_id', $userCompany->id)
+            ->where('is_active', 'ACTIVE');
+
+        $postsCount = $existingPosts->count();
+
+        $user = $userCompanyUserAsUser;
+
+        return view('home.ceohome', compact('employeesCount', 'postsCount', 'user'));
+
+    }
+
+    public function ceoEdit()
+    {
+        $currentCeo = Auth::user();
+        $ceo = User::findOrFail($currentCeo->id);
+
+        return view('ceo.ceoedit', compact('ceo'));
+    }
+
+    public function ceoUpdate(Request $request)
+    {
+        $user = Auth::user();
+        $ceo = User::findOrFail($user->id);
+
+        if ($request->oldPassword == '') {
+            if ($request->newPassword != '' || $request->confirmNewPassword != '') {
+                toastr()->error('Favor coloque su clave vieja si desea realizar cambios', 'Error en clave');
+                return redirect()->back();
+            }
+
+            $ceo->name = $request->name;
+            $ceo->lastName = $request->lastName;
+            $ceo->phoneNumber = $request->phoneNumber;
+            $ceo->email = $request->email;
+            $ceo->save();
+            toastr('Perfil editado exitosamente', 'Editar Perfil');
+            return redirect()->route('ceo.ceohome');
+
+        }
+        if (!Hash::check($request->oldPassword, $ceo->password)) {
+
+            toastr()->error('Clave incorrecta', 'Error en clave');
+            return redirect()->back();
+        }
+        if ($request->newPassword == '' || $request->confirmNewPassword == '') {
+            toastr()->error('Favor coloque la nueva clave para realizar cambios', 'Error en clave');
+            return redirect()->back();
+        }
+        if ($request->newPassword != $request->confirmNewPassword) {
+            toastr()->error('Confirme su clave para continuar', 'Error en clave');
+            return redirect()->back();
+        }
+        $ceo->name = $request->name;
+        $ceo->lastName = $request->lastName;
+        $ceo->phoneNumber = $request->phoneNumber;
+        $ceo->email = $request->email;
+        $ceo->password = bcrypt($request->newPassword);
+        $ceo->save();
+        toastr()->success('Credenciales actualizadas exitosamente', 'Editar Perfil');
+        return redirect()->back();
+    }
+
+    public function ceoUpdateOrDestroy(Request $request)
+    {
+        $user = Auth::user();
+        $company = Company::find($user->id)->first();
+        $company->comp_name = $request->name;
+        $company->comp_mail = $request->email;
+        $company->comp_phone = $request->phone;
+        $company->comp_city = $request->city;
+        $company->comp_depart = $request->depart;
+        $company->save();
+        toastr()->success('Credenciales actualizadas exitosamente', 'Editar Compañia');
+        return redirect()->route('ceo.ceohome');
     }
 }

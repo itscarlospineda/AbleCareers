@@ -184,14 +184,20 @@ class MenuFilter
                 'label_color' => 'success',
             ],
             [
-                'text' => 'Crear Reclutador',
-                'url' => '',
+                'text' => 'Ver Empleados',
+                'url' => '/ceo/employees',
+                'icon' => 'fas fa-users',
+                'label_color' => 'success',
+            ],
+            [
+                'text' => 'Crear Empleado',
+                'url' => '/ceo/createuser',
                 'icon' => 'fa-solid fa-user-plus',
                 'label_color' => 'success',
             ],
             [
                 'text' => 'Posts',
-                'url' => '',
+                'url' => '/ceo/postlist',
                 'icon' => 'fa-solid fa-signs-post',
                 'label_color' => 'success',
             ],
@@ -207,12 +213,12 @@ class MenuFilter
                 'submenu' => [
                     [
                         'text' => 'Usuario Personal',
-                        'url' => '',
+                        'url' => '/ceo/profile/edit',
                         'icon' => 'fa-solid fa-user-gear'
                     ],
                     [
                         'text' => 'Compañia',
-                        'url' => '',
+                        'url' => '/ceo/company/edit',
                         'icon' => 'fa-solid fa-building'
                     ],
                 ],

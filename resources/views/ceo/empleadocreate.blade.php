@@ -1,4 +1,7 @@
-@extends('layouts.ceo')
+@extends('adminlte::page')
+
+@section('title', 'Crear Empleado')
+
 
 @section('content')
 
@@ -42,15 +45,15 @@
 
                         <div class="mb-3">
                             <label for="title" class="form-label">Rol</label>
-                            <select class="form-select" name="role_id" id="role_id">
+                            <select class="form-control" name="role_id" id="role_id">
                                 @foreach ($roles as $role)
-                                <option value="{{$role->id}}">{{$role->role_name}}</option>
+                                    <option value="{{ $role->id }}">{{ $role->role_name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <button type="submit" class="btn btn-success">
-                            <i class="bi bi-floppy"></i>&nbsp;Guardar Empleado
+                            <i class="fa-solid fa-floppy-disk"></i>&emsp;Guardar Empleado
                         </button>
 
                     </form>
@@ -68,4 +71,12 @@
     <script>
         let table = new DataTable('#example');
     </script>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop
