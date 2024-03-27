@@ -25,9 +25,9 @@ Route::get('/companyedit', function () {
     return view('ceo.companyedit');
 })->name('ceo.companyoedit');
 
-Route::get('/empleadoedit', function () {
-    return view('ceo.empleadoedit');
-})->name('ceo.empleadoedit');
+// Route::get('/empleadoedit', function () {
+//     return view('ceo.empleadoedit');
+// })->name('ceo.empleadoedit');
 
 //Route::get('/ceo/{id}/empleadoedit', [App\Http\Controllers\CompanyUserController::class, 'edit'])->name('ceo.empleadoedit');
 //Colocar ruta con ID
@@ -51,6 +51,11 @@ Route::put('/employee/{id}', [App\Http\Controllers\CompanyUserController::class,
 
 //----EDITAR PERFIL CEO
 Route::get('/profile/edit', [App\Http\Controllers\CompanyController::class, 'ceoEdit'])->name('ceo.profile.edit');
+Route::put('/profile/update',[App\Http\Controllers\CompanyController::class,'ceoUpdate'])->name('ceo.profile.update');
+
+//---EDITAR COMPANY
+Route::get('/company/edit',[App\Http\Controllers\CompanyController::class,'edit'])->name('ceo.company.edit');
+Route::put('/company/update',[App\Http\Controllers\CompanyController::class,'ceoUpdateOrDestroy'])->name('ceo.company.update');
 
 
 /*

@@ -79,6 +79,7 @@
                         </button>
                         <a href="{{ route('ceo.showEmployees') }}" class="btn btn-secondary">
                             <i class="fa-solid fa-xmark"></i>
+                            &nbsp;
                             Cancelar
                         </a>
 

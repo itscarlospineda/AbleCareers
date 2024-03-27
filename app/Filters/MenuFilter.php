@@ -218,7 +218,7 @@ class MenuFilter
                     ],
                     [
                         'text' => 'Compañia',
-                        'url' => '/ceo/companyedit',
+                        'url' => '/ceo/company/edit',
                         'icon' => 'fa-solid fa-building'
                     ],
                 ],
