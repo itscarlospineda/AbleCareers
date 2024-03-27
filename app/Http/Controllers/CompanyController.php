@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyUser;
+use App\Models\Job_Position;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class CompanyController
@@ -108,5 +112,46 @@ class CompanyController extends Controller
             $company->save();
             return redirect()->route('company.index')->with('flash_message', 'Compañia eliminada exitosamente');
         }
+    }
+
+    public function ceoHomePage()
+    {
+        $currentUserCompany = Auth::user();
+        $userCompanyUserAsUser = User::findOrFail($currentUserCompany->id);
+        $userHighRole = $userCompanyUserAsUser
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+        $userCompany = $userCompanyUserAsUser
+            ->company()
+            ->where('user_id', $currentUserCompany->id)
+            ->where('is_active', 'ACTIVE')
+            ->first();
+
+        $activeCompanyUsers = CompanyUser::all()
+            ->where('comp_id', $userCompany->id)
+            ->where('is_active', 'ACTIVE');
+
+        $employeesCount = $activeCompanyUsers->count();
+
+        $existingPosts = Job_Position::all()
+            ->where('company_id', $userCompany->id)
+            ->where('is_active', 'ACTIVE');
+
+        $postsCount = $existingPosts->count();
+
+        $user = $userCompanyUserAsUser;
+
+        return view('home.ceohome', compact('employeesCount', 'postsCount', 'user'));
+
+    }
+
+    public function ceoEdit()
+    {
+        $currentCeo = Auth::user();
+        $ceo = User::findOrFail($currentCeo->id);
+
+        return view('ceo.ceoedit',compact('ceo'));
     }
 }

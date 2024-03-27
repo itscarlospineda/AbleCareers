@@ -5,68 +5,44 @@
 
 @section('content')
 
-    <head>
+    <p class="h1 m-0 card-header">BIENVENIDO {{ strtoupper($user->name) }}</p>
 
-        <link rel="stylesheet" href="//cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
-    </head>
-
-    <div class="col">
-        <section class="py-4">
-
-            <div class="col">
-                <h1>Administracion de Empleados</h1> <br>
+    <div class="card card-success">
+        <div class="card-header">
+            <p class="h1 card-title">COMPANY - {{ strtoupper($user->company->comp_name) }}</p>
+        </div>
+        <div class="card-body">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>{{ $employeesCount }}</h3>
+                    <p class="h2">Empleados</p>
+                </div>
+                <div class="icon">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <a href="{{ route('ceo.showEmployees') }}" class="small-box-footer">
+                    Administrar
+                    <i class="fa-solid fa-arrow-circle-right"></i>
+                </a>
             </div>
-
-            <div class="container">
-
-                <div class="card border-dark">
-                    <!--<div class="card-header"><h5 class="card-title">Solicitudes de Empresa</h5></div>
-
-                      <div class="container mt-3">
-                            <a class="btn btn-success col-auto" href="/createcategories">
-                                <i class="bi bi-journal-arrow-up"></i>&nbsp;Crear Nuevo</a>
-                      </div>-->
-
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover" id="example" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Nombre Del Empleado</th>
-                                        <th scope="col">Rol Del Empleado</th>
-                                        <th scope="col">Editar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($activeCompanyUsers as $companyUser)
-                                        <tr>
-                                            <td class="fw-bold">{{ $companyUser->id }}</td>
-                                            <td>{{ $companyUser->user->name }}</td>
-                                            @foreach ($companyUser->user->roles as $role)
-                                                <td>{{ $role->role_name }}</td>
-                                            @endforeach
-                                            <!-- Cambiar Ruta-->
-                                            <td> <a href="{{ route('ceo.empleadoedit') }}"
-                                                    class="btn btn-primary">Actualizar</a>
-                                                <button type="submit" class="btn btn-danger" name="action"
-                                                    value="destroy">Eliminar</button>
-                                            </td>
-
-                                            <td>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-
-
-        </section>
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $postsCount }}</h3>
+                    <p>Posts Creados</p>
+                </div>
+                <div class="icon">
+                    <i class="fa-solid fa-address-book"></i>
+                </div>
+                <a href="{{ route('ceo.postlist.showpost') }}" class="small-box-footer">
+                    Administrar
+                    <i class="fa-solid fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+
+
 @stop
 
 @section('css')
@@ -74,5 +50,4 @@
 @stop
 
 @section('js')
-
 @stop

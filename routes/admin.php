@@ -49,7 +49,9 @@ Route::get('/hasroles', function () {
 Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('admin.category.index');
 Route::get('/category/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('admin.category.create');
 Route::get('/category/{id}/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name('admin.category.edit');
+
 Route::put('/category/{id}', [App\Http\Controllers\CategoryController::class, 'update_or_destroy'])->name('admin.category.update_or_destroy');
+
 Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store'])->name('admin.category.store');
 
 /*

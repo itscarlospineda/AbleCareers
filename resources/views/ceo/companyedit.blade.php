@@ -1,4 +1,7 @@
-@extends('layouts.ceo')
+@extends('adminlte::page')
+
+@section('title', 'Editar Compañia')
+
 
 @section('content')
     <div class="mt-3 card">
@@ -6,8 +9,7 @@
 
         <div class="card-body">
             <!-- Formulario para actualizar los datos de categoria -->
-            <form action="" method="POST"
-                enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -32,4 +34,12 @@
 
 
     </div>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop
