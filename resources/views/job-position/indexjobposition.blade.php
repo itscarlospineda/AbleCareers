@@ -1,6 +1,11 @@
-@extends('layouts.recruiter')
+@extends('adminlte::page')
+
+@section('title', 'Recruiter Home')
+
 
 @section('content')
+
+
 <head>
 
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
@@ -55,4 +60,14 @@
   <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
   <script>let table = new DataTable('#example');</script>
 
-@endsection
+
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop
+
