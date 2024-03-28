@@ -1,8 +1,7 @@
-@extends('layouts.recruiter')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ __('Update') }} Job Position
-@endsection
+@section('title', 'Postulant Home')
+
 
 @section('content')
     <section class="content container-fluid">
@@ -49,4 +48,13 @@
             </div>
         </div>
     </section>
-@endsection
+    @stop
+
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
+    @stop
+    
+    @section('js')
+    
+    @stop
+    
