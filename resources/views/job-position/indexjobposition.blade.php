@@ -43,6 +43,10 @@
                             <td>{{ $jobPosition->description}}</td>
                             <td>{{ $jobPosition->post_date}}</td>
                             <td>{{ $jobPosition->company_id}}</td>
+                            <td>
+                                <!-- Botón de editar -->
+                                <a href="{{ route('jobPosition.edit', ['id' => $jobPosition->id]) }}" class="btn btn-primary">Editar</a>
+                            </td>
                         </tr>
                         @endforeach
 
