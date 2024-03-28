@@ -15,10 +15,13 @@
 
 
 
-Route::get('/home', [App\Http\Controllers\CompanyUserController::class, 'index'])->name('manager.managerhome');
+Route::get('/home', [App\Http\Controllers\CompanyUserController::class, 'managerIndex'])->name('manager.managerhome');
+Route::get('/employees', [App\Http\Controllers\CompanyUserController::class, 'index'])->name('manager.showEmployees');
 Route::get('/compusrcreate', [App\Http\Controllers\CompanyUserController::class, 'create'])->name('manager.reclutador.create');
-Route::get('/compus/{id}/edit',[App\Http\Controllers\CompanyUserController::class, 'edit']) -> name('manager.reclutador.edit');
-Route::put('/{id}',[App\Http\Controllers\CompanyUserController::class,'update_or_destroy'])->name('manager.reclutador.update_or_destroy');
+
+//EDITAR RECLUTADOR
+Route::get('/employee/edit/{id}', [App\Http\Controllers\CompanyUserController::class, 'edit'])->name('manager.employee.edit');
+Route::put('/employee/{id}', [App\Http\Controllers\CompanyUserController::class, 'update_or_destroy'])->name('manager.employee.update_or_destroy');
 
 
 Route::get('/puestos', [App\Http\Controllers\JobPositionController::class, 'index'])->name('manager.puestos.index');

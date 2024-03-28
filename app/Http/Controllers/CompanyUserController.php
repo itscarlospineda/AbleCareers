@@ -6,6 +6,7 @@ use App\Models\CompanyUser;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\user_has_role;
+use App\Models\Job_Position;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,12 +41,13 @@ class CompanyUserController extends Controller
                 ->where('is_active', 'ACTIVE')
                 ->first();
 
-            $activeCompanyRecruiters = CompanyUser::join('user_has_role', 'user_has_role.user_id', '=', 'company_user.user_id')
-                ->where('company_user.comp_id', $userCompany->comp_id)
-                ->where('user_has_role.role_id', 2)
-                ->get();
+            $compID = $userCompany->comp_id;
 
-            return view('home.managerhome', compact('activeCompanyRecruiters'));
+            $activeCompanyRecruiters = CompanyUser::whereHas('user.roles',function($query){
+                $query -> where('role.id',2);
+            })->where('company_user.comp_id',$compID)->get();
+
+            return view('manager.manager-showEmployees', compact('activeCompanyRecruiters'));
         }
         if ($userHighRole->id == 4) {
 
@@ -60,6 +62,39 @@ class CompanyUserController extends Controller
                 ->where('is_active', 'ACTIVE');
             return view('ceo.ceo-showEmployees', compact('activeCompanyUsers'));
         }
+    }
+
+    public function managerIndex()
+    {
+        $currentUserCompany = Auth::user();
+        $userCompanyAsUser = User::findOrFail($currentUserCompany->id);
+        $userHighRole = $userCompanyAsUser
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+        $userCompany = $userCompanyAsUser
+            ->companyUser()
+            ->where('user_id', $currentUserCompany->id)
+            ->where('is_active', 'ACTIVE')
+            ->first();
+        $activeCompanyUsers = CompanyUser::join('user_has_role', 'user_has_role.user_id', '=', 'company_user.user_id')
+            ->where('company_user.comp_id', $userCompany->comp_id)
+            ->where('user_has_role.role_id', 2)
+            ->where('company_user.is_active', 'ACTIVE')
+            ->get();
+        $employeesCount = $activeCompanyUsers->count();
+        $existingPosts = Job_Position::all()
+            ->where('company_id', $userCompany->id)
+            ->where('is_active', 'ACTIVE');
+
+        $postsCount = $existingPosts->count();
+
+        $user = $userCompanyAsUser;
+
+
+        return view('home.managerhome', compact('employeesCount', 'postsCount', 'user'));
+
     }
 
     /**
@@ -145,6 +180,14 @@ class CompanyUserController extends Controller
      */
     public function edit($id)
     {
+        $userSession = Auth::user();
+        $userSessionAsUser = User::findOrFail($userSession->id);
+        $userSessionHasRole = $userSessionAsUser
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+
         $employee = CompanyUser::findOrFail($id);
         $roles = Role::where('is_active', 'ACTIVE')
             ->whereIn('id', [2, 3])
@@ -155,7 +198,17 @@ class CompanyUserController extends Controller
             ->where('role.is_active', 'ACTIVE')
             ->orderBy('role_id', 'desc')
             ->first();
-        return view('ceo.empleadoedit', compact('employee', 'roles', 'employeeRole'));
+
+        if ($userSessionHasRole->id == 3) {
+
+            return view('manager.manager-editEmployee', compact('employee'));
+        }
+
+        if ($userSessionHasRole->id == 4) {
+
+            return view('ceo.empleadoedit', compact('employee', 'roles', 'employeeRole'));
+        }
+
     }
 
 
@@ -167,6 +220,14 @@ class CompanyUserController extends Controller
      */
     public function update_or_destroy(Request $request, $id)
     {
+        $userSession = Auth::user();
+        $userSessionAsUser = User::findOrFail($userSession->id);
+        $userSessionHasRole = $userSessionAsUser
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+
         $action = $request->input('action');
         $resetPassword = $request->input('resetPassword');
 
@@ -196,13 +257,23 @@ class CompanyUserController extends Controller
             }
 
             //AREA FOR UPDATE USER_HAS_ROLE
-            $userHasRole->role_id = $request->role_id;
+            if ($userSessionHasRole->id == 3) {
+                $userHasRole->role_id = 2;
+            }
+            if ($userSessionHasRole->id == 4) {
+                $userHasRole->role_id = $request->role_id;
+            }
 
             $user->save();
             $userHasRole->save();
 
+            if ($userSessionHasRole->id == 3) {
+                return redirect()->route('manager.showEmployees');
+            }
 
-            return redirect()->route('ceo.showEmployees');
+            if ($userSessionHasRole->id == 4) {
+                return redirect()->route('ceo.showEmployees');
+            }
         }
         if ($action == 'destroy') {
             $user->is_active = 'INACTIVE';
@@ -214,7 +285,13 @@ class CompanyUserController extends Controller
             $companyUser->save();
 
             toastr()->success('Empleado eliminado exitosamente', 'Eliminar Empleado');
-            return redirect()->route('ceo.showEmployees');
+            if ($userSessionHasRole->id == 3) {
+                return redirect()->route('manager.showEmployees');
+            }
+
+            if ($userSessionHasRole->id == 4) {
+                return redirect()->route('ceo.showEmployees');
+            }
         }
     }
 

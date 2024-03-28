@@ -142,6 +142,12 @@ class MenuFilter
                 'label_color' => 'success',
             ],
             [
+                'text' => 'Ver Empleados',
+                'url' => '/manager/employees',
+                'icon' => 'fas fa-users',
+                'label_color' => 'success',
+            ],
+            [
                 'text' => 'Crear Reclutador',
                 'url' => '',
                 'icon' => 'fa-solid fa-user-plus',
