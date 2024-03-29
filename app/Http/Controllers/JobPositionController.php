@@ -138,9 +138,18 @@ class JobPositionController extends Controller
     }
 
     public function showDetails($id)
-    {
-        $jobPosition = Job_Position::findOrFail($id);
+{
+    $jobPosition = Job_Position::findOrFail($id);
+    
+    // Obtener el usuario autenticado
+    $user = Auth::user();
+    
+    // Obtener los currículums del usuario que estén activos ('ACTIVE')
+    $resumes = Resume::where('user_id', $user->id)
+        ->where('is_active', 'ACTIVE') // Asegúrate de que el estado sea 'ACTIVE' en lugar de 'ACTIVE'
+        ->get();
+    
+    return view('common.showpost', compact('jobPosition', 'resumes'));
+}
 
-        return view('common.showpost', compact('jobPosition'));
-    }
 }

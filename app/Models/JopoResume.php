@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class JopoResume extends Model
 {
-
     protected $table = 'jopo_resume';
 
     protected $primaryKey = 'id';
@@ -25,13 +23,11 @@ class JopoResume extends Model
 
     public function jobPosition()
     {
-        //return $this->belongsTo(\App\Models\JobPosition::class);
+        return $this->belongsTo(Job_Position::class, 'job_position_id');
     }
 
     public function resume()
     {
-        //return $this->belongsTo(\App\Models\Resume::class);
+        return $this->belongsTo(Resume::class, 'resume_id');
     }
-
-
 }

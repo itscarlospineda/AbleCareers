@@ -4,36 +4,52 @@ namespace App\Http\Controllers;
 
 use App\Models\JopoResume;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class JopoResumeController extends Controller
 {
     /**
-     * Redirecciona a vista de todos los registros activos de JopoResume
-     * @param $jopoResumes arreglo de todos los JopoResumes activos
+     * Aplica a una posición de trabajo
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-
+    
+     
      public function apply(Request $request)
-     {
-         // Validar la solicitud
-         $request->validate([
-             'resume_id' => 'required|exists:resume,id',
-             'job_position_id' => 'required|exists:job_position,id'
-         ]);
-     
-         // Obtener el ID del currículum y de la posición de trabajo
-         $resumeId = $request->resume_id;
-         $jobPositionId = $request->job_position_id;
-     
-         // Crear una nueva entrada en la tabla jopo_resume
-         $jopoResume = new JopoResume();
-         $jopoResume->resume_id = $resumeId;
-         $jopoResume->job_position_id = $jobPositionId;
-         $jopoResume->save();
-     
-         // Redirigir de vuelta con un mensaje de éxito
-         return redirect()->back()->with('success', '¡Aplicación exitosa a la posición de trabajo!');
-     }
-     
+    {
+        try {
+           
+        
+            // Obtener el ID del currículum y de la posición de trabajo
+            $resumeId = $request->resume_id;
+            $jobPositionId = $request->job_position_id;
+        
+            // Crear una nueva entrada en la tabla jopo_resume
+            $jopoResume = new JopoResume();
+            $jopoResume->resume_id = $resumeId;
+            $jopoResume->job_position_id = $jobPositionId;
+            $jopoResume->save();
+        
+            // Registra un mensaje de información si la aplicación se realiza correctamente
+            Log::info('Aplicación a la posición de trabajo exitosa.', ['request' => $request->all()]);
+            
+            // Redirigir de vuelta con un mensaje de éxito
+            return redirect()->back()->with('success', '¡Aplicación exitosa a la posición de trabajo!');
+        } catch (\Exception $e) {
+            // Registra un mensaje de error si ocurre alguna excepción
+            Log::error('Error al aplicar a la posición de trabajo', ['request' => $request->all(), 'error' => $e->getMessage()]);
+            
+            // Redirigir de vuelta con un mensaje de error
+            return redirect()->back()->with('error', 'Se produjo un error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
+        }
+    }
+    
+    /**
+     * Muestra todos los JopoResumes activos
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $jopoResumes = JopoResume::where('is_active', 'ACTIVE')->get();
@@ -42,8 +58,9 @@ class JopoResumeController extends Controller
 
     /**
      * Almacena un JopoResume en la base de datos
-     * @param $request Arreglo de los parametros que se pasaran mediante el html
-     * @param $jopoResume creacion de JopoResume donde se le colocara los parametros correspondientes
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -56,9 +73,10 @@ class JopoResumeController extends Controller
 
     /**
      * Elimina o Actualiza un JopoResume
-     * @param $id ID de JopoResume a eliminar o actualizar
-     * @param $request Arreglo de informacion que se enviara por la vista
-     * @param $action Input que almacena que accion se realizara
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function update_or_destroy(Request $request, $id)
     {
