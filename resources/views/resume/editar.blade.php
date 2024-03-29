@@ -3,13 +3,10 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <p class="h2"> Editar Resume</p>
 @stop
 
 @section('content')
-<div class="col">
-    <h1>Editar Resumen</h1>
-    <br>
 
     <!-- Formulario para actualizar los datos del resumen -->
     <form action="{{ route('resume.update_or_destroy', $resume->id) }}" method="POST" enctype="multipart/form-data">

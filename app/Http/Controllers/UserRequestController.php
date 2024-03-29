@@ -79,4 +79,27 @@ class UserRequestController extends Controller
             return redirect()->route('userRequest.index')->with('flash_message','UserRequest eliminado exitosamente');
         }
     }
+
+    public function createrequest(Request $request)
+    {
+
+        // Validación de los datos recibidos del formulario
+        $validatedData = $request->validate([
+            'info' => 'required|string|max:255',
+        ]);
+
+        // Crear una nueva instancia de UserRequest
+        $userRequest = new UserRequest();
+
+        // Establecer los valores de los campos
+        $userRequest->user_id = auth()->id(); // Asignar el ID del usuario autenticado
+        $userRequest->request_info = $validatedData['info'];
+        $userRequest->request_status = 'aplicando'; // Establecer el estado del request como "aplicando"
+
+        // Guardar el nuevo request en la base de datos
+        $userRequest->save();
+
+     // Redireccionar a la página de inicio del postulante u otra página según sea necesario
+        return redirect()->route('postulant.postulanthome')->with('success', 'Request creado exitosamente.');
+    }
 }

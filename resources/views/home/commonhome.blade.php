@@ -24,7 +24,7 @@
 </div>
 
 <div class="container offers">
-    <div class="row my-5">
+    <!--<div class="row my-5">
         <div class="col-lg">
             <div class="card card-body">
                 <a href="#" class="nav-link font2 button">
@@ -49,7 +49,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <!--<div class="row py-3">
       <div class="col">

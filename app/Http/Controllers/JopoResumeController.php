@@ -44,6 +44,7 @@ class JopoResumeController extends Controller
             return redirect()->back()->with('error', 'Se produjo un error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
         }
     }
+     
     
     /**
      * Muestra todos los JopoResumes activos
