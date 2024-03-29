@@ -17,38 +17,33 @@ class JopoResumeController extends Controller
     
      
      public function apply(Request $request)
-     {
-         try {
-             // Obtener el ID del usuario autenticado
-             $userId = auth()->id();
-             
-             // Verificar si el usuario ya ha aplicado a la posición de trabajo con cualquiera de sus resúmenes asociados
-             if (JopoResume::where('resume_id', $request->resume_id)
-                 ->whereHas('resume', function ($query) use ($userId) {
-                     $query->where('user_id', $userId);
-                 })->exists()) {
-                 return redirect()->back()->with('error', 'Ya has aplicado a esta posición de trabajo.');
-             }
-     
-             // Crear una nueva entrada en la tabla jopo_resume
-             $jopoResume = new JopoResume();
-             $jopoResume->resume_id = $request->resume_id;
-             $jopoResume->job_position_id = $request->job_position_id;
-             $jopoResume->save();
-     
-             // Registra un mensaje de información si la aplicación se realiza correctamente
-             Log::info('Aplicación a la posición de trabajo exitosa.', ['request' => $request->all()]);
-             
-             // Redirigir de vuelta con un mensaje de éxito
-             return redirect()->back()->with('success', '¡Aplicación exitosa a la posición de trabajo!');
-         } catch (\Exception $e) {
-             // Registra un mensaje de error si ocurre alguna excepción
-             Log::error('Error al aplicar a la posición de trabajo', ['request' => $request->all(), 'error' => $e->getMessage()]);
-             
-             // Redirigir de vuelta con un mensaje de error
-             return redirect()->back()->with('error', 'Se produjo un error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
-         }
-     }
+    {
+        try {
+           
+        
+            // Obtener el ID del currículum y de la posición de trabajo
+            $resumeId = $request->resume_id;
+            $jobPositionId = $request->job_position_id;
+        
+            // Crear una nueva entrada en la tabla jopo_resume
+            $jopoResume = new JopoResume();
+            $jopoResume->resume_id = $resumeId;
+            $jopoResume->job_position_id = $jobPositionId;
+            $jopoResume->save();
+        
+            // Registra un mensaje de información si la aplicación se realiza correctamente
+            Log::info('Aplicación a la posición de trabajo exitosa.', ['request' => $request->all()]);
+            
+            // Redirigir de vuelta con un mensaje de éxito
+            return redirect()->back()->with('success', '¡Aplicación exitosa a la posición de trabajo!');
+        } catch (\Exception $e) {
+            // Registra un mensaje de error si ocurre alguna excepción
+            Log::error('Error al aplicar a la posición de trabajo', ['request' => $request->all(), 'error' => $e->getMessage()]);
+            
+            // Redirigir de vuelta con un mensaje de error
+            return redirect()->back()->with('error', 'Se produjo un error al procesar la solicitud. Por favor, inténtalo de nuevo más tarde.');
+        }
+    }
      
     
     /**

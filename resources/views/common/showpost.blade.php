@@ -27,22 +27,26 @@
 
                 <!-- Lógica de aplicación -->
                 @if (JopoResume::whereHas('resume', function ($query) {
-                    $query->where('user_id', auth()->id());
-                })->where('job_position_id', $jobPosition->id)->exists())
-                    <button class="btn btn-primary" disabled>Aplicando</button>
-                    <span class="text-success">¡🎊🎊 Ya has aplicado a esta posición 🎊🎊!</span>
-                @else
-                    <!-- Botón para abrir el modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Aplicar
-                    </button>
-                @endif
-            @else
-                <div class="alert alert-danger" role="alert">
-                    No se encontraron detalles de puesto disponibles.
-                </div>
-            @endif
+                  $query->where('user_id', auth()->id());
+              })->where('job_position_id', $jobPosition->id)->exists())
+                  <button class="btn btn-primary" disabled>Aplicando</button>
+                  <span class="text-success">¡🎊🎊 Ya has aplicado a esta posición 🎊🎊!</span>
+              @else
+                  <!-- Botón para abrir el modal -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      Aplicar
+                  </button>
+              @endif
+          @else
+              <div class="alert alert-danger" role="alert">
+                  No se encontraron detalles de puesto disponibles.
+              </div>
+          @endif
         </div>
+    </div>
+    <!-- Botón para volver a la página anterior -->
+    <div class="mt-3">
+        <a href="{{ URL::previous() }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>
 
