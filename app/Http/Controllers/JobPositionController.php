@@ -119,7 +119,7 @@ class JobPositionController extends Controller
     public function showPost()
     {
         // Obtener las posiciones de trabajo activas
-        $jobPositions = Job_Position::where('is_active', 'ACTIVE')->with('company')->get();
+        $jobPositions = Job_Position::where('is_active', 'ACTIVE')->get();
 
         // Obtener los resúmenes activos del usuario autenticado
         $user = Auth::user();
@@ -174,6 +174,7 @@ class JobPositionController extends Controller
         $resumes = Resume::where('user_id', $user->id)
             ->where('is_active', 'ACTIVE') // Asegúrate de que el estado sea 'ACTIVE' en lugar de 'ACTIVE'
             ->get();
+        
         
         return view('common.showpost', compact('jobPosition', 'resumes'));
     }

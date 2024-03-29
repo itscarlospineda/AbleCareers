@@ -15,7 +15,7 @@ class Job_Position extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'comp_id');
+        return $this->belongsTo(Company::class, 'company_id','id');
     }
 
     // Método para determinar si el trabajo ya ha sido aplicado

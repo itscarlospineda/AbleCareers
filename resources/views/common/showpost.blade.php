@@ -17,7 +17,7 @@
             @if($jobPosition)
                 <p class="h5">{{ $jobPosition->name }}</p>
                 @if ($jobPosition->company)
-                    <p class="text-dark">Empresa: {{ $jobPosition->company->comp_name }}</p>
+                    <p class="text-dark">Empresa: {{$jobPosition->company->comp_name}}</p>
                 @else
                     <p class="text-dark">Empresa: No especificada</p>
                 @endif
@@ -46,7 +46,7 @@
     </div>
     <!-- Botón para volver a la página anterior -->
     <div class="mt-3">
-        <a href="{{ URL::previous() }}" class="btn btn-secondary">Volver</a>
+        <a href="{{ route('postslist')}}" class="btn btn-secondary">Volver</a>
     </div>
 </div>
 
