@@ -32,7 +32,7 @@
                 <div class="icon">
                     <i class="fa-solid fa-address-book"></i>
                 </div>
-                <a href="{{ route('ceo.postlist.showpost') }}" class="small-box-footer">
+                <a href="{{ route('manager.postlist.showpost') }}" class="small-box-footer">
                     Administrar
                     <i class="fa-solid fa-arrow-circle-right"></i>
                 </a>
