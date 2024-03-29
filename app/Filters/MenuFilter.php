@@ -113,7 +113,7 @@ class MenuFilter
         
             [
                 'text' => 'Postulantes',
-                'url' => '',
+                'url' => 'recruiter/jobPosition/postulantes',
                 'icon' => 'fa-solid fa-users-rectangle',
                 'label_color' => 'success',
             ],

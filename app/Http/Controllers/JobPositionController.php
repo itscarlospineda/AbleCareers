@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Job_Position;
 use App\Models\Resume;
 use App\Models\User;
+use App\Models\JopoResume;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -148,5 +149,30 @@ class JobPositionController extends Controller
         $jobPosition = Job_Position::findOrFail($id);
 
         return view('common.showpost', compact('jobPosition'));
+    }
+
+    public function recruiterShowPost()
+    {
+        $user = Auth::user();
+        $userAsUser = User::findOrFail($user->id);
+       
+        $comp_id = $user->companyUser->comp_id;
+        // Obtener las posiciones de trabajo activas
+        $jobPositions = Job_Position::where('is_active', 'ACTIVE')
+            ->where('company_id',$comp_id)
+            ->get();
+           
+        // Pasar las posiciones de trabajo y los resúmenes a la vista
+        return view('recruiter.postlist', compact('jobPositions'));
+    }
+  
+    public function showPostulantes($id)
+    {
+        // Obtener los registros de JopoResume asociados al puesto específico ($id)
+    $jobPositions = JopoResume::where('job_position_id', $id)->get();
+ 
+
+
+        return view('recruiter.showResumeList', compact('jobPositions'));
     }
 }
