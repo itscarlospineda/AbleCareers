@@ -143,14 +143,20 @@ class MenuFilter
                 'label_color' => 'success',
             ],
             [
+                'text' => 'Ver Empleados',
+                'url' => '/manager/employees',
+                'icon' => 'fas fa-users',
+                'label_color' => 'success',
+            ],
+            [
                 'text' => 'Crear Reclutador',
-                'url' => '',
+                'url' => '/manager/employee/create',
                 'icon' => 'fa-solid fa-user-plus',
                 'label_color' => 'success',
             ],
             [
                 'text' => 'Posts',
-                'url' => '',
+                'url' => '/manager/postlist',
                 'icon' => 'fa-solid fa-signs-post',
                 'label_color' => 'success',
             ],
@@ -162,7 +168,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Editar Perfil',
-                'url' => '',
+                'url' => '/manager/profile/edit',
                 'icon' => 'fa-solid fa-user-gear',
                 'label_color' => 'success',
             ],

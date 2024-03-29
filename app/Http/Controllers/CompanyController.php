@@ -83,7 +83,9 @@ class CompanyController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        $company = Company::find($user->id)->first();
+        $company = Company::all()
+        ->where('user_id',$user->id)
+        ->first();
 
         return view('ceo.companyedit', compact('company'));
     }
@@ -203,7 +205,9 @@ class CompanyController extends Controller
     public function ceoUpdateOrDestroy(Request $request)
     {
         $user = Auth::user();
-        $company = Company::find($user->id)->first();
+        $company = Company::all()
+        ->where('user_id',$user->id)
+        ->first();
         $company->comp_name = $request->name;
         $company->comp_mail = $request->email;
         $company->comp_phone = $request->phone;

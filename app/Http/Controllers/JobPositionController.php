@@ -144,6 +144,25 @@ class JobPositionController extends Controller
         return view('ceo.postlist', compact('jobPositions'));
     }
 
+    public function managerShowPost()
+    {
+        $user = Auth::user();
+        $userAsUser = User::findOrFail($user->id);
+        $userCompany = $userAsUser
+                ->companyUser()
+                ->where('user_id', $user->id)
+                ->where('is_active', 'ACTIVE')
+                ->first();
+        $compID = $userCompany->comp_id;
+
+        $jobPositions = Job_Position::where('is_active','ACTIVE')
+        ->where('company_id',$compID)
+        ->get();
+
+        return view('manager.postlist',compact('jobPositions'));
+
+    }
+
     public function showDetails($id)
     {
         $jobPosition = Job_Position::findOrFail($id);

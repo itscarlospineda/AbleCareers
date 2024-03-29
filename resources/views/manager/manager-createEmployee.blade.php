@@ -20,7 +20,7 @@
             <div class="col">
                 <div class="card-body text-dark ">
 
-                    <form action="{{route('ceo.store')}}" method="POST">
+                    <form action="" method="POST">
                         @csrf
 
                         <div class="mb-3">
@@ -41,15 +41,6 @@
                         <div class="mb-3">
                             <label for="title" class="form-label">Correo</label>
                             <input type="text" class="form-control" name="email" id="email">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Rol</label>
-                            <select class="form-control" name="role_id" id="role_id">
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->role_name }}</option>
-                                @endforeach
-                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-success">
