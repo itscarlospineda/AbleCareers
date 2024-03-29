@@ -1,8 +1,6 @@
-@extends('layouts.recruiter')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ __('Update') }} Job Position
-@endsection
+@section('title', 'Postulant Home')
 
 @section('content')
     <section class="content container-fluid">
@@ -22,31 +20,41 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="title" class="form-label">Puesto</label>
-                                <input type="text" class="form-control" name="jobpo_name">
+                                <input type="text" class="form-control" name="jobpo_name" value="{{ $jobPosition->name }}">
                             </div>
                             <div class="mb-3">
                                 <label for="title" class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" name="jobpo_desc">
+                                <input type="text" class="form-control" name="jobpo_desc" value="{{ $jobPosition->description }}">
                             </div>
                             <div class="mb-3">
                                 <label for="title" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" name="jobpo_date">
+                                <input type="date" class="form-control" name="jobpo_date" value="{{ substr($jobPosition->post_date, 0, 10) }}">
                             </div>
                             <div class="mb-3">
                                 <label for="title" class="form-label">Compania</label>
-                                <input type="text" class="form-control" name="jobpo_company">
+                                <input type="text" class="form-control" name="jobpo_company" value="{{ $jobPosition->company_id }}">
                             </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="is_active" name="active" {{ $jobPosition->is_active === 'ACTIVE' ? 'checked' : 'INACTIVO' }}>
+                                <label class="form-check-label" for="active">Activo</label>
+                            </div>
+                            
 
-                           {{--  @include('job-position.form') --}}
 
                             <a href="{{route('jobPosition.index')}}" class="btn btn-danger">Regresar</a>
                             <button type="submit" class="btn btn-primary" name="action" value="update">Actualizar</button>
-
-
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop

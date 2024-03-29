@@ -98,6 +98,12 @@ class JobPositionController extends Controller
             $jobPosition->name = $request->jobpo_name;
             $jobPosition->description = $request->jobpo_desc;
             $jobPosition->company_id = $request->jobpo_company;
+             // Verificar si el checkbox está marcado o no y asignar el estado correspondiente
+        if ($request->has('active')) {
+            $jobPosition->is_active = 'ACTIVE';
+        } else {
+        $jobPosition->is_active = 'INACTIVE';
+        }
             $jobPosition->save();
 
             return redirect()->route('jobPosition.index')->with('flash_message', 'JobPosition actualizado exitosamente');

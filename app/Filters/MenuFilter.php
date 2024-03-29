@@ -100,16 +100,17 @@ class MenuFilter
             ],
             [
                 'text' => 'Posts',
-                'url' => '',
+                'url' =>'/recruiter/jobPosition',
                 'icon' => 'fa-solid fa-signs-post',
                 'label_color' => 'success',
             ],
             [
                 'text' => 'Crear Post',
-                'url' => '',
+                'url' => 'recruiter/jobPosition/create',
                 'icon' => 'fa-solid fa-square-plus',
                 'label_color' => 'success',
             ],
+        
             [
                 'text' => 'Postulantes',
                 'url' => '',
