@@ -26,9 +26,10 @@
                         <a href="{{ route('jobpositions.showdetails', ['id' => $jobPos->id]) }}" class="btn btn-success">
                             <i class="bi bi-plus-circle"></i>&nbsp;Ver más 
                         </a>
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            <i class="bi bi-plus-circle"></i>&nbsp;Aplicar
-                        </a>
+                        @if ($jobPos->isAppliedByUser(auth()->id()))
+                            <button class="btn btn-primary" disabled>Aplicando</button>
+                            <span class="text-success">¡🎊🎊 Has aplicado a esta posición 🎊🎊!</span>
+                        @endif
                     </div>
                 </div>  
             </div>
@@ -37,59 +38,19 @@
     @endforeach
 </div>
 
-<!-- Ventana Emergente Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Selecciona un Currículum</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Lista de Currículums -->
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Información</th>
-              <th>Foto</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($resumes as $resume)
-            <tr>
-              <td>{{ $resume->info }}</td>
-              <td><img src="{{ asset($resume->photo) }}" alt="Foto del resumen" style="max-width: 100px; max-height: 100px;"></td>
-              <td>
-                <form action="{{ route('jobpositions.apply') }}" method="POST">
-                  @csrf
-                  <input type="hidden" name="resume_id" value="{{ $resume->id }}">
-                  <input type="hidden" name="job_position_id" value="{{ $jobPos->id }}"> <!-- Aquí deberías usar el ID del trabajo del bucle de los resúmenes -->
-                  <button type="submit" class="btn btn-success apply-button" data-jobid="{{ $jobPos->id }}">Seleccionar</button>
-                </form>
-              </td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 @endsection
 
 @section('js')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-// Cambiar el color del botón al hacer clic
-$(document).ready(function() {
-    $('.apply-button').click(function() {
-        var jobId = $(this).data('jobid');
-        $(this).removeClass('btn-primary').addClass('btn-secondary').text('Aplicado');
-    });
-});
+  $(document).ready(function(){
+      var selectedJobId; // Variable para almacenar el ID de la posición de trabajo seleccionada
+
+      $('.apply-button').click(function(){
+          selectedJobId = $(this).data('jobid'); // Almacenar el ID de la posición de trabajo seleccionada
+          $('#job_position_id').val(selectedJobId); // Asignar el valor al campo oculto job_position_id
+      });
+  });
 </script>
 @endsection

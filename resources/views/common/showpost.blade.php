@@ -10,11 +10,71 @@
 
     <div class="card border-dark">
         <div class="card-body">
-            <p class="h5">{{ $jobPosition->name }}</p>
-            <p class="text-primary">Fecha y Hora de Publicación: {{ $jobPosition->post_date }}</p>
-            <hr>
-            <p>{{ $jobPosition->description }}</p>
+            @if($jobPosition)
+                <p class="h5">{{ $jobPosition->name }}</p>
+                <p class="text-primary">Fecha y Hora de Publicación: {{ $jobPosition->post_date }}</p>
+                <hr>
+                <p>{{ $jobPosition->description }}</p>
+
+                <!-- Lógica de aplicación -->
+                @if ($jobPosition->isAppliedByUser(auth()->id()))
+                    <button class="btn btn-primary" disabled>Aplicando</button>
+                    <span class="text-success">¡🎊🎊 Has aplicado a esta posición 🎊🎊!</span>
+                @else
+                    <!-- Botón para abrir el modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Aplicar
+                    </button>
+                @endif
+            @else
+                <div class="alert alert-danger" role="alert">
+                    No se encontraron detalles de puesto disponibles.
+                </div>
+            @endif
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Selecciona un Currículum</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Lista de Currículums -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Información</th>
+                <th>Foto</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($resumes as $resume)
+              <tr>
+                <td>{{ $resume->info }}</td>
+                <td><img src="{{ asset($resume->photo) }}" alt="Foto del resumen" style="max-width: 100px; max-height: 100px;"></td>
+                <td>
+                  <form action="{{ route('jobpositions.apply') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="resume_id" value="{{ $resume->id }}">
+                    <input type="hidden" name="job_position_id" value="{{ $jobPosition->id }}">
+                    <button type="submit" class="btn btn-success apply-button">Seleccionar</button>
+                  </form>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
