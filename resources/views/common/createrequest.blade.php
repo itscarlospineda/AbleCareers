@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-            <div class="col">
+            <div class="mt-2">
                 <h1>Formulario de Solicitud de Empresa</h1> <br>
             </div>
 
@@ -15,12 +15,8 @@
                             <label for="title" class="form-label">Información</label>
                             <textarea style="height: 150px; resize:none" name="info" class="form-control" aria-label="With textarea"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Estatus</label>
-                            <textarea style="height: 150px; resize:none" name="status" class="form-control" aria-label="With textarea"></textarea>
-                        </div>
 
-                        <a href="/postulant/home" class="btn btn-danger"><i class="bi bi-x-circle"></i>&nbsp;Cancelar</a>
+                        <a href="{{route('postulant.postulanthome')}}" class="btn btn-danger"><i class="bi bi-x-circle"></i>&nbsp;Cancelar</a>
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-floppy"></i>&nbsp;Guardar
                         </button>

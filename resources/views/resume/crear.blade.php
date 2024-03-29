@@ -2,10 +2,11 @@
 
 @section('title', 'AbleCareers - Crear Resume')
 
+@section('content_header')
+    <p class="h2">Crear Nuevo Resume</p>
+@stop
+
 @section('content')
-<div class="col">
-    <p class="h1">Nuevo Resume</p>
-    <br>
     
     <!-- Formulario para capturar los datos del resumen -->
     <form action="{{ route('resume.store') }}" method="POST" enctype="multipart/form-data">

@@ -52,6 +52,27 @@
         </div>
     </div>
 
+    <div class="container mt-5 pt-5">
+        <div class="row gy-3">
+
+            <div class="col-md-7">
+                <div class="card card-body bg-color text-white">
+                    <p class="h3">Aliados con</p>
+                    <p class="h1">+15</p>
+                    <p class="h3">empresas a nivel nacional</p>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card card-body bg-color text-white">
+                    <p class="h1">Construye tu futuro:</p>
+                    <p class="h4">Explora empleos que se ajusten a tus habilidades.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="container mt-5 pt-5" style="min-height: 100vh;">
         <div class="row gy-3">
 

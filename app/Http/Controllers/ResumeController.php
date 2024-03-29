@@ -57,7 +57,7 @@ class ResumeController extends Controller
         Resume::create($requestData);
 
         // Redirigir de vuelta a la página anterior
-        return back()->with('flash_message', 'Employee added successfully.');
+        return redirect()->route('resume.index')->with('flash_message', 'Employee added successfully.');
     }
 
     // public function show($id)
@@ -72,11 +72,6 @@ class ResumeController extends Controller
         $resume = Resume::findOrFail($id);
         return view('resume.editar', compact('resume'));
     }
-
-
-
-
-
 
     public function update_or_destroy(Request $request, $id)
     {
@@ -96,7 +91,7 @@ class ResumeController extends Controller
 
             $resume->update($requestData);
 
-            return back()->with('flash_message', 'Resumen actualizado exitosamente.');
+            return redirect()->route('resume.index')->with('flash_message', 'Resumen actualizado exitosamente.');
         }
         if ($action == 'destroy') {
             $resume->is_active = 'INACTIVE';

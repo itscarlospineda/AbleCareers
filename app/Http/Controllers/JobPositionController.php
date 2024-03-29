@@ -118,7 +118,7 @@ class JobPositionController extends Controller
     public function showPost()
     {
         // Obtener las posiciones de trabajo activas
-        $jobPositions = Job_Position::where('is_active', 'ACTIVE')->get();
+        $jobPositions = Job_Position::where('is_active', 'ACTIVE')->with('company')->get();
 
         // Obtener los resúmenes activos del usuario autenticado
         $user = Auth::user();

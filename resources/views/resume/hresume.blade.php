@@ -3,7 +3,7 @@
 @section('title', 'AbleCareers - Vista de Resumes')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <p class="h2"> Vista de Resumes</p>
 @stop
 
 @section('content')
