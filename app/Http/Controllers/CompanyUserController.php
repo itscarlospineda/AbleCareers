@@ -43,9 +43,9 @@ class CompanyUserController extends Controller
 
             $compID = $userCompany->comp_id;
 
-            $activeCompanyRecruiters = CompanyUser::whereHas('user.roles',function($query){
-                $query -> where('role.id',2);
-            })->where('company_user.comp_id',$compID)->get();
+            $activeCompanyRecruiters = CompanyUser::whereHas('user.roles', function ($query) {
+                $query->where('role.id', 2);
+            })->where('company_user.comp_id', $compID)->get();
 
             return view('manager.manager-showEmployees', compact('activeCompanyRecruiters'));
         }
@@ -102,10 +102,25 @@ class CompanyUserController extends Controller
      */
     public function create()
     {
-        $roles = Role::where('is_active', 'ACTIVE')
-            ->whereIn('id', [2, 3])
-            ->get();
-        return view('ceo.empleadocreate', compact('roles'));
+        $currentUserCompany = Auth::user();
+        $userCompanyUserAsUser = User::findOrFail($currentUserCompany->id);
+        $userHighRole = $userCompanyUserAsUser
+            ->roles()
+            ->where('role.is_active', 'ACTIVE')
+            ->orderBy('role_id', 'desc')
+            ->first();
+
+        if ($userHighRole->id == 3) {
+            return view('manager.manager-createEmployee');
+        }
+        if ($userHighRole->id == 4) {
+            $roles = Role::where('is_active', 'ACTIVE')
+                ->whereIn('id', [2, 3])
+                ->get();
+            return view('ceo.empleadocreate', compact('roles'));
+        }
+
+
     }
 
 
@@ -143,15 +158,19 @@ class CompanyUserController extends Controller
                 ->where('is_active', 'ACTIVE')
                 ->first();
 
+
             $userHasRole = new user_has_role;
             $userHasRole->user_id = $user->id;
             $userHasRole->role_id = 2;
             $userHasRole->save();
 
             $companyUser = new CompanyUser;
-            $companyUser->comp_id = $userCompany->id;
+            $companyUser->comp_id = $userCompany->comp_id;
             $companyUser->user_id = $user->id;
             $companyUser->save();
+
+            toastr()->success('Empleado creado exitosamente', 'Crear Empleado');
+            return redirect()->route('manager.managerhome');
         }
         if ($userHighRole->id == 4) {
             $userCompany = $userCompanyUserAsUser
@@ -169,10 +188,11 @@ class CompanyUserController extends Controller
             $companyUser->comp_id = $userCompany->id;
             $companyUser->user_id = $user->id;
             $companyUser->save();
+
+            toastr()->success('Empleado creado exitosamente', 'Crear Empleado');
+            return redirect()->route('ceo.ceohome');
         }
 
-        toastr()->success('Empleado creado exitosamente', 'Crear Empleado');
-        return redirect()->route('ceo.ceohome');
     }
 
     /**
@@ -208,6 +228,58 @@ class CompanyUserController extends Controller
 
             return view('ceo.empleadoedit', compact('employee', 'roles', 'employeeRole'));
         }
+
+    }
+
+    public function managerEdit()
+    {
+        $currentCeo = Auth::user();
+        $manager = User::findOrFail($currentCeo->id);
+
+        return view('manager.manager-editManager', compact('manager'));
+    }
+
+    public function managerUpdate(Request $request)
+    {
+        $user = Auth::user();
+        $manager = User::findOrFail($user->id);
+
+        if ($request->oldPassword == '') {
+            if ($request->newPassword != '' || $request->confirmNewPassword != '') {
+                toastr()->error('Favor coloque su clave vieja si desea realizar cambios', 'Error en clave');
+                return redirect()->back();
+            }
+
+            $manager->name = $request->name;
+            $manager->lastName = $request->lastName;
+            $manager->phoneNumber = $request->phoneNumber;
+            $manager->email = $request->email;
+            $manager->save();
+
+            toastr('Perfil editado exitosamente', 'Editar Perfil');
+            return redirect()->route('manager.managerhome');
+
+        }
+        if (!Hash::check($request->oldPassword, $manager->password)) {
+            toastr()->error('Clave incorrecta', 'Error en clave');
+            return redirect()->back();
+        }
+        if ($request->newPassword == '' || $request->confirmNewPassword == '') {
+            toastr()->error('Favor coloque la nueva clave para realizar cambios', 'Error en clave');
+            return redirect()->back();
+        }
+        if ($request->newPassword != $request->confirmNewPassword) {
+            toastr()->error('Confirme su clave para continuar', 'Error en clave');
+            return redirect()->back();
+        }
+        $manager->name = $request->name;
+        $manager->lastName = $request->lastName;
+        $manager->phoneNumber = $request->phoneNumber;
+        $manager->email = $request->email;
+        $manager->password = bcrypt($request->newPassword);
+        $manager->save();
+        toastr()->success('Credenciales actualizadas exitosamente', 'Editar Perfil');
+        return redirect()->back();
 
     }
 
