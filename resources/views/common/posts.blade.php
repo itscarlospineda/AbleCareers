@@ -4,7 +4,7 @@
 
 @extends('adminlte::page')
 
-@section('title', 'AbleCareers - Browse Posts')
+@section('title', 'Búsqueda de Posts')
 
 @section('content')
 <div class="col-md-12 mt-2" style="padding-top: 20px; padding-left: 30px;">

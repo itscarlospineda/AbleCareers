@@ -37,9 +37,9 @@ Route::get('/create/resume', function () {
 });
 
 Route::get('/create/request', function () {
-    return view('common.createrequest');
-})->name('postulant.createrequest');;
-Route::get('/create/request',[App\Http\Controllers\UserRequestController::class, 'createrequest'])->name('postulant.createrequest');
+    return view('common.companyrequest');})->name('postulant.companyrequest');
+
+Route::post('/create/request',[App\Http\Controllers\UserRequestController::class, 'createrequest'])->name('postulant.createrequest');
 
 
 Route::get('/edit/profile', function () {

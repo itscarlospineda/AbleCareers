@@ -4,7 +4,7 @@
 
 @extends('adminlte::page')
 
-@section('title', 'AbleCareers - Detalles del Puesto')
+@section('title', 'Detalles del Puesto')
 
 @section('content')
 <div class="col-md-12" style="padding-top: 20px; padding-left: 30px;">

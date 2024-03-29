@@ -81,7 +81,7 @@
               <p class="h3">¿Eres dueño o administrador de una empresa?</p> <br>
               <p class="card-text">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores beneficios.
                 Haz clic aquí para aplicar.</p> <br>
-              <a href="{{route('postulant.createrequest')}}" class="btn btn-danger"> <i class="bi bi-building-up"></i>&nbsp;Aplicar</a>
+              <a href="{{route('postulant.companyrequest')}}" class="btn btn-danger"> <i class="bi bi-building-up"></i>&nbsp;Aplicar</a>
           </div>
       </div>
     </div>
