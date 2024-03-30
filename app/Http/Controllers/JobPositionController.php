@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Job_Position;
 use App\Models\Resume;
@@ -40,7 +41,8 @@ class JobPositionController extends Controller
      */
     public function create()
     {
-        return view('job-position.createjobposition');
+        $companies = Company::all(); //Se obtiene la data de Compañia la cual se usara para el DropDownList
+        return view('job-position.createjobposition', compact('companies'));
     }
 
     /**

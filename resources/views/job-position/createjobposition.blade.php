@@ -27,16 +27,21 @@
                                 <label for="title" class="form-label">Descripción</label>
                                 <input type="text" class="form-control" name="jobpo_desc">
                             </div>
+
                             <div class="mb-3">
-                                <label for="title" class="form-label">Compañía</label>
-                                <input type="text" class="form-control" name="jobpo_company">
+                                <label for="title" class="form-label">Compañia</label>
+                                <select name="jobpo_company" id="jobpo_company" class="form-select form-select-lg mb-3" aria-label="Large select example">
+                                    <option selected>Escoja la compañia</option>
+                                    @foreach ($companies as $company)
+                                        <option value="{{ $company->id }}">{{ $company->comp_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-success">
                                 <i class="bi bi-floppy"></i>&nbsp;Guardar
                             </button>
 
-                            {{-- @include('job-position.form') --}}
                         </form>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -52,13 +57,12 @@
             </div>
         </div>
     </section>
-    @stop
+@stop
 
-    @section('css')
-        <link rel="stylesheet" href="/css/admin_custom.css">
-    @stop
-    
-    @section('js')
-    
-    @stop
-    
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop
