@@ -118,44 +118,28 @@ class UserController extends Controller
     public function userUpdate(Request $request)
     {
         $user = User::findOrFail($request->user()->id);
-        
-        if ($request->oldPassword == '') {
-            if ($request->newPassword != '' || $request->confirmNewPassword != '') {
-                toastr()->error('Favor coloque su antigua clave si desea realizar cambios', 'Error en clave');
+    
+        // Verificar si se proporcionó una nueva contraseña y si coincide con la confirmación
+        if ($request->newPassword != '') {
+            if ($request->newPassword != $request->confirmNewPassword) {
+                toastr()->error('Confirme su clave para continuar', 'Error en clave');
                 return redirect()->back();
             }
-
-            $user->name = $request->name;
-            $user->lastName = $request->lastName;
-            $user->phoneNumber = $request->phoneNumber;
-            $user->email = $request->email;
-            $user->save();
-
-            toastr('Perfil editado exitosamente', 'Editar Perfil');
-            return redirect()->route('home.commonhome');
-
+            // Actualizar la contraseña
+            $user->password = bcrypt($request->newPassword);
         }
-        if (!Hash::check($request->oldPassword, $user->password)) {
-            toastr()->error('Clave incorrecta', 'Error en clave');
-            return redirect()->back();
-        }
-        if ($request->newPassword == '' || $request->confirmNewPassword == '') {
-            toastr()->error('Favor coloque la nueva clave para realizar cambios', 'Error en clave');
-            return redirect()->back();
-        }
-        if ($request->newPassword != $request->confirmNewPassword) {
-            toastr()->error('Confirme su clave para continuar', 'Error en clave');
-            return redirect()->back();
-        }
+    
+        // Actualizar otros detalles del usuario
         $user->name = $request->name;
         $user->lastName = $request->lastName;
         $user->phoneNumber = $request->phoneNumber;
         $user->email = $request->email;
-        $user->password = bcrypt($request->newPassword);
         $user->save();
-        toastr()->success('Credenciales actualizadas exitosamente', 'Editar Perfil');
-        return redirect()->back();
+    
+        toastr()->success('Perfil editado exitosamente', 'Editar Perfil');
+        return redirect()->route('postulant.postulanthome');
     }
+
 }
 
 

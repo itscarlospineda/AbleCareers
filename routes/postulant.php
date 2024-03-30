@@ -42,7 +42,7 @@ Route::get('/create/request', function () {
 Route::post('/create/request',[App\Http\Controllers\UserRequestController::class, 'createrequest'])->name('postulant.createrequest');
 
 Route::get('/profile/edit',[App\Http\Controllers\UserController::class, 'editUser'])->name('postulant.editprofile');
-Route::post('/profile/edit',[App\Http\Controllers\UserController::class, 'userUpdate'])->name('postulant.updateprofile');
+Route::put('/profile/edit',[App\Http\Controllers\UserController::class, 'userUpdate'])->name('postulant.updateprofile');
 
 Route::get('/edit/resume', function () {
     return view('common.editresume');
