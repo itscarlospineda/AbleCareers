@@ -65,7 +65,8 @@ class JobPositionController extends Controller
         $jobpo->company_id = $request->jobpo_company;
         $jobpo->save();
 
-        return redirect()->route('jobPosition.index')->with('success', 'jobPosition created successfully.');
+        toastr()->success('Creado exitosamente', 'Exito');
+        return redirect()->route('jobPosition.index');
     }
 
     /**
@@ -100,13 +101,14 @@ class JobPositionController extends Controller
                 $jobPosition->is_active = 'INACTIVE';
             }
             $jobPosition->save();
-
-            return redirect()->route('jobPosition.index')->with('flash_message', 'JobPosition actualizado exitosamente');
+            toastr()->success('Vacante actualizada exitosamente', 'Éxito');
+            return redirect()->route('jobPosition.index');
         }
         if ($action == 'destroy') {
             $jobPosition->is_active = 'INACTIVE';
             $jobPosition->save();
-            return redirect()->route('jobPosition.index')->with('flash_message', 'JobPosition eliminado exitosamente');
+            toastr()->warning('Vacante eliminada exitosamente', 'Éxito');
+            return redirect()->route('jobPosition.index');
         }
     }
 
