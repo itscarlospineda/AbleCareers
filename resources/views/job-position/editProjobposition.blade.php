@@ -1,52 +1,58 @@
-@extends('layouts.recruiter')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ __('Update') }} Job Position
-@endsection
+@section('title', 'Editar Perfil')
+
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="">
-            <div class="col-md-12">
+    <div class="mt-3 card">
+        <h1 class="card-header">Editar Perfil</h1>
 
-                @includeif('partials.errors')
+        <div class="card-body">
+            <!-- Formulario para actualizar los datos del perfil de RECLUTADOR -->
+            <form action="{{ route('jobPosition.profile.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $recruiter->name }}">
+                    <label for="lastName">Apellido</label>
 
-                <div class="card card-default">
-                    <div class="card-header">
-                        <span class="card-title">{{ __('Editar') }} Posicion de trabajo</span>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('jobPosition.update_or_destroy', $jobPosition->id) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PUT') }}
-                            {{--  @method('PUT') --}}
-                            @csrf
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Puesto</label>
-                                <input type="text" class="form-control" name="jobpo_name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" name="jobpo_desc">
-                            </div>
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" name="jobpo_date">
-                            </div>
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Compania</label>
-                                <input type="text" class="form-control" name="jobpo_company">
-                            </div>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ $recruiter->phoneNumber }}">
+                    <label for="email">Correo</label>
 
-                           {{--  @include('job-position.form') --}}
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{ $recruiter->lastName }}">
+                    <label for="phoneNumber">Telefono</label>
 
-                            <a href="{{route('jobPosition.index')}}" class="btn btn-danger">Regresar</a>
-                            <button type="submit" class="btn btn-primary" name="action" value="update">Actualizar</button>
+                    <input type="text" class="form-control" id="email" name="email" value="{{ $recruiter->email }}">
+                    <label for="oldPassword">Clave Anterior</label>
 
+                    <input type="password" class="form-control" id="oldPassword" name="oldPassword" value="">
+                    <label for="newPassword">Clave Nueva</label>
 
-                        </form>
-                    </div>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" value="">
+                    <label for="confirmNewPassword">Confirme clave Nueva</label>
+                    
+                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" value="">
                 </div>
-            </div>
+
+                <br>
+                <button type="submit" class="btn btn-primary" name="action" value="update">
+                    <i class="fa-solid fa-pen"></i>
+                    &nbsp;
+                    Actualizar
+                </button>
+        
+            </form>
         </div>
-    </section>
-@endsection
+
+
+    </div>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+
+@stop

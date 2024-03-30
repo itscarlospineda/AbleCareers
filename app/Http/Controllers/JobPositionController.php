@@ -8,7 +8,7 @@ use App\Models\Resume;
 use App\Models\User;
 use App\Models\JopoResume;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
 
 class JobPositionController extends Controller
 {
@@ -78,12 +78,6 @@ class JobPositionController extends Controller
         return view('job-position.editjobposition', compact('jobPosition'));
     }
 
-    public function editProfile($id)
-    {
-        $jobPosition = Job_Position::FindOrFail($id);
-
-        return view('job-position.editjobposition', compact('jobPosition'));
-    }
 
     /**
      * Elimina o Actualiza un JobPosition
@@ -99,12 +93,12 @@ class JobPositionController extends Controller
             $jobPosition->name = $request->jobpo_name;
             $jobPosition->description = $request->jobpo_desc;
             $jobPosition->company_id = $request->jobpo_company;
-             // Verificar si el checkbox está marcado o no y asignar el estado correspondiente
-        if ($request->has('active')) {
-            $jobPosition->is_active = 'ACTIVE';
-        } else {
-        $jobPosition->is_active = 'INACTIVE';
-        }
+            // Verificar si el checkbox está marcado o no y asignar el estado correspondiente
+            if ($request->has('active')) {
+                $jobPosition->is_active = 'ACTIVE';
+            } else {
+                $jobPosition->is_active = 'INACTIVE';
+            }
             $jobPosition->save();
 
             return redirect()->route('jobPosition.index')->with('flash_message', 'JobPosition actualizado exitosamente');
@@ -149,33 +143,32 @@ class JobPositionController extends Controller
         $user = Auth::user();
         $userAsUser = User::findOrFail($user->id);
         $userCompany = $userAsUser
-                ->companyUser()
-                ->where('user_id', $user->id)
-                ->where('is_active', 'ACTIVE')
-                ->first();
+            ->companyUser()
+            ->where('user_id', $user->id)
+            ->where('is_active', 'ACTIVE')
+            ->first();
         $compID = $userCompany->comp_id;
 
-        $jobPositions = Job_Position::where('is_active','ACTIVE')
-        ->where('company_id',$compID)
-        ->get();
+        $jobPositions = Job_Position::where('is_active', 'ACTIVE')
+            ->where('company_id', $compID)
+            ->get();
 
-        return view('manager.postlist',compact('jobPositions'));
-
+        return view('manager.postlist', compact('jobPositions'));
     }
 
     public function showDetails($id)
     {
         $jobPosition = Job_Position::findOrFail($id);
-        
+
         // Obtener el usuario autenticado
         $user = Auth::user();
-        
+
         // Obtener los currículums del usuario que estén activos ('ACTIVE')
         $resumes = Resume::where('user_id', $user->id)
             ->where('is_active', 'ACTIVE') // Asegúrate de que el estado sea 'ACTIVE' en lugar de 'ACTIVE'
             ->get();
-        
-        
+
+
         return view('common.showpost', compact('jobPosition', 'resumes'));
     }
 
@@ -183,24 +176,85 @@ class JobPositionController extends Controller
     {
         $user = Auth::user();
         $userAsUser = User::findOrFail($user->id);
-       
+
         $comp_id = $user->companyUser->comp_id;
         // Obtener las posiciones de trabajo activas
         $jobPositions = Job_Position::where('is_active', 'ACTIVE')
-            ->where('company_id',$comp_id)
+            ->where('company_id', $comp_id)
             ->get();
-           
+
         // Pasar las posiciones de trabajo y los resúmenes a la vista
         return view('recruiter.postlist', compact('jobPositions'));
     }
-  
+
     public function showPostulantes($id)
     {
         // Obtener los registros de JopoResume asociados al puesto específico ($id)
-    $jobPositions = JopoResume::where('job_position_id', $id)->get();
- 
+        $jobPositions = JopoResume::where('job_position_id', $id)->get();
+
 
 
         return view('recruiter.showResumeList', compact('jobPositions'));
+    }
+
+
+
+    /* 
+        EDIT PERFIL DEL RECLUTADOR 
+    */
+    public function editProfile()
+    {
+        $userActive = Auth::user();
+        $recruiter = User::findOrFail($userActive->id);
+
+        return view('job-position.editProjobposition', compact('recruiter'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        $recruiter = User::findOrFail($user->id);
+
+
+    /* Validacion que el campo clave anterior no este vacio */
+        if ($request->oldPassword == '') {
+            if ($request->newPassword != '' || $request->confirmNewPassword != '') {
+                toastr()->error('Favor coloque su contraseña actual si desea realizar cambios', 'Error en clave');
+                return redirect()->back();
+            }
+
+            $recruiter->name = $request->name;
+            $recruiter->lastName = $request->lastName;
+            $recruiter->phoneNumber = $request->phoneNumber;
+            $recruiter->email = $request->email;
+            $recruiter->save();
+
+            toastr('Perfil editado exitosamente', 'Editar Perfil');
+            return redirect()->route('recruiter.recruiterhome');
+        }
+        /* Verificacion si la clave anterior coincide con la de la BBDD */
+        if (!Hash::check($request->oldPassword, $recruiter->password)) {
+            toastr()->error('Contraseña incorrecta', 'Error en clave');
+            return redirect()->back();
+        }
+        /* Valida que los campos de newPassword no esten vacios */
+        if ($request->newPassword == '' || $request->confirmNewPassword == '') {
+            toastr()->error('Favor coloque la nueva contraseña', 'Error en clave');
+            return redirect()->back();
+        }
+        /* Verificacion que newPassword coincida con confirmNewPassword */
+        if ($request->newPassword != $request->confirmNewPassword) {
+            toastr()->error('Confirme su contraseña para continuar', 'Error en clave');
+            return redirect()->back();
+        }
+        /* Actualiza cambios */
+        $recruiter->name = $request->name;
+        $recruiter->lastName = $request->lastName;
+        $recruiter->phoneNumber = $request->phoneNumber;
+        $recruiter->email = $request->email;
+        $recruiter->password = bcrypt($request->newPassword);
+        $recruiter->save();
+        toastr()->success('Credenciales actualizadas exitosamente', 'Editar Perfil');
+        return redirect()->back();
     }
 }

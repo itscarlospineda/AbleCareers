@@ -28,8 +28,11 @@ Route::get('/jobPosition/create', [App\Http\Controllers\JobPositionController::c
 Route::get('/jobPosition/{id}/edit', [App\Http\Controllers\JobPositionController::class, 'edit'])->name('jobPosition.edit');
 Route::put('/jobPosition/{id}', [App\Http\Controllers\JobPositionController::class, 'update_or_destroy'])->name('jobPosition.update_or_destroy');
 Route::post('/jobPosition', [App\Http\Controllers\JobPositionController::class, 'store'])->name('jobPosition.store');
-Route::get('/jobPosition/{id}/editProfile', [App\Http\Controllers\JobPositionController::class, 'editProfile'])->name('jobPosition.editProfile');
+
 Route::get('/jobPosition/postulantes',[App\Http\Controllers\JobPositionController::class,'recruiterShowPost'])->name('jobPosition.recruiterShowPost');
 Route::get('/jobPosition/postsRecruiter/{id}', [App\Http\Controllers\JobPositionController::class, 'showPostulantes'])->name('jobpositions.showPostulantes');
 Route::get('/jobPosition/pdf/{id}', [App\Http\Controllers\ResumeController::class, 'pdfShowRecruiter'])->name('resume.pdfShowRecruiter');
 
+/* Editar Perfil */
+Route::get('/profile/edit', [App\Http\Controllers\JobPositionController::class, 'editProfile'])->name('jobPosition.profile.edit');
+Route::put('/profile/update',[App\Http\Controllers\JobPositionController::class,'updateProfile'])->name('jobPosition.profile.update');

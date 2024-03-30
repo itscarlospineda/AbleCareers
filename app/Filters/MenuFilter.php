@@ -119,7 +119,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Editar Perfil',
-                'url' => '',
+                'url' => 'recruiter/profile/edit',
                 'icon' => 'fa-solid fa-user-gear',
                 'label_color' => 'success',
             ],
