@@ -1,8 +1,9 @@
-@extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
+
 
 @section('adminlte_css_pre')
     <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 @stop
+
 
 @php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
 @php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
@@ -19,86 +20,99 @@
 @endif
 
 @section('auth_header', __('adminlte::adminlte.login_message'))
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+          background: linear-gradient(45deg, #1f1f1f, #a303a3);
+        }
+      </style>
 
 @section('auth_body')
-    <form action="{{ $login_url }}" method="post">
-        @csrf
-
-        {{-- Email field --}}
-        <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                   value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <div class="login-logo">
+                    <a href="">
+                        <img src="http://ablecareers.test/vendor/adminlte/dist/img/AbleCareersLogo.png" alt="AbleCareers Logo" height="50">
+                        <b>Able</b>Careers
+                    </a>
                 </div>
             </div>
-
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
         </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-wrap p-0">
+              <form action="{{ $login_url }}" method="post" class="signin-form"  action="{{ $login_url }} ">
+                @csrf
+                  <div class="form-group">
+                      <input type="text" name="email"  class="login-input form-control @error('email') is-invalid @enderror"
+                      value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
+                      @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+                  </div>
+{{-- password --}}
+            <div class="form-group ">
+              <input id="password-input" type="password"  name="password" class=" login-input form-control @error('password') is-invalid @enderror"
+              placeholder="{{ __('adminlte::adminlte.password') }}">
 
-        {{-- Password field --}}
-        <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                   placeholder="{{ __('adminlte::adminlte.password') }}">
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
+              @error('password')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
             </div>
 
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
 
-        {{-- Login field --}}
-        <div class="row">
-            <div class="col-7">
-                <div class="icheck-primary" title="{{ __('adminlte::adminlte.remember_me_hint') }}">
-                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                    <label for="remember">
-                        {{ __('adminlte::adminlte.remember_me') }}
-                    </label>
-                </div>
+            <div class="form-group">
+                <button type="submit" class="form-control btn btn-dark submit px-3">Sign In</button>
             </div>
-
-            <div class="col-5">
-                <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
-                    <span class="fas fa-sign-in-alt"></span>
-                    {{ __('adminlte::adminlte.sign_in') }}
-                </button>
+            <div class="form-group d-md-flex">
+                <div class="w-50">
+                    <label class="checkbox-wrap checkbox-light"> {{ __('adminlte::adminlte.remember_me') }}
+                                  <input type="checkbox" checked name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>>
+                                  <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="w-50 text-md-right">
+                                <a href="{{ $password_reset_url }}" style="color: hsl(291, 26%, 95%)">Forgot Password</a>
+                               <p> <a href="{{ $register_url }}" style="color: hsl(291, 26%, 95%)">Register a new membership</a></p>
+                            </div>
             </div>
-        </div>
+            @section('auth_footer')
+{{-- Password reset link --}}
+@if($password_reset_url)
+    <p class="my-0">
+        <a href="{{ $password_reset_url }}">
+            {{ __('adminlte::adminlte.i_forgot_my_password') }}
+        </a>
+    </p>
+@endif
 
-    </form>
+{{-- Register link --}}
+@if($register_url)
+    <p class="my-0">
+        <a href="{{ $register_url }}">
+            {{ __('adminlte::adminlte.register_a_new_membership') }}
+        </a>
+    </p>
+@endif
 @stop
+          </form>
 
-@section('auth_footer')
-    {{-- Password reset link --}}
-    @if($password_reset_url)
-        <p class="my-0">
-            <a href="{{ $password_reset_url }}">
-                {{ __('adminlte::adminlte.i_forgot_my_password') }}
-            </a>
-        </p>
-    @endif
+          </div>
+            </div>
+        </div>
+    </div>
 
-    {{-- Register link --}}
-    @if($register_url)
-        <p class="my-0">
-            <a href="{{ $register_url }}">
-                {{ __('adminlte::adminlte.register_a_new_membership') }}
-            </a>
-        </p>
-    @endif
-@stop
+    <script src="http://ablecareers.test/vendor/jquery/jquery.min.js"></script>
+    <script src="http://ablecareers.test/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</section>
