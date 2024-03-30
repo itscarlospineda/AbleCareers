@@ -7,7 +7,8 @@ use App\Models\User;
 use App\Models\user_has_role;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -88,4 +89,76 @@ class UserController extends Controller
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
     }
+
+    /*
+     *
+     *          EL ANTERIOR CODIGO ES DE EXTRAÑA PROCEDENCIA
+     * 
+     *          No se ha podido determinar en este momento si el código adjunto
+     *          anteriormente a este paréntesis tiene una finalidad adjunta 
+     *          en otro perfil del proyecto. Por favor no eliminar hasta 
+     *          asegurarse lo contrario.
+     * 
+     *          A posteriori, el siguiente código es fundamental para
+     *          mantener la funcionalidad de la página. Por favor no eliminar
+     *          ya que probablemente truene funciones del perfil de postulante.
+     *          Os agradezco de antemano por su comprensión.
+     * 
+     *          Atte.: Ing. Carlos Andrés Pineda
+     * 
+     * 
+    */
+
+     public function editUser()
+    {
+        $user = Auth::user();
+        return view('common.editusers', compact('user'));
+    }
+
+    public function userUpdate(Request $request)
+    {
+        $user = User::findOrFail($request->user()->id);
+        
+        if ($request->oldPassword == '') {
+            if ($request->newPassword != '' || $request->confirmNewPassword != '') {
+                toastr()->error('Favor coloque su antigua clave si desea realizar cambios', 'Error en clave');
+                return redirect()->back();
+            }
+
+            $user->name = $request->name;
+            $user->lastName = $request->lastName;
+            $user->phoneNumber = $request->phoneNumber;
+            $user->email = $request->email;
+            $user->save();
+
+            toastr('Perfil editado exitosamente', 'Editar Perfil');
+            return redirect()->route('home.commonhome');
+
+        }
+        if (!Hash::check($request->oldPassword, $user->password)) {
+            toastr()->error('Clave incorrecta', 'Error en clave');
+            return redirect()->back();
+        }
+        if ($request->newPassword == '' || $request->confirmNewPassword == '') {
+            toastr()->error('Favor coloque la nueva clave para realizar cambios', 'Error en clave');
+            return redirect()->back();
+        }
+        if ($request->newPassword != $request->confirmNewPassword) {
+            toastr()->error('Confirme su clave para continuar', 'Error en clave');
+            return redirect()->back();
+        }
+        $user->name = $request->name;
+        $user->lastName = $request->lastName;
+        $user->phoneNumber = $request->phoneNumber;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->newPassword);
+        $user->save();
+        toastr()->success('Credenciales actualizadas exitosamente', 'Editar Perfil');
+        return redirect()->back();
+    }
 }
+
+
+
+
+

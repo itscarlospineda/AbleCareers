@@ -16,27 +16,27 @@
 <body>
 
     <div class="container-fluid">
-        <nav class="navbar navigation fixed-top">
-            <div class="container-fluid">
-                <div class="d-flex justify-content-between fw-bold align-items-center">
-                    <a class="navbar-brand gradient" href="#">AbleCareers</a>
-
-                    <ul class="nav d-flex justify-content-center ">
-                        <li class="nav-item"><a href="" class="nav-link text-white">Posts</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-white">Empresas</a></li>
-                        <li class="nav-item"><a href="" class="nav-link text-white">Acerca de Nosotros</a></li>
-                    </ul>
-
-                    <ul class="nav d-flex flex-row ">
-                        <li class="nav-item"><a href="{{route('login')}}" class="nav-link text-white">Login</a></li>
-                        <li class="nav-item"><a href="{{route('register')}}" class="nav-link text-white">Register</a></li>
-                    </ul>
-                </div>
-
-
+        <nav class="navbar navigation fixed-top d-flex justify-content-between align-items-center">
+            <div class="d-flex fw-bold">
+                <a class="navbar-brand gradient ms-5" href="#">AbleCareers</a>
+            </div>
+        
+            <div class="d-flex align-items-center">
+                <ul class="nav ms-5">
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Posts Recientes</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Empresas</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-white">Acerca de Nosotros</a></li>
+                </ul>
+            </div>
+        
+            <div class="d-flex align-items-center">
+                <ul class="nav me-5">
+                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link text-dark fw-bold" style="background-color: white; border-radius:10px;">Login</a></li>
+                    <li class="nav-item"><a href="{{ route('register') }}" class="nav-link text-white">Register</a></li>
+                </ul>
             </div>
         </nav>
-
+      
         <div class="row rectangle">
             <div class="container">
                 <center>
@@ -50,6 +50,7 @@
                 <p class="h5 text-white">Encuentra ofertas de empleo y conéctate en el mejor lugar para expandir tu futuro.</p>
             </center>
         </div>
+
     </div>
 
     <div class="container mt-5 pt-5">
@@ -74,24 +75,38 @@
     </div>
 
     <div class="container mt-5 pt-5" style="min-height: 100vh;">
+        <div class="col py-4">
+            <center>
+                <p class="h1">Posts Recientes</p>
+            </center>
+        </div>
+
         <div class="row gy-3">
 
-            <div class="col-md-7">
-                <div class="card card-body bg-color text-white">
-                    <p class="h3">Aliados con</p>
-                    <p class="h1">+15</p>
-                    <p class="h3">empresas a nivel nacional</p>
-                </div>
+            @foreach($jobPositions as $jobPos)
+            <div class="col-md-4">
+                <div class="col-lg">
+                    <div class="card h-100">
+                      <img src="https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                      alt="image" srcset="" class="card-img-top img-dark">
+                      <div class="card-body">
+                        <h5 class="card-title">{{$jobPos->name}}</h5>
+                        <p class="card-text text-danger">{{$jobPos->company->comp_name }}</p>
+                        <p class="card-text">{{ \Illuminate\Support\Str::limit($jobPos->description, 65, $end='...') }}</p>
+                      </div>
+                    </div>
+                  </div>
             </div>
-
-            <div class="col-md-5">
-                <div class="card card-body bg-color text-white">
-                    <p class="h1">Construye tu futuro:</p>
-                    <p class="h4">Explora empleos que se ajusten a tus habilidades.</p>
-                </div>
-            </div>
+            @endforeach
 
         </div>
+
+        <div class="col py-4">
+            <center>
+                <p class="h5">Si deseas aplicar a estos puestos y muchos más, créate una cuenta con nosotros.</p>
+            </center>
+        </div>
+
     </div>
 
     <footer class="footer bg-color">

@@ -78,6 +78,13 @@ class MenuFilter
                 'label' => 4,
                 'label_color' => 'success',
             ],
+            [
+                'text' => 'Editar Perfil',
+                'url' => '/postulant/profile/edit/',
+                'icon' => 'fa-solid fa-user-gear',
+                'label_color' => 'success',
+            ],
+
 
         ];
 
