@@ -279,7 +279,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Solicitudes',
-                'url' => '',
+                'url' => '/admin/userRequest',
                 'icon' => 'fa-solid fa-bullhorn',
                 'label_color' => 'success',
             ],
@@ -291,7 +291,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Ver todos los Posts',
-                'url' => '',
+                'url' => '/admin/browse/posts',
                 'icon' => 'fa-solid fa-signs-post',
                 'label_color' => 'success',
             ],

@@ -77,9 +77,23 @@ Route::post('/company', [App\Http\Controllers\CompanyController::class, 'store']
 |
 |
 */
-Route::get('/userRequest', [App\Http\Controllers\UserRequestController::class, 'index'])->name('userRequest.index');
+Route::get('/userRequest/{status?}', [App\Http\Controllers\UserRequestController::class, 'index'])->name('userRequest.index');
+Route::get('/userRequest/{id}/details', [App\Http\Controllers\UserRequestController::class, 'requestDetails'])->name('admin.requestdetails');
+
+Route::post('/userRequest/{id}/accept', [UserRequestController::class, 'accept'])->name('admin.request.accept');
+Route::post('/userRequest/{id}/deny', [UserRequestController::class, 'deny'])->name('admin.request.deny');
+
+
 Route::get('/userRequest/create', [App\Http\Controllers\UserRequestController::class, 'create'])->name('userRequest.create');
-Route::get('/userRequest/{id}/edit', [App\Http\Controllers\UserRequestController::class, 'edit'])->name('userRequest.edit');
-Route::put('/userRequest/{id}', [App\Http\Controllers\UserRequestController::class, 'update_or_destroy'])->name('userRequest.update_or_destroy');
+// Route::get('/userRequest/{id}/edit', [App\Http\Controllers\UserRequestController::class, 'edit'])->name('userRequest.edit');
+// Route::put('/userRequest/{id}', [App\Http\Controllers\UserRequestController::class, 'update_or_destroy'])->name('userRequest.update_or_destroy');
 Route::post('/userRequest', [App\Http\Controllers\UserRequestController::class, 'store'])->name('userRequest.store');
 
+/*
+|--------------------------------------------------------------------------
+| JOP_POSITION ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
+Route::get('/browse/posts', [App\Http\Controllers\JobPositionController::class, 'showPost'])->name('postslist');
