@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
  use Illuminate\Support\Facades\Auth;
  use App\Http\Controllers\UserController;
  use App\Http\Controllers\UserRequestController;
+use App\Models\UserRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +38,16 @@ Route::get('/create/resume', function () {
 });
 
 Route::get('/create/request', function () {
-    return view('common.companyrequest');})->name('postulant.companyrequest');
+    // Obtener el userRequest asociado al usuario autenticado, si existe
+    $userRequest = UserRequest::where('user_id', auth()->id())->first();
+    
+    // Pasar el userRequest a la vista
+    return view('common.companyrequest', ['userRequest' => $userRequest]);
+})->name('postulant.companyrequest');
 
 Route::post('/create/request',[App\Http\Controllers\UserRequestController::class, 'createrequest'])->name('postulant.createrequest');
+Route::put('/edit/request', [App\Http\Controllers\UserRequestController::class, 'editrequest'])->name('postulant.editrequest');
+
 
 Route::get('/profile/edit',[App\Http\Controllers\UserController::class, 'editUser'])->name('postulant.editprofile');
 Route::put('/profile/edit',[App\Http\Controllers\UserController::class, 'userUpdate'])->name('postulant.updateprofile');

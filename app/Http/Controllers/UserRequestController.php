@@ -102,4 +102,28 @@ class UserRequestController extends Controller
      // Redireccionar a la página de inicio del postulante u otra página según sea necesario
         return redirect()->route('postulant.postulanthome')->with('success', 'Request creado exitosamente.');
     }
+    public function editrequest(Request $request)
+    {
+        // Obtener la solicitud asociada al usuario autenticado
+        $userRequest = UserRequest::where('user_id', auth()->id())->first();
+    
+        // Si no se encuentra la solicitud, devolver un error 404
+        if (!$userRequest) {
+            abort(404);
+        }
+    
+        // Validación de los datos recibidos del formulario
+        $validatedData = $request->validate([
+            'info' => 'required|string|max:255',
+        ]);
+
+        // Actualizar los detalles de la solicitud
+        $userRequest->request_info = $validatedData['info'];
+    
+        // Guardar los cambios
+        $userRequest->save();
+
+        // Redireccionar a la página de inicio del postulante u otra página según sea necesario
+        return redirect()->route('postulant.postulanthome')->with('success', 'Request editado exitosamente.');
+    }
 }
