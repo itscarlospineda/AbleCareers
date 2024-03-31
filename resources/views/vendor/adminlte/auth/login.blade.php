@@ -19,7 +19,7 @@
 @endif
 
 @section('auth_header', __('adminlte::adminlte.login_message'))
-
+@vite(['resources/css/bg.css'])
 @section('auth_body')
     <form action="{{ $login_url }}" method="post">
         @csrf

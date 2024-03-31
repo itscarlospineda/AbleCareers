@@ -13,19 +13,9 @@
 
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
-@section('auth_body')
-<style>
-    body{
-        background-image: url("https://www.theladders.com/wp-content/uploads/handshake_190617.jpg");
-        background-repeat: no-repeat;
-        height: 100vh;
-        /*
-        height: 100vh;
-        background-repeat: no-repeat;
-        --bg-image-opacity: .85;*/
-    }
-</style>
+@vite(['resources/css/bg.css'])
 
+@section('auth_body')
     <form action="{{ $register_url }}" method="post">
         @csrf
 
