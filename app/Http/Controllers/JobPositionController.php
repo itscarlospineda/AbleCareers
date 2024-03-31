@@ -193,10 +193,11 @@ class JobPositionController extends Controller
 
     public function showPostulantes($id)
     {
-        // Obtener los registros de JopoResume asociados al puesto específico ($id)
+       
         $jobPositions = JopoResume::where('job_position_id', $id)->get();
+        
 
-
+    
 
         return view('recruiter.showResumeList', compact('jobPositions'));
     }
