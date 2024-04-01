@@ -41,17 +41,14 @@ class ResumeController extends Controller
         //return $pdf->stream();
     }
 
-    public function pdfShowRecruiter($id)
+    public function pdfShowRecruiter($id, $idJobPos)
     {
-        // Obtener el resumen específico por su ID
-        //$resume = Resume::findOrFail($id);
+       
         $resumes = Resume::all();
-        return view('recruiter.showResumePdf')->with('resumes',$resumes);
-        // Cargar la vista PDF con el resumen obtenido
-        //$pdf = PDF::loadView('common.showresume', compact('resume'));
-
-        // Devolver el PDF como una respuesta
-        //return $pdf->stream();
+        $resume = $resumes->where('id', $id)->first();
+    
+    return view('recruiter.showResumePdf')->with(['resume' => $resume, 'idJobPos' => $idJobPos]);
+     
     }
 
 
@@ -85,6 +82,11 @@ class ResumeController extends Controller
         $resume = Resume::findOrFail($id);
         return view('resume.editar', compact('resume'));
     }
+
+
+
+
+
 
     public function update_or_destroy(Request $request, $id)
     {

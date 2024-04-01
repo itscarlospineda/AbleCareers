@@ -19,9 +19,15 @@
                             <img src="{{ asset('images/resumePic.png') }}"  class="img-fluid">
                         </div>
                         <div class="col-md-8">
-                            <p class="h5">Alexandra Caballero</p>
+                         
+                          <div class="d-flex justify-content-between mt-2">
+                            <p style="font-style: italic;">Haz recibido una nueva solicitud </p>
+                            <p class="color-grey">
+                                <i class="far fa-clock"></i> {{$jopoResume->created_at}}
+                            </p>
+                        </div>
                             <hr>
-                            <a href="{{ route('resume.pdfShowRecruiter', ['id' => $jopoResume->resume_id]) }}" class="btn btn-success">
+                            <a href="{{ route('resume.pdfShowRecruiter', ['id' => $jopoResume->resume_id, 'idJobPos'=> $jopoResume->job_position_id]) }}" class="btn btn-success">
                                 <i class="bi bi-plus-circle"></i>&nbsp;Ver Hoja de vida
                             </a>
                         </div>
