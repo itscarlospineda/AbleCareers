@@ -31,7 +31,6 @@ Route::get('/requests', [App\Http\Controllers\UserRequestController::class, 'ind
 
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('admin.users.index');
 
-Route::get('/companies', [App\Http\Controllers\CompanyController::class, 'index'])->name('admin.companies.index');
 
 Route::get('/hasroles', function () {
     return view('admin.hasroles');
@@ -62,11 +61,11 @@ Route::post('/category', [App\Http\Controllers\CategoryController::class, 'store
 |
 */
 
-Route::get('/company', [App\Http\Controllers\CompanyController::class, 'index'])->name('company.index');
-Route::get('/company/create', [App\Http\Controllers\CompanyController::class, 'create'])->name('company.create');
-Route::get('company/{id}/edit', [App\Http\Controllers\CompanyController::class, 'edit'])->name('company.edit');
-Route::put('/company/{id}', [App\Http\Controllers\CompanyController::class, 'update_or_destroy'])->name('company.update_or_destroy');
-Route::post('/company', [App\Http\Controllers\CompanyController::class, 'store'])->name('company.store');
+Route::get('/company', [App\Http\Controllers\CompanyController::class, 'index'])->name('admin.company.index');
+Route::get('/company/create', [App\Http\Controllers\CompanyController::class, 'create'])->name('admin.company.create');
+Route::get('/company/{id}/edit', [App\Http\Controllers\CompanyController::class, 'adminCompanyEdit'])->name('admin.company.edit');
+Route::put('/company/{id}', [App\Http\Controllers\CompanyController::class, 'update_or_destroy'])->name('admin.company.update_or_destroy');
+Route::post('/company', [App\Http\Controllers\CompanyController::class, 'store'])->name('admin.company.store');
 
 
 
@@ -97,3 +96,15 @@ Route::post('/userRequest', [App\Http\Controllers\UserRequestController::class, 
 |
 */
 Route::get('/browse/posts', [App\Http\Controllers\JobPositionController::class, 'showPost'])->name('postslist');
+
+/*
+|--------------------------------------------------------------------------
+| BASIC ROUTES
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+//Edit User
+Route::get('/profile/edit',[App\Http\Controllers\UserController::class,'adminEdit'])->name('admin.profile.edit');
+Route::put('/profile/update',[App\Http\Controllers\UserController::class,'adminUpdate'])->name('admin.profile.update');

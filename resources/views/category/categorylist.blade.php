@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('adminlte::page')
 
 @section('content')
 <head>
@@ -40,7 +40,10 @@
                             <td class="fw-bold">{{ $category->id}}</td>
                             <td>{{ $category->name}}</td>
                             <td>
-                                <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}" class="btn btn-outline-primary">Editar</a>
+                                <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-file-pen"></i>
+                                    Editar
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -49,7 +52,7 @@
                 </table>
                 <button type="submit" class="btn btn-success">
                     <a href="{{ route('admin.category.create') }}" style="color:white;">
-                            <i class="bi bi-floppy"></i>&nbsp;Crear Categoria
+                            <i class="fa-solid fa-square-plus"></i>&nbsp;Crear Categoria
                     </a>
                         </button>
                 </div>

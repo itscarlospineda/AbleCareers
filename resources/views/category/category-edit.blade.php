@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('adminlte::page')
 
 @section('content')
     <div class="mt-3 card">
@@ -16,9 +16,19 @@
                 </div>
 
                 <br>
-                <button type="submit" class="btn btn-primary" name="action" value="update">Actualizar</button>
-                <button type="submit" class="btn btn-danger" name="action" value="destroy">Eliminar</button>
-                <a href="{{route('admin.category.index')}}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary" name="action" value="update">
+                    <i class="fa-solid fa-file-pen"></i>
+                    Actualizar
+                </button>
+                <button type="submit" class="btn btn-danger" name="action" value="destroy">
+                    <i class="fa-solid fa-trash"></i>
+                    Eliminar
+                </button>
+                <a href="{{ route('admin.category.index') }}" class="btn btn-secondary">
+                    <i class="fa-solid fa-xmark"></i>
+                    &nbsp;
+                    Cancelar
+                </a>
             </form>
         </div>
 
