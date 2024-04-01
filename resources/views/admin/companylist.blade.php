@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('adminlte::page')
 
 @section('content')
 <head>
@@ -34,8 +34,8 @@
                             <th scope="col">Teléfono</th>
                             <th scope="col">Ciudad</th>
                             <th scope="col">Dept</th>
-                            <th scope="col">CEO_ID</th>
-                            <th scope="col">Activo</th>
+                            <th scope="col">CEO</th>
+                            <th scope="col">Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,13 +43,18 @@
                         @foreach ($companies as $company)
                         <tr>
                             <td class="fw-bold">{{ $company->id}}</td>
-                            <td>{{ $company->name}}</td>
-                            <td>{{ $company->mail}}</td>
-                            <td>{{ $company->phone}}</td>
-                            <td>{{ $company->city}}</td>
-                            <td>{{ $company->depart}}</td>
-                            <td>{{ $company->user_id}}</td>
-                            <td>{{ $company->active}}</td>
+                            <td>{{ $company->comp_name}}</td>
+                            <td>{{ $company->comp_mail}}</td>
+                            <td>{{ $company->comp_phone}}</td>
+                            <td>{{ $company->comp_city}}</td>
+                            <td>{{ $company->comp_depart}}</td>
+                            <td>{{ $company->user->name}} {{$company->user->lastName}}</td>
+                            <td>
+                                <a href="{{ route('admin.company.edit', ['id' => $company->id]) }}" class="btn btn-outline-primary">
+                                    <i class="fa-solid fa-file-pen"></i>
+                                    Editar
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
 
@@ -57,7 +62,7 @@
                 </table>
                 </div>
               </div>
-            
+
           </div>
       </div>
     </section>
@@ -66,5 +71,5 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
   <script>let table = new DataTable('#example');</script>
-  
+
 @endsection
