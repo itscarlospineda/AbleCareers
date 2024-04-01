@@ -32,3 +32,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('role.redirect:superUsuario,postulante')->get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', [\App\Http\Controllers\Controller::class, 'showLanding'])->name('landing');
+Route::get('/old', [\App\Http\Controllers\Controller::class, 'showOld'])->name('landingold');

@@ -13,7 +13,6 @@
 
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
-@vite(['resources/css/bg.css'])
 
 @section('auth_body')
     <form action="{{ $register_url }}" method="post">
