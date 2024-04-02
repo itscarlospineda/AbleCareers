@@ -1,0 +1,79 @@
+:root {
+  --bs-body-font-family: 'Roboto', sans-serif;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.mainbar{
+  background-color: white;
+}
+
+.hero{
+  background-color: rgb(240, 240, 240);
+}
+
+
+.bg-color{
+  background-color: #131312;
+}
+.footer {
+  color: #ffffff;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/*COLORES*/
+.black{
+  color: black;
+}
+
+.lightgreen{
+  color: rgb(13, 185, 134) !important;
+}
+
+.joinbtn{
+  background-color: rgb(13, 185, 134);
+  border-color: rgb(13, 185, 134);
+  color: rgb(247, 247, 247);
+  border-radius: 10px;
+}
+.joinbtn:hover{
+  background-color: rgb(35, 226, 169);
+  border-color: rgb(35, 226, 169);
+  color: white;
+  border-radius: 10px;
+}
+
+.authBtn{
+  background-color: rgb(240, 240, 240);
+  border-color: rgb(240, 240, 240);
+  color: black;
+  border-radius: 10px;
+}
+.authBtn:hover{
+  background-color: black;
+  border-color: black;
+  color: white;
+  border-radius: 10px;
+}
+
+.navBtn{
+  background-color: white;
+  border-color: white;
+  color: black;
+  border-radius: 10px;
+}
+.navBtn:hover{
+  background-color: rgb(35, 226, 169);
+  border-color: rgb(35, 226, 169);
+  color: white;
+  border-radius: 10px;
+}
+
