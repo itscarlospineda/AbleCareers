@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyUser;
 use Illuminate\Http\Request;
 use App\Models\Job_Position;
 use App\Models\Resume;
@@ -42,7 +43,12 @@ class JobPositionController extends Controller
     public function create()
     {
         $companies = Company::all(); //Se obtiene la data de Compañia la cual se usara para el DropDownList
-        return view('job-position.createjobposition', compact('companies'));
+
+        $activeUser = Auth::user();  //Usuario Logeado
+        $user = User::findOrFail($activeUser->id); //Busca el usuario activo
+        $companyName = $user->companyUser->company->comp_name;  //Captura el nombre de la compañia relacionada al usuario activo
+
+        return view('job-position.createjobposition', compact('companies', 'companyName'));
     }
 
     /**
@@ -212,6 +218,8 @@ class JobPositionController extends Controller
         $userActive = Auth::user();
         $recruiter = User::findOrFail($userActive->id);
 
+        
+
         return view('job-position.editProjobposition', compact('recruiter'));
     }
 
@@ -262,4 +270,7 @@ class JobPositionController extends Controller
         toastr()->success('Credenciales actualizadas exitosamente', 'Editar Perfil');
         return redirect()->back();
     }
+
+    
+
 }

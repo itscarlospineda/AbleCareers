@@ -29,13 +29,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="title" class="form-label">Compañia</label>
-                                <select name="jobpo_company" id="jobpo_company" class="form-select form-select-lg mb-3" aria-label="Large select example">
-                                    <option selected>Escoja la compañia</option>
-                                    @foreach ($companies as $company)
-                                        <option value="{{ $company->id }}">{{ $company->comp_name }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="title" class="form-label">Compañia: </label>
+                                <button type="button" class="btn btn-secondary mx-4">{{strtoupper($companyName) }}</button>
                             </div>
 
                             <button type="submit" class="btn btn-success">
