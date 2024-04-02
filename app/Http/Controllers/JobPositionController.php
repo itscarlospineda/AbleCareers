@@ -84,7 +84,11 @@ class JobPositionController extends Controller
     {
         $jobPosition = Job_Position::FindOrFail($id);
 
-        return view('job-position.editjobposition', compact('jobPosition'));
+        $activeUser = Auth::user();  //Usuario Logeado
+        $user = User::findOrFail($activeUser->id); //Busca el usuario activo
+        $companyName = $user->companyUser->company->comp_name;  //Captura el nombre de la compañia relacionada al usuario activo
+
+        return view('job-position.editjobposition', compact('jobPosition', 'companyName'));
     }
 
 
@@ -101,7 +105,6 @@ class JobPositionController extends Controller
         if ($action == 'update') {
             $jobPosition->name = $request->jobpo_name;
             $jobPosition->description = $request->jobpo_desc;
-            $jobPosition->company_id = $request->jobpo_company;
             // Verificar si el checkbox está marcado o no y asignar el estado correspondiente
             if ($request->has('active')) {
                 $jobPosition->is_active = 'ACTIVE';
