@@ -97,4 +97,14 @@ class User extends Authenticatable
         return $this->hasOne(CompanyUser::class);
     }
 
+    public function resumes()
+    {
+        return $this->hasMany(Resume::class, 'user_id', 'id');
+    }
+
+    public function userRequests()
+    {
+        return $this->hasMany(UserRequest::class,'user_id','id');
+    }
+
 }

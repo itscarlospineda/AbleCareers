@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\JopoResume;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\user_has_role;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +19,18 @@ class UserController extends Controller
     {
         $users = User::where('is_active', '!=', 'INACTIVE')->get();
         return view('admin\userlist', compact('users'));
+    }
+
+    public function postulantIndex()
+    {
+        $user = Auth::user();
+        $userAsUser = User::findOrFail($user->id);
+        //APARTADO DE REQUEST
+        $postulantRequestCount = $userAsUser->userRequests->where('request_status','denegado')->count();
+        $applyCount = JopoResume::whereIn('resume_id', $userAsUser->resumes()->pluck('id'))
+        ->where('is_active', 'ACTIVE')
+        ->count();
+        return view('home.commonhome', compact('user','applyCount','postulantRequestCount'));
     }
 
 

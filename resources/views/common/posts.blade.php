@@ -33,16 +33,23 @@
                     </div>
                     <div class="col-md-2 align-self-center">
                         <a href="{{ route('jobpositions.showdetails', ['id' => $jobPos->id]) }}" class="btn btn-success">
-                            <i class="bi bi-plus-circle"></i>&nbsp;Ver más 
+                            <i class="fa-solid fa-square-plus"></i>
+                            &nbsp;
+                            Ver más
                         </a>
                         @if (JopoResume::whereHas('resume', function ($query) {
                             $query->where('user_id', auth()->id());
                         })->where('job_position_id', $jobPos->id)->exists())
                             <button class="btn btn-primary" disabled>Aplicando</button>
-                            <span class="text-success">¡🎊🎊 Ya has aplicado a esta posición 🎊🎊!</span>
+                            <br>
+                            <span class="text-success">
+                                <i class="fa-solid fa-building-circle-check"></i>
+                                &nbsp;
+                                Ya has aplicado a esta posición
+                            </span>
                         @endif
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>

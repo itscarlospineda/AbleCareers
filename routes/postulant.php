@@ -25,9 +25,7 @@ use App\Models\UserRequest;
 
 
 
-Route::get('/home', function () {
-    return view('home.commonhome');
-})->name('postulant.postulanthome');
+Route::get('/home',[App\Http\Controllers\UserController::class, 'postulantIndex'])->name('postulant.postulanthome');
 
 Route::get('/create/profile', function () {
     return view('common.createusers');
@@ -40,7 +38,7 @@ Route::get('/create/resume', function () {
 Route::get('/create/request', function () {
     // Obtener el userRequest asociado al usuario autenticado, si existe
     $userRequest = UserRequest::where('user_id', auth()->id())->first();
-    
+
     // Pasar el userRequest a la vista
     return view('common.companyrequest', ['userRequest' => $userRequest]);
 })->name('postulant.companyrequest');

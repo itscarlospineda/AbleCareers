@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Resume extends Model
 {
     protected $table = 'resume';
-    
+
     static $rules = [
 		'info' => 'required|string',
 		'education' => 'required|string',
@@ -46,14 +46,14 @@ class Resume extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function jopoResumes()
     {
-        return $this->hasMany(\App\Models\JopoResume::class, 'id', 'resume_id');
+        return $this->hasMany(\App\Models\JopoResume::class, 'resume_id', 'id');
     }
-    
+
 
 }
