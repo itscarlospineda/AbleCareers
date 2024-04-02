@@ -30,7 +30,7 @@
 
                             <div class="mb-3">
                                 <label for="title" class="form-label">Compañia: </label>
-                                <button type="button" class="btn btn-secondary mx-4">{{strtoupper($companyName) }}</button>
+                                <button type="button" class="btn btn-secondary mx-4" disabled>{{strtoupper($companyName) }}</button>
                             </div>
 
                             <div class="mb-3 form-check">
