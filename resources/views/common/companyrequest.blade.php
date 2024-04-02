@@ -27,7 +27,7 @@
                     <i class="bi bi-x-circle"></i>&nbsp;Cancelar
                 </a>
 
-                <button type="submit" class="btn btn-{{ $userRequest ? 'primary' : 'success' }}">
+                <button type="submit" class="btn btn-{{ $userRequest ? 'primary' : 'success' }}" {{ $userRequest && $userRequest->request_status === 'denegado' ? 'disabled' : '' }}>
                     <i class="bi bi-floppy"></i>&nbsp;{{ $userRequest ? 'Editar' : 'Guardar' }}
                 </button>
             </form>

@@ -28,15 +28,15 @@
 
                 <hr>
 
-                <div class="mt-3 btn-group" role="group">
+                <div class="mt-3 btn-group d-flex justify-content-between" role="group">
                     <form action="{{ route('admin.request.accept', ['id' => $request->id]) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-success">Aceptar</button>
+                        <button type="submit" class="btn btn-success mr-2" {{ $request->request_status !== 'aplicando' ? 'disabled' : '' }}>Aceptar</button>
                     </form>
                     
                     <form action="{{ route('admin.request.deny', ['id' => $request->id]) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Denegar</button>
+                        <button type="submit" class="btn btn-danger mr-2" {{ $request->request_status !== 'aplicando' ? 'disabled' : '' }}>Denegar</button>
                     </form>
                 
                     <a href="{{ route('userRequest.index') }}" class="btn btn-secondary">Volver</a>

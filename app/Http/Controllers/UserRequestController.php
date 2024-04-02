@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\User;
 use App\Models\UserRequest;
 use Illuminate\Http\Request;
@@ -60,9 +61,20 @@ class UserRequestController extends Controller
         $userHasRoleController = new userhasroleController(); // Crear una instancia del controlador
         $userHasRoleController->createOrUpdateCEO(['user_id' => $user->id]); // Llamar al método de instancia
     
+        // Crear la compañía
+        $company = new Company();
+        $company->user_id = $user->id;
+        $company->comp_name = $request->comp_name ?: 'Nueva Compañía'; // Establecer un nombre predeterminado si no se proporciona
+        $company->comp_mail = $request->comp_mail ?: '-@mail'; // Establecer un correo predeterminado si no se proporciona
+        $company->comp_phone = $request->comp_phone ?: '-'; // Establecer un teléfono predeterminado si no se proporciona
+        $company->comp_city = $request->comp_city ?: '-'; // Establecer una ciudad predeterminada si no se proporciona
+        $company->comp_depart = $request->comp_depart ?: '-'; // Establecer un departamento predeterminado si no se proporciona
+        $company->save();
+    
         // Redirigir de vuelta a la página de detalles de la solicitud
         return redirect()->route('admin.requestdetails', ['id' => $id])->with('success', 'Solicitud aceptada exitosamente.');
     }
+    
     
 
 

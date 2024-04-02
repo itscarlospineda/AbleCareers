@@ -30,26 +30,22 @@
     </ul>
 
     <!-- Aquí va el código para mostrar las solicitudes de acuerdo al estado seleccionado -->
-    @foreach ($userRequest as $request)
+    @foreach ($userRequest->sortByDesc('created_at') as $request)
     <div class="col" style="padding-top: 20px;">
-        <div class="card border-{{ strtolower($request->request_status) === 'aplicando' ? 'primary' : (strtolower($request->request_status) === 'aprobado' ? 'success' : 'danger') }}">
+        <div class="card text-center">
+            <div class="card-header{{ strtolower($request->request_status) === 'aprobado' ? ' bg-success' : (strtolower($request->request_status) === 'denegado' ? ' bg-danger' : (strtolower($request->request_status) === 'aplicando' ? ' bg-primary' : '')) }}">
+                {{ strtoupper($request->request_status) }}
+            </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-8">
-                        <p class="h5">Nombre: {{ $request->user->name }} {{ $request->user->lastName }}</p>
-                        <p class="text-dark">Correo: {{ $request->user->email }}</p>
-                        <p class="text-info">Teléfono: {{ $request->user->phoneNumber }}</p>
-                        <p class="text-dark">Solicitud: {{ $request->request_info }}</p>
-                        <p class="text-dark">Estado: {{ $request->request_status }}</p>
-                        <p class="text-primary">Fecha y Hora de Creación: {{ $request->created_at }}</p>
-                    </div>
-                    
-                    <div class="col-md-4 align-self-center">
-                        <a href="{{ route('admin.requestdetails', ['id' => $request->id]) }}" class="btn btn-primary">
-                            <i class="bi bi-eye"></i> Ver más
-                        </a>                        
-                    </div>
-                </div>
+                <h5 class="card-title">Nombre: {{ $request->user->name }} {{ $request->user->lastName }}</h5>
+                <p class="text-dark">Correo: {{ $request->user->email }}</p>
+                <p class="text-info">Teléfono: {{ $request->user->phoneNumber }}</p>
+                <p class="text-dark">Solicitud: {{ $request->request_info }}</p>
+                <p class="text-primary">Fecha y Hora de Creación: {{ $request->created_at }}</p>
+                <a href="{{ route('admin.requestdetails', ['id' => $request->id]) }}" class="btn btn-primary">Ver más</a>
+            </div>
+            <div class="card-footer text-muted">
+                {{ $request->created_at->diffForHumans() }}
             </div>
         </div>
     </div>
