@@ -1,19 +1,26 @@
 @extends('adminlte::page')
 
-@section('title', 'AbleCareers - Vista de Resumes')
+@section('title', 'Vista de Resumes')
 
 @section('content_header')
-    <p class="h2"> Vista de Resumes</p>
+    <p class="h2"> Control de Resumes</p>
 @stop
 
 @section('content')
-<a href="{{ route('resume.create')}}" class="btn btn-outline-success">Crear</a>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<a href="{{ route('resume.create')}}" class="btn btn-success">
+    <i class="fa-solid fa-square-plus"></i>
+    &nbsp;Crear
+</a>
+
 <div class="table-responsive mt-3">
     <table id="resumes-table" class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>Información</th>
-                <th>Educación</th>
+                <th class="col-md-5">Información</th>
+                <th class="col-md-3">Educación</th>
                 <th>Foto</th>
                 <th>Acciones</th>
             </tr>
@@ -21,13 +28,19 @@
         <tbody>
             @foreach ($resumes as $resume)
             <tr>
-                <td>{{ $resume->info }}</td>
+                <td>{{ \Illuminate\Support\Str::limit($resume->info, 150, $end='...') }}</td>
                 <td>{{ $resume->education }}</td>
                 <td><img src="{{ asset("/$resume->photo") }}" alt="Foto del resumen" style="max-width: 100px; max-height: 100px;">
                 </td>
                 <td>
-                    <a href="{{ route('resume.edit', ['id' => $resume->id]) }}" class="btn btn-outline-primary">Editar</a>
-                    <a href="{{ route('resume.pdf', ['id' => $resume->id]) }}" class="btn btn-outline-info">Ver</a>
+                    <a href="{{ route('resume.edit', ['id' => $resume->id]) }}" class="btn btn-primary gy-2"> 
+                        <i class="fa-solid fa-file-pen"></i>
+                        &nbsp;Editar
+                    </a>
+                    <a href="{{ route('resume.pdf', ['id' => $resume->id]) }}" class="btn btn-info">
+                        <i class="fa-brands fa-readme"></i>
+                        &nbsp;Ver
+                    </a>
                 </td>
             </tr>
             @endforeach

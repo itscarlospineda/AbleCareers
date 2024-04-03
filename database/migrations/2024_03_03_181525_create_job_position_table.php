@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('job_position', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('description', 255);
+            $table->text('description');
             $table->dateTime('post_date')->default(now());
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('company');

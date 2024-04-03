@@ -84,10 +84,16 @@ class CompanyController extends Controller
     {
         $user = Auth::user();
         $company = Company::all()
-        ->where('user_id',$user->id)
-        ->first();
+            ->where('user_id', $user->id)
+            ->first();
 
         return view('ceo.companyedit', compact('company'));
+    }
+
+    public function adminCompanyEdit($id)
+    {
+        $company = Company::findOrFail($id);
+        return view('admin.admin-editCompany', compact('company'));
     }
 
     /**
@@ -101,20 +107,31 @@ class CompanyController extends Controller
         $action = $request->input('action');
         $company = Company::findOrFail($id);
         if ($action == 'update') {
-            $company->comp_name = $request->comp_name;
-            $company->comp_mail = $request->comp_mail;
-            $company->comp_phone = $request->comp_phone;
-            $company->comp_city = $request->comp_city;
-            $company->comp_depart = $request->comp_depart;
-            $company->comp_depart = $request->comp_depart;
-            $company->user_id = $request->user_id;
+            $company->comp_name = $request->name;
+            $company->comp_mail = $request->email;
+            $company->comp_phone = $request->phone;
+            $company->comp_city = $request->city;
+            $company->comp_depart = $request->depart;
             $company->save();
-            return redirect()->route('company.index')->with('flash_message', 'Compañia actualizado exitosamente');
+            return redirect()->route('admin.company.index')->with('success', 'Compañia actualizado exitosamente');
         }
         if ($action == 'destroy') {
             $company->is_active = 'INACTIVE';
             $company->save();
-            return redirect()->route('company.index')->with('flash_message', 'Compañia eliminada exitosamente');
+            $ceo = $company->user;
+            $ceo->is_active = 'INACTIVE';
+            $ceo->save();
+            $companyUsers = CompanyUser::where('comp_id', $company->id)->get();
+
+            foreach ($companyUsers as $companyUser) {
+                $companyUser->is_active = 'INACTIVE';
+                $companyUser->save();
+                $user = $companyUser->user;
+                $user->is_active = 'INACTIVE';
+                $user->save();
+            }
+
+            return redirect()->route('admin.company.index')->with('success', 'Compañia eliminada exitosamente');
         }
     }
 
@@ -206,8 +223,8 @@ class CompanyController extends Controller
     {
         $user = Auth::user();
         $company = Company::all()
-        ->where('user_id',$user->id)
-        ->first();
+            ->where('user_id', $user->id)
+            ->first();
         $company->comp_name = $request->name;
         $company->comp_mail = $request->email;
         $company->comp_phone = $request->phone;

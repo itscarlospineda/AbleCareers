@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\User;
 use App\Models\UserRequest;
 use Illuminate\Http\Request;
+use App\Models\user_has_role;
 
 class UserRequestController extends Controller
 {
@@ -12,11 +15,105 @@ class UserRequestController extends Controller
      * @param $userRequest arreglo de todos los UserRequest activos
      *
      */
-    public function index()
+    // public function index()
+    // {
+    //     $userRequest = UserRequest::where('is_active', 'ACTIVE')->get();
+    //     return view('', compact('userRequest'));
+    // }
+    public function index($status = null)
     {
-        $userRequest = UserRequest::where('is_active', 'ACTIVE')->get();
-        return view('admin.requestlist', compact('userRequest'));
+        if ($status === 'aplicando') {
+            $userRequest = UserRequest::where('request_status', 'aplicando')
+                ->with('user')
+                ->whereHas('user', function ($query) {
+                    $query->where('is_active', 'ACTIVE');
+                })
+                ->get();
+            return view('admin.aplicando', compact('userRequest', 'status'));
+        } elseif ($status === 'aprobado') {
+            $userRequest = UserRequest::where('request_status', 'aprobado')
+                ->with('user')
+                ->whereHas('user', function ($query) {
+                    $query->where('is_active', 'ACTIVE');
+                })
+                ->get();
+            return view('admin.aprobado', compact('userRequest', 'status'));
+        } elseif ($status === 'denegado') {
+            $userRequest = UserRequest::where('request_status', 'denegado')
+                ->with('user')
+                ->whereHas('user', function ($query) {
+                    $query->where('is_active', 'ACTIVE');
+                })
+                ->get();
+            return view('admin.denegado', compact('userRequest', 'status'));
+        } else {
+            $userRequest = UserRequest::with('user')
+                ->whereHas('user', function ($query) {
+                    $query->where('is_active', 'ACTIVE');
+                })
+                ->get();
+            return view('admin.requestlist', compact('userRequest'));
+        }
     }
+
+    public function requestDetails($id)
+    {
+        $request = UserRequest::findOrFail($id);
+        // Aquí puedes agregar cualquier lógica adicional, como cargar relaciones o realizar operaciones en la solicitud
+        return view('admin.requestdetails', compact('request'));
+    }
+
+
+
+
+    public function accept(Request $request, $id)
+    {
+        // Buscar la solicitud por su ID
+        $userRequest = UserRequest::findOrFail($id);
+
+        // Cambiar el estado de la solicitud a 'aprobado'
+        $userRequest->request_status = 'aprobado';
+        $userRequest->save();
+
+        // Cambiar el rol del usuario que creó la solicitud a CEO
+        $user = User::findOrFail($userRequest->user_id);
+        $userHasRoleController = new userhasroleController(); // Crear una instancia del controlador
+        $userHasRoleController->createOrUpdateCEO(['user_id' => $user->id]); // Llamar al método de instancia
+
+        // Crear la compañía
+        $company = new Company();
+        $company->user_id = $user->id;
+        $company->comp_name = $request->comp_name ?: 'Nueva Compañía'; // Establecer un nombre predeterminado si no se proporciona
+        $company->comp_mail = $request->comp_mail ?: '-@mail'; // Establecer un correo predeterminado si no se proporciona
+        $company->comp_phone = $request->comp_phone ?: '-'; // Establecer un teléfono predeterminado si no se proporciona
+        $company->comp_city = $request->comp_city ?: '-'; // Establecer una ciudad predeterminada si no se proporciona
+        $company->comp_depart = $request->comp_depart ?: '-'; // Establecer un departamento predeterminado si no se proporciona
+        $company->save();
+
+        // Redirigir de vuelta a la página de detalles de la solicitud
+        return redirect()->route('admin.requestdetails', ['id' => $id])->with('success', 'Solicitud aceptada exitosamente.');
+    }
+
+
+
+
+    public function deny($id)
+    {
+        // Encuentra la solicitud por su ID
+        $request = UserRequest::findOrFail($id);
+
+        // Cambia el estado de la solicitud a "denegado"
+        $request->update(['request_status' => 'denegado']);
+
+        // Aquí puedes agregar la lógica para cambiar el rol del usuario, si es necesario
+
+        // Redirecciona a donde desees después de denegar la solicitud
+        return redirect()->back()->with('status', 'La solicitud ha sido denegada exitosamente.');
+    }
+
+
+
+
 
     /**
      * Redirecciona a la vista de creacion de UserRequest
@@ -71,12 +168,12 @@ class UserRequestController extends Controller
             $userRequest->request_info = $request->request_info;
             $userRequest->request_status = $request->request_status;
             $userRequest->save();
-            return redirect()->route('userRequest.index')->with('flash_message','UserRequest actualizado exitosamente');
+            return redirect()->route('userRequest.index')->with('flash_message', 'UserRequest actualizado exitosamente');
         }
         if ($action == 'destroy') {
             $userRequest->is_active = 'INACTIVE';
             $userRequest->save();
-            return redirect()->route('userRequest.index')->with('flash_message','UserRequest eliminado exitosamente');
+            return redirect()->route('userRequest.index')->with('flash_message', 'UserRequest eliminado exitosamente');
         }
     }
 
@@ -99,7 +196,31 @@ class UserRequestController extends Controller
         // Guardar el nuevo request en la base de datos
         $userRequest->save();
 
-     // Redireccionar a la página de inicio del postulante u otra página según sea necesario
+        // Redireccionar a la página de inicio del postulante u otra página según sea necesario
         return redirect()->route('postulant.postulanthome')->with('success', 'Request creado exitosamente.');
+    }
+    public function editrequest(Request $request)
+    {
+        // Obtener la solicitud asociada al usuario autenticado
+        $userRequest = UserRequest::where('user_id', auth()->id())->first();
+
+        // Si no se encuentra la solicitud, devolver un error 404
+        if (!$userRequest) {
+            abort(404);
+        }
+
+        // Validación de los datos recibidos del formulario
+        $validatedData = $request->validate([
+            'info' => 'required|string|max:255',
+        ]);
+
+        // Actualizar los detalles de la solicitud
+        $userRequest->request_info = $validatedData['info'];
+
+        // Guardar los cambios
+        $userRequest->save();
+
+        // Redireccionar a la página de inicio del postulante u otra página según sea necesario
+        return redirect()->route('postulant.postulanthome')->with('success', 'Request editado exitosamente.');
     }
 }

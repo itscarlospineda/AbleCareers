@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('adminlte::page')
 
 @section('content')
 <head>
@@ -10,7 +10,7 @@
     <section class="py-4">
 
       <div class="col py-4">
-                <h1>Creacion de categorias</h1> <br>
+                <h1>Creación de categorias</h1> <br>
             </div>
 
             <div class="col">
@@ -24,8 +24,13 @@
                             <input type="text" class="form-control" name="name">
                         </div>
                         <button type="submit" class="btn btn-success">
-                            <i class="bi bi-floppy"></i>&nbsp;Guardar
+                            <i class="fa fa-floppy-disk"></i>&nbsp;Guardar
                         </button>
+                        <a href="{{ route('admin.category.index') }}" class="btn btn-secondary">
+                            <i class="fa-solid fa-xmark"></i>
+                            &nbsp;
+                            Cancelar
+                        </a>
 
                     </form>
                 </div>

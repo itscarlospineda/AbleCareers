@@ -1,70 +1,78 @@
-@extends('layouts.admin')
+@php
+    use App\Models\UserRequest;
+@endphp
+
+@extends('adminlte::page')
+
+@section('title', 'Lista de Solicitudes de Usuarios')
 
 @section('content')
-<head>
-
-    <link rel="stylesheet" href="//cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
-</head>
-
-<div class="col">
-    <section class="py-4">
-
+    <div class="col-md-12 mt-2" style="padding-top: 20px; padding-left: 30px;">
         <div class="col">
-                <h1>Solicitudes de Empresas</h1> <br>
+            <p class="h2">Solicitudes de Usuarios</p>
+            <p class="h5">Aquí se muestran las solicitudes de los usuarios.</p>
         </div>
 
-      <div class="container">
+        <!-- Pestañas de filtro -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link{{ !isset($status) ? ' active' : '' }}" href="{{ route('userRequest.index') }}">
+                    <i class="fa-regular fa-newspaper"></i>
+                    &nbsp;
+                    Todos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{{ isset($status) && $status === 'aplicando' ? ' active' : '' }}"
+                    href="{{ route('userRequest.index', ['status' => 'aplicando']) }}">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    &nbsp;
+                    Aplicando
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{{ isset($status) && $status === 'aprobado' ? ' active' : '' }}"
+                    href="{{ route('userRequest.index', ['status' => 'aprobado']) }}">
+                    <i class="fa-solid fa-check-to-slot"></i>
+                    &nbsp;
+                    Aceptados
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{{ isset($status) && $status === 'denegado' ? ' active' : '' }}"
+                    href="{{ route('userRequest.index', ['status' => 'denegado']) }}">
+                    <i class="fa-solid fa-square-xmark"></i>
+                    &nbsp;
+                    Denegados
+                </a>
+            </li>
+        </ul>
 
-          <div class="card border-dark" >
-            <!--<div class="card-header"><h5 class="card-title">Solicitudes de Empresa</h5></div>
-
-              <div class="container mt-3">
-                    <a class="btn btn-success col-auto" href="/createcategories">
-                        <i class="bi bi-journal-arrow-up"></i>&nbsp;Crear Nuevo</a>
-              </div>-->
-
-              <div class="card-body">
-                <div class="table-responsive">
-                <table class="table table-striped table-hover" id="example" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Información</th>
-                            <th scope="col">Estatus</th>
-                            <th scope="col">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach ($userRequests as $user_request)
-                        <tr>
-                            <td class="fw-bold">{{ $user_request->id}}</td>
-                            <td>{{ $user_request->info}}</td>
-                            <td>{{ $user_request->status}}</td>
-                            <td>
-                                <a href="#" class="btn btn-success">
-                                    <i class="bi bi-floppy"></i>&nbsp;Aceptar
-                                </a> <!-- Post para cambiar tipo de user?-->
-
-                                <a href="#" class="btn btn-danger">
-                                    <i class="bi bi-x-circle"></i>&nbsp;Cancelar
-                                </a> <!-- Eliminar?-->
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
+        <!-- Aquí va el código para mostrar las solicitudes de acuerdo al estado seleccionado -->
+        @foreach ($userRequest->sortByDesc('created_at') as $request)
+            <div class="col" style="padding-top: 20px;">
+                <div class="card text-center">
+                    <div
+                        class="card-header{{ strtolower($request->request_status) === 'aprobado' ? ' bg-success' : (strtolower($request->request_status) === 'denegado' ? ' bg-danger' : (strtolower($request->request_status) === 'aplicando' ? ' bg-primary' : '')) }}">
+                        {{ strtoupper($request->request_status) }}
+                    </div>
+                    <div class="card-body">
+                        <p class="h5">Nombre: {{ $request->user->name }} {{ $request->user->lastName }}</p>
+                        <p class="text-dark">Correo: {{ $request->user->email }}</p>
+                        <p class="text-info">Teléfono: {{ $request->user->phoneNumber }}</p>
+                        <p class="text-dark">Solicitud: {{ $request->request_info }}</p>
+                        <p class="text-primary">Fecha y Hora de Creación: {{ $request->created_at }}</p>
+                        <a href="{{ route('admin.requestdetails', ['id' => $request->id]) }}" class="btn btn-primary">
+                            <i class="fa-solid fa-square-plus"></i>
+                            &nbsp;
+                            Ver más
+                        </a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ $request->created_at->diffForHumans() }}
+                    </div>
                 </div>
-              </div>
-
-          </div>
-      </div>
-    </section>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
-  <script>let table = new DataTable('#example');</script>
-
+            </div>
+        @endforeach
+    </div>
 @endsection

@@ -25,15 +25,16 @@ class userhasroleController extends Controller
         // Verificar si se encontró un registro existente
         if ($existingRecord) {
             // Borrar el registro existente
-            $existingRecord->delete();
+        $existingRecord->delete();
         }
 
         // Crear un nuevo registro con el rol de CEO
         return user_has_role::create([
             'user_id' => $data['user_id'],
-            '   role_id' => 4, // ID del rol de CEO
+            'role_id' => 4, // ID del rol de CEO
         ]);
     }
+
     public function createOrUpdateManager(array $data)
     {
         // Buscar si el usuario ya tiene asignado el rol de Manager (ID 3)

@@ -4,6 +4,7 @@ use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserRequestController;
 
 /*
@@ -30,6 +31,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role.redirect');
 Route::middleware('role.redirect:superUsuario,postulante')->get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('home.landing');
-});
+Route::get('/', [\App\Http\Controllers\Controller::class, 'showLanding'])->name('landing');
+Route::get('/old', [\App\Http\Controllers\Controller::class, 'showOld'])->name('landingold');

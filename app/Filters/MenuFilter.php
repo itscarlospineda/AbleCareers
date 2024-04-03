@@ -78,6 +78,13 @@ class MenuFilter
                 'label' => 4,
                 'label_color' => 'success',
             ],
+            [
+                'text' => 'Editar Perfil',
+                'url' => '/postulant/profile/edit/',
+                'icon' => 'fa-solid fa-user-gear',
+                'label_color' => 'success',
+            ],
+
 
         ];
 
@@ -110,7 +117,7 @@ class MenuFilter
                 'icon' => 'fa-solid fa-square-plus',
                 'label_color' => 'success',
             ],
-        
+
             [
                 'text' => 'Postulantes',
                 'url' => 'recruiter/jobPosition/postulantes',
@@ -266,31 +273,31 @@ class MenuFilter
             ],
             [
                 'text' => 'Administrar Compañias',
-                'url' => '',
+                'url' => '/admin/company',
                 'icon' => 'fa-solid fa-toolbox',
                 'label_color' => 'success',
             ],
             [
                 'text' => 'Solicitudes',
-                'url' => '',
+                'url' => '/admin/userRequest',
                 'icon' => 'fa-solid fa-bullhorn',
                 'label_color' => 'success',
             ],
             [
                 'text' => 'Administrar Categorias',
-                'url' => '',
+                'url' => '/admin/category',
                 'icon' => 'fa-solid fa-icons',
                 'label_color' => 'success',
             ],
             [
                 'text' => 'Ver todos los Posts',
-                'url' => '',
+                'url' => '/admin/browse/posts',
                 'icon' => 'fa-solid fa-signs-post',
                 'label_color' => 'success',
             ],
             [
                 'text' => 'Editar Perfil',
-                'url' => '',
+                'url' => '/admin/profile/edit',
                 'icon' => 'fa-solid fa-address-card',
                 'label_color' => 'success',
             ],
