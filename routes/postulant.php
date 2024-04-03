@@ -9,6 +9,7 @@
 
  use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\JopoResumeController;
+use App\Http\Controllers\NotificationsController;
 use Illuminate\Support\Facades\Route;
  use Illuminate\Support\Facades\Auth;
  use App\Http\Controllers\UserController;
@@ -91,3 +92,12 @@ Route::get('/browse/posts/{id}', [App\Http\Controllers\JobPositionController::cl
 |
 */
 Route::post('/jobpositions/apply', [JopoResumeController::class, 'apply'])->name('jobpositions.apply');
+/*
+|--------------------------------------------------------------------------
+| NotificationController ROUTES
+|--------------------------------------------------------------------------
+| 
+|
+*/
+
+Route::get('/notificacion',[NotificationsController::class, 'getPostulanteNotifications'])->name('postulant.getPostulanteNotifications');
