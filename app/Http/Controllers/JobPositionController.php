@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\CompanyUser;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Models\Resume;
 use App\Models\User;
 use App\Models\JopoResume;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class JobPositionController extends Controller
@@ -232,9 +234,6 @@ class JobPositionController extends Controller
     {
         $userActive = Auth::user();
         $recruiter = User::findOrFail($userActive->id);
-
-
-
         return view('job-position.editProjobposition', compact('recruiter'));
     }
 
@@ -285,6 +284,25 @@ class JobPositionController extends Controller
         toastr()->success('Credenciales actualizadas exitosamente', 'Editar Perfil');
         return redirect()->back();
     }
+
+    public function getPostulantesXPuestosXCategoria()
+    {
+        $categories = Category::all();
+
+        $results = DB::table('job_position')
+            ->join('jopo_category', 'Job_Position.id', '=', 'jopo_category.job_position_id')
+            ->join('jopo_resume','Job_Position.id','=','jopo_resume.job_position_id')
+            ->join('category','jopo_category.category_id','=','category.id')
+            ->groupBy('category')
+            ->select(DB::raw('count(*) as amount, category.name as category'))
+            ->get();
+
+            //ver en consola
+           // dd($results);
+            return ($results);
+
+
+        }
 
 
 
