@@ -33,6 +33,16 @@ class JobPositionController extends Controller
         return view('job-position.indexjobposition', compact('jobPositions'));
     }
 
+    public function recruiterIndex()
+    {
+        $user = Auth::user();
+        $recruiter = User::findOrFail($user->id);
+        $recruiterCompany = $recruiter->companyUser;
+        $jobPositions = Job_Position::where('is_active', 'ACTIVE')
+            ->where('company_id', $recruiterCompany->comp_id)->get();
+        return view('job-position.indexjobposition', compact('jobPositions'));
+    }
+
     public function list(Request $request)
     {
         $jobPosition = Job_Position::where('is_active', 'ACTIVE')->paginate(10);
@@ -60,11 +70,13 @@ class JobPositionController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $recruiter = User::findOrFail($user->id);
+        $recruiterCompany = $recruiter->companyUser;
         $request->validate(
             [
                 'jobpo_name' => 'required|string|min:5',
-                'jobpo_desc' => 'required|string|min:5',
-                'jobpo_company' => 'required|string'
+                'jobpo_desc' => 'required|string|min:5'
 
             ]
         );
@@ -72,7 +84,7 @@ class JobPositionController extends Controller
         $jobpo = new Job_Position;
         $jobpo->name = $request->jobpo_name;
         $jobpo->description = $request->jobpo_desc;
-        $jobpo->company_id = $request->jobpo_company;
+        $jobpo->company_id = $recruiterCompany->comp_id;
         $jobpo->save();
 
         toastr()->success('Creado exitosamente', 'Exito');
@@ -222,7 +234,6 @@ class JobPositionController extends Controller
     {
         $userActive = Auth::user();
         $recruiter = User::findOrFail($userActive->id);
-
         return view('job-position.editProjobposition', compact('recruiter'));
     }
 
@@ -232,7 +243,7 @@ class JobPositionController extends Controller
         $recruiter = User::findOrFail($user->id);
 
 
-    /* Validacion que el campo clave anterior no este vacio */
+        /* Validacion que el campo clave anterior no este vacio */
         if ($request->oldPassword == '') {
             if ($request->newPassword != '' || $request->confirmNewPassword != '') {
                 toastr()->error('Favor coloque su contraseña actual si desea realizar cambios', 'Error en clave');
@@ -274,7 +285,6 @@ class JobPositionController extends Controller
         return redirect()->back();
     }
 
-
     public function getPostulantesXPuestosXCategoria()
     {
         $categories = Category::all();
@@ -293,6 +303,7 @@ class JobPositionController extends Controller
 
 
         }
+
 
 
 }
