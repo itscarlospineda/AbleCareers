@@ -23,7 +23,7 @@
 	@vite(['resources/Pillar-BS5-v3.0/assets/css/pillar-3.css', 'resources/Pillar-BS5-v3.0/assets/fontawesome/js/all.min.js'])
 
 
-</head> 
+</head> .
 
 <body>	
 	@foreach ($resumes as $resume)
