@@ -19,6 +19,10 @@ Route::get('/home', [App\Http\Controllers\CompanyUserController::class, 'manager
 Route::get('/employees', [App\Http\Controllers\CompanyUserController::class, 'index'])->name('manager.showEmployees');
 Route::get('/compusrcreate', [App\Http\Controllers\CompanyUserController::class, 'create'])->name('manager.reclutador.create');
 
+//-----CREAR POSTS
+Route::get('/jobPosition/create', [App\Http\Controllers\JobPositionController::class, 'create'])->name('managerJobPosition.create');
+Route::post('/jobPosition', [App\Http\Controllers\JobPositionController::class, 'managerStore'])->name('managerJobPosition.store');
+
 //-----EDITAR RECLUTADOR
 Route::get('/employee/edit/{id}', [App\Http\Controllers\CompanyUserController::class, 'edit'])->name('manager.employee.edit');
 Route::put('/employee/{id}', [App\Http\Controllers\CompanyUserController::class, 'update_or_destroy'])->name('manager.employee.update_or_destroy');

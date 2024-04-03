@@ -63,6 +63,16 @@ class JobPositionController extends Controller
         return view('job-position.createjobposition', compact('companies', 'companyName'));
     }
 
+    public function ceoCreate()
+    {
+        $companies = Company::all(); //Se obtiene la data de Compañia la cual se usara para el DropDownList
+
+        $activeUser = Auth::user();  //Usuario Logeado
+        $user = User::findOrFail($activeUser->id); //Busca el usuario activo
+        $companyName = $user->company->comp_name;  //Captura el nombre de la compañia relacionada al usuario activo
+        return view('ceo.ceo-createPost',compact('companies', 'companyName'));
+    }
+
     /**
      * Almacena una JobPosition en la base de datos
      * @param $request arreglo de los parametros que se pasaran mediante el html
@@ -90,6 +100,53 @@ class JobPositionController extends Controller
         toastr()->success('Creado exitosamente', 'Exito');
         return redirect()->route('jobPosition.index');
     }
+
+    public function managerStore(Request $request)
+    {
+        $user = Auth::user();
+        $recruiter = User::findOrFail($user->id);
+        $recruiterCompany = $recruiter->companyUser;
+        $request->validate(
+            [
+                'jobpo_name' => 'required|string|min:5',
+                'jobpo_desc' => 'required|string|min:5'
+
+            ]
+        );
+
+        $jobpo = new Job_Position;
+        $jobpo->name = $request->jobpo_name;
+        $jobpo->description = $request->jobpo_desc;
+        $jobpo->company_id = $recruiterCompany->comp_id;
+        $jobpo->save();
+
+        toastr()->success('Creado exitosamente', 'Exito');
+        return redirect()->route('manager.managerhome');
+    }
+
+    public function ceoStore(Request $request)
+    {
+        $user = Auth::user();
+        $recruiter = User::findOrFail($user->id);
+        $recruiterCompany = $recruiter->company;
+        $request->validate(
+            [
+                'jobpo_name' => 'required|string|min:5',
+                'jobpo_desc' => 'required|string|min:5'
+
+            ]
+        );
+
+        $jobpo = new Job_Position;
+        $jobpo->name = $request->jobpo_name;
+        $jobpo->description = $request->jobpo_desc;
+        $jobpo->company_id = $recruiterCompany->id;
+        $jobpo->save();
+
+        toastr()->success('Creado exitosamente', 'Exito');
+        return redirect()->route('ceo.ceohome');
+    }
+
 
     /**
      * Redirecciona a la vista de editar JobPosition
@@ -291,18 +348,18 @@ class JobPositionController extends Controller
 
         $results = DB::table('job_position')
             ->join('jopo_category', 'Job_Position.id', '=', 'jopo_category.job_position_id')
-            ->join('jopo_resume','Job_Position.id','=','jopo_resume.job_position_id')
-            ->join('category','jopo_category.category_id','=','category.id')
+            ->join('jopo_resume', 'Job_Position.id', '=', 'jopo_resume.job_position_id')
+            ->join('category', 'jopo_category.category_id', '=', 'category.id')
             ->groupBy('category')
             ->select(DB::raw('count(*) as amount, category.name as category'))
             ->get();
 
-            //ver en consola
-           // dd($results);
-            return ($results);
+        //ver en consola
+        // dd($results);
+        return ($results);
 
 
-        }
+    }
 
 
 

@@ -37,6 +37,9 @@ Route::get('/postcreate', function () {
 })->name('ceo.postcreate');
 
 
+//-----CREAR POSTS
+Route::get('/jobPosition/create', [App\Http\Controllers\JobPositionController::class, 'ceoCreate'])->name('ceoJobPosition.create');
+Route::post('/jobPosition', [App\Http\Controllers\JobPositionController::class, 'ceoStore'])->name('ceoJobPosition.store');
 
 //-----VISTA DE POSTS
 Route::get('/postlist', [App\Http\Controllers\JobPositionController::class, 'ceoShowPost'])->name('ceo.postlist.showpost');
