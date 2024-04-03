@@ -5,10 +5,7 @@
 
 @section('content')
 
-    <head>
-
-    </head>
-    <div class="container  mt-5 pt-5">
+    <div class="container  mt-5 pt-5 ">
         <div class="row gy-3">
             <div class="col-md-6">
                 <center>
@@ -17,9 +14,9 @@
                 </center>
             </div>
             <div class="col-md-6">
-                <br><br><br>
+                <br><br>
                 <p class="display-4">Encuentra el trabajo que deseas en AbleCareers</p>
-                <p class="h4">¡El éxito no tiene etiquetas!</p>
+                <p class="h3">¡El éxito no tiene etiquetas!</p>
             </div>
         </div>
     </div>
@@ -80,13 +77,13 @@
     <div class="container offers">
         <div class="card mb-3 mt-5" style="max-width: 100%;">
             <div class="row g-0">
-                <div class="col-2 col-md-3">
+                <div class="pt-4 ms-4 col-md-3">
                     <img src="{{ asset('images/company_request.png') }}" class="card-img img-fluid rounded-start"
                         alt="company_request.png">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <p class="card-text  display-4">¿Eres dueño o administrador de una empresa?</p>
+                        <p class="card-text display-4">¿Eres dueño o administrador de una empresa?</p>
                         <p class="card-text h5">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores
                             beneficios.
                         </p> <br>

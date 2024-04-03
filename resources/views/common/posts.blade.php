@@ -16,12 +16,12 @@
 <div class="card">
     <div class="card-body">
         @foreach ($jobPositions as $jobPos)
-    <div class="col" style="padding-top: 20px;">
-        <div class="card border-dark">
+    <div class="col border-dark " style="padding-top: 20px;">
+        <div class="card ">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-2">
-                        <img src="/data_analysis.jpg" alt="" srcset="" height="100px" width="155px">
+                        <img src="" alt="" srcset="" height="100px" width="155px">
                     </div>
                     <div class="col-md-7">
                         <p class="h5">{{ $jobPos->name }}</p>
