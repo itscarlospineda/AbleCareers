@@ -169,7 +169,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Crear Post',
-                'url' => '',
+                'url' => '/manager/jobPosition/create',
                 'icon' => 'fa-solid fa-square-plus',
                 'label_color' => 'success',
             ],
@@ -217,7 +217,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Crear Post',
-                'url' => '',
+                'url' => '/ceo/jobPosition/create',
                 'icon' => 'fa-solid fa-square-plus',
                 'label_color' => 'success',
             ],

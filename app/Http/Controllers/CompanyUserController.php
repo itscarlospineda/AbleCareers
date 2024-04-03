@@ -85,11 +85,10 @@ class CompanyUserController extends Controller
             ->get();
         $employeesCount = $activeCompanyUsers->count();
         $existingPosts = Job_Position::all()
-            ->where('company_id', $userCompany->id)
+            ->where('company_id', $userCompany->comp_id)
             ->where('is_active', 'ACTIVE');
 
         $postsCount = $existingPosts->count();
-
         $user = $userCompanyAsUser;
 
 
