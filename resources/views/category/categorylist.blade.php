@@ -10,7 +10,7 @@
     <section class="py-4">
 
         <div class="col">
-                <h1>Administracion de Categorias</h1> <br>
+                <h1>Administración de Categorias</h1> <br>
         </div>
 
       <div class="container">

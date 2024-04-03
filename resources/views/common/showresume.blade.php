@@ -1,14 +1,15 @@
+@extends('adminlte::page')
+
+@section('title', 'Ver Resume')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title>Resume</title>
-    
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Responsive Resume Template">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
     <link rel="shortcut icon" href="favicon.ico"> 
     
     <!-- Google Font -->
@@ -19,7 +20,7 @@
        
     <!-- Theme CSS -->  
     <!--<link id="theme-style" rel="stylesheet" href="">-->
-	@vite(['resources/Pillar-BS5-v3.0/assets/css/pillar-1.css', 'resources/Pillar-BS5-v3.0/assets/fontawesome/js/all.min.js'])
+	@vite(['resources/Pillar-BS5-v3.0/assets/css/pillar-3.css', 'resources/Pillar-BS5-v3.0/assets/fontawesome/js/all.min.js'])
 
 
 </head> 
@@ -31,7 +32,8 @@
 		    <header class="resume-header pt-4 pt-md-0">
 			    <div class="row">
 				    <div class="col-block col-md-auto resume-picture-holder text-center text-md-start">
-				        <img class="picture" src="assets/images/profile.jpg" alt="">
+
+				        <!--<img class="picture" src="assets/images/profile.jpg" alt="">-->
 				    </div><!--//col-->
 				    <div class="col">
 					    <div class="row p-4 justify-content-center justify-content-md-between">
@@ -43,14 +45,14 @@
 								    <li><a class="text-link" href="#"><i class="fas fa-mobile-alt fa-fw me-2" data-fa-transform="grow-6"></i>{{$resume->user->phoneNumber}}</a></li>
 							    </ul>
 						    </div><!--//primary-info-->
-						    <div class="secondary-info col-auto mt-2">
+						    <!--<div class="secondary-info col-auto mt-2">
 							    <ul class="resume-social list-unstyled">
 					                <li class="mb-3"><a class="text-link" href="#"><span class="fa-container text-center me-2"><i class="fab fa-linkedin-in fa-fw"></i></span>linkedin.com/in/stevedoe</a></li>
 					                <li class="mb-3"><a class="text-link" href="#"><span class="fa-container text-center me-2"><i class="fab fa-github-alt fa-fw"></i></span>github.com/username</a></li>
 					                <li class="mb-3"><a class="text-link" href="#"><span class="fa-container text-center me-2"><i class="fab fa-codepen fa-fw"></i></span>codepen.io/username/</a></li>
 					                <li><a class="text-link" href="{{route('resume.index')}}"><span class="fa-container text-center me-2"><i class="fas fa-globe"></i></span>CV generado por AbleCareers</a></li>
 							    </ul>
-						    </div><!--//secondary-info-->
+						    </div>--><!--//secondary-info-->
 					    </div><!--//row-->
 					    
 				    </div><!--//col-->
@@ -74,14 +76,13 @@
 									    
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
-										        <h3 class="resume-position-title font-weight-bold mb-1">Lead Developer</h3>
-										        <div class="resume-company-name ms-auto">Startup Hub</div>
+										        <h3 class="resume-position-title font-weight-bold mb-1">{{$resume->work_experience}}</h3>
+										        <!--<div class="resume-company-name ms-auto">Startup Hub</div>-->
 										    </div><!--//row-->
-										    <div class="resume-position-time">2023 - Present</div>
+										    <div class="resume-position-time">{{$resume->work_years}}</div>
 									    </div><!--//resume-timeline-item-header-->
 									    <div class="resume-timeline-item-desc">
-										    <p>{{$resume->work_experience
-											}}</p>
+										    <p>{{$resume->work_pos}}</p>
 										    <!--<h4 class="resume-timeline-item-desc-heading font-weight-bold">Achievements:</h4>
 										    <p>Praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
 										    <ul>
@@ -90,7 +91,7 @@
 											    <li>Blanditiis praesentium voluptatum deleniti atque corrupti.</li>
 											    <li>Maecenas tempus tellus eget.</li>
 										    </ul>-->
-										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
+										    <!--<h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
 										    <ul class="list-inline">
 											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Angular</span></li>
 											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Python</span></li>
@@ -99,7 +100,7 @@
 											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">HTML/SASS</span></li>
 											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">PostgresSQL</span></li>
 										    </ul>
-									    </div><!--//resume-timeline-item-desc-->
+									    </div>--><!--//resume-timeline-item-desc-->
 
 								    </article><!--//resume-timeline-item-->
 								    
@@ -107,14 +108,14 @@
 									    
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
-										        <h3 class="resume-position-title font-weight-bold mb-1">Senior Software Developer</h3>
-										        <div class="resume-company-name ms-auto">Google</div>
+										        <h3 class="resume-position-title font-weight-bold mb-1">{{$resume->work_two_experience}}</h3>
+										        <!--<div class="resume-company-name ms-auto">Google</div>-->
 										    </div><!--//row-->
-										    <div class="resume-position-time">2019 - 2023</div>
+										    <div class="resume-position-time">{{$resume->work_two_years}}</div>
 									    </div><!--//resume-timeline-item-header-->
 									    <div class="resume-timeline-item-desc">
-										    <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Donec pede justo, fringilla vel.</p>
-										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Achievements</h4>
+										    <p>{{$resume->work_two_pos}}</p>
+										    <!--<h4 class="resume-timeline-item-desc-heading font-weight-bold">Achievements</h4>
 										    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
 										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
 										    <ul class="list-inline">
@@ -125,7 +126,51 @@
 											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">HTML/SASS</span></li>
 											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">MySQL</span></li>
 										    </ul>
-									    </div><!--//resume-timeline-item-desc-->
+									    </div>--><!--//resume-timeline-item-desc-->
+
+								    </article><!--//resume-timeline-item-->
+								    
+  
+							    </div><!--//resume-timeline-->
+							    
+							    
+
+						    </div>
+					    </section><!--//experience-section-->
+
+						<section class="resume-section experience-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">ESTUDIOS COMPLEMENTARIOS</h2>
+						    <div class="resume-section-content">
+							    <div class="resume-timeline position-relative">
+								    <article class="resume-timeline-item position-relative pb-5">
+									    
+									    <div class="resume-timeline-item-header mb-2">
+										    <div class="d-flex flex-column flex-md-row">
+										        <h3 class="resume-position-title font-weight-bold mb-1">{{$resume->education}}</h3>
+										        <!--<div class="resume-company-name ms-auto">Startup Hub</div>-->
+										    </div><!--//row-->
+										    <div class="resume-position-time">{{$resume->education_years}}</div>
+									    </div><!--//resume-timeline-item-header-->
+									    <div class="resume-timeline-item-desc">
+										    <p>{{$resume->education_pos}}</p>
+										    <!--<h4 class="resume-timeline-item-desc-heading font-weight-bold">Achievements:</h4>
+										    <p>Praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+										    <ul>
+											    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+											    <li>At vero eos et accusamus et iusto odio dignissimos.</li>
+											    <li>Blanditiis praesentium voluptatum deleniti atque corrupti.</li>
+											    <li>Maecenas tempus tellus eget.</li>
+										    </ul>-->
+										    <!--<h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
+										    <ul class="list-inline">
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Angular</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Python</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">jQuery</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Webpack</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">HTML/SASS</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">PostgresSQL</span></li>
+										    </ul>
+									    </div>--><!--//resume-timeline-item-desc-->
 
 								    </article><!--//resume-timeline-item-->
 								    
@@ -133,61 +178,37 @@
 									    
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
-										        <h3 class="resume-position-title font-weight-bold mb-1">Co-Founder & Lead Developer</h3>
-										        <div class="resume-company-name ms-auto">To-do Lists</div>
+										        <h3 class="resume-position-title font-weight-bold mb-1">{{$resume->education_two}}</h3>
+										        <!--<div class="resume-company-name ms-auto">Google</div>-->
 										    </div><!--//row-->
-										    <div class="resume-position-time">2015 - 2019</div>
+										    <div class="resume-position-time">{{$resume->education_two_years}}</div>
 									    </div><!--//resume-timeline-item-header-->
 									    <div class="resume-timeline-item-desc">
-										    <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.</p>
-										    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+										    <p>{{$resume->education_two_pos}}</p>
+										    <!--<h4 class="resume-timeline-item-desc-heading font-weight-bold">Achievements</h4>
+										    <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
 										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
 										    <ul class="list-inline">
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">React</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Redux</span></li>
 											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Django</span></li>
-											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">JavaScript</span></li>
-											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Node.js</span></li>
-											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Require.js</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Webpack</span></li>
 											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">HTML/SASS</span></li>
+											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">MySQL</span></li>
 										    </ul>
-									    </div><!--//resume-timeline-item-desc-->
-
-								    </article><!--//resume-timeline-item-->
-								    
-								    <article class="resume-timeline-item position-relative">
-									    
-									    <div class="resume-timeline-item-header mb-2">
-										    <div class="d-flex flex-column flex-md-row">
-										        <h3 class="resume-position-title font-weight-bold mb-1">Web Developer <small class="text-muted">(Intern)</small></h3>
-										        <div class="resume-company-name ms-auto">Amazon</div>
-										    </div><!--//row-->
-										    <div class="resume-position-time">2014 - 2015</div>
-									    </div><!--//resume-timeline-item-header-->
-									    <div class="resume-timeline-item-desc">
-										    <p>Role description goes here ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum.</p>
-										    <h4 class="resume-timeline-item-desc-heading font-weight-bold">Technologies used:</h4>
-										    <ul class="list-inline">
-											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">Ruby on Rails</span></li>
-											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">jQuery</span></li>
-											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">HTML/LESS</span></li>
-											    <li class="list-inline-item"><span class="badge bg-secondary badge-pill">MongoDB</span></li>
-										    </ul>
-									    </div><!--//resume-timeline-item-desc-->
+									    </div>--><!--//resume-timeline-item-desc-->
 
 								    </article><!--//resume-timeline-item-->
 								    
 								    
 							    </div><!--//resume-timeline-->
-							    
-							    
-							    
-							    
-							    
-							    
+
 						    </div>
-					    </section><!--//experience-section-->
+					    </section>
 				    </div>
+
 				    <div class="col-lg-3">
-					    <section class="resume-section skills-section mb-5">
+					    <!--<section class="resume-section skills-section mb-5">
 						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Skills &amp; Tools</h2>
 						    <div class="resume-section-content">
 						        <div class="resume-skill-item">
@@ -227,7 +248,7 @@
 							        </ul>
 						        </div><!--//resume-skill-item-->
 						        
-						        <div class="resume-skill-item">
+						        <!--<div class="resume-skill-item">
 						            <h4 class="resume-skills-cat font-weight-bold">Backend</h4>
 							        <ul class="list-unstyled">
 								        <li class="mb-2">
@@ -257,7 +278,7 @@
 							        </ul>
 						        </div><!--//resume-skill-item-->
 						        
-						        <div class="resume-skill-item">
+						        <!--<div class="resume-skill-item">
 						            <h4 class="resume-skills-cat font-weight-bold">Others</h4>
 						            <ul class="list-inline">
 							            <li class="list-inline-item"><span class="badge badge-light">DevOps</span></li>
@@ -271,43 +292,45 @@
 							            <li class="list-inline-item"><span class="badge badge-light">Shopify</span></li>
 						            </ul>
 						        </div><!--//resume-skill-item-->
-						    </div><!--resume-section-content-->
-					    </section><!--//skills-section-->
-					    <section class="resume-section education-section mb-5">
-						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Education</h2>
-						    <div class="resume-section-content">
-							    <ul class="list-unstyled">
-								    <li class="mb-2">
-								        <div class="resume-degree font-weight-bold">MSc in Computer Science</div>
-								        <div class="resume-degree-org">University College London</div>
-								        <div class="resume-degree-time">2013 - 2014</div>
-								    </li>
-								    <li>
-								        <div class="resume-degree font-weight-bold">BSc Maths and Physics</div>
-								        <div class="resume-degree-org">Imperial College London</div>
-								        <div class="resume-degree-time">2010 - 2013</div>
-								    </li>
-							    </ul>
-						    </div>
-					    </section><!--//education-section-->
-					    <section class="resume-section reference-section mb-5">
-						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Awards</h2>
+					<!--</div><!--resume-section-content-->
+					    <!--</section><!--//skills-section-->
+						<section class="resume-section reference-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Información Adicional</h2>
 						    <div class="resume-section-content">
 							    <ul class="list-unstyled resume-awards-list">
 								    <li class="mb-2 ps-4 position-relative">
 								        <i class="resume-award-icon fas fa-trophy position-absolute" data-fa-transform="shrink-2"></i>
-								        <div class="resume-award-name">Award Name Lorem</div>
-								        <div class="resume-award-desc">Award desc goes here, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo.</div>
+								        <div class="resume-award-name">{{$resume->extra}}</div>
+								        <!--<div class="resume-award-desc">{{$resume->extra}}</div>
 								    </li>
 								    <li class="mb-0 ps-4 position-relative">
 								        <i class="resume-award-icon fas fa-trophy position-absolute" data-fa-transform="shrink-2"></i>
 								        <div class="resume-award-name">Award Name Ipsum</div>
 								        <div class="resume-award-desc">Award desc goes here, ultricies nec, pellentesque.</div>
-								    </li>
+								    </li>-->
 							    </ul>
 						    </div>
 					    </section><!--//interests-section-->
-					    <section class="resume-section language-section mb-5">
+
+					    <section class="resume-section education-section mb-5">
+						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Referencias Personales</h2>
+						    <div class="resume-section-content">
+							    <ul class="list-unstyled">
+								    <li class="mb-2">
+								        <div class="resume-degree font-weight-bold">{{$resume->reference}}</div>
+								        <div class="resume-degree-org">{{$resume->reference_num}}</div>
+								        <!--<div class="resume-degree-time">2013 - 2014</div> --><br>
+								    </li>
+								    <li>
+								        <div class="resume-degree font-weight-bold">{{$resume->reference_two}}</div>
+								        <div class="resume-degree-org">{{$resume->reference_two_num}}</div>
+								        <!--<div class="resume-degree-time">2010 - 2013</div>-->
+								    </li>
+							    </ul>
+						    </div>
+					    </section><!--//education-section-->
+					    
+					    <!--<section class="resume-section language-section mb-5">
 						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Language</h2>
 						    <div class="resume-section-content">
 							    <ul class="list-unstyled resume-lang-list">
@@ -317,7 +340,7 @@
 							    </ul>
 						    </div>
 					    </section><!--//language-section-->
-					    <section class="resume-section interests-section mb-5">
+					    <!--<section class="resume-section interests-section mb-5">
 						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Interests</h2>
 						    <div class="resume-section-content">
 							    <ul class="list-unstyled">
@@ -338,3 +361,4 @@
 	@endforeach
 </body>
 </html> 
+@endsection

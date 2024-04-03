@@ -10,7 +10,7 @@
     <section class="py-4">
 
       <div class="col py-4">
-                <h1>Creacion de categorias</h1> <br>
+                <h1>Creación de categorias</h1> <br>
             </div>
 
             <div class="col">
