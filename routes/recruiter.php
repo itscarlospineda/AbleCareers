@@ -19,9 +19,8 @@
 |
 |
 */
-Route::get('/home', function () {
-    return view('home.recruiterhome');
-})->name('recruiter.recruiterhome');
+Route::get('/home', [App\Http\Controllers\CompanyUserController::class, 'recruiterIndex'])->name('recruiter.recruiterhome');
+
 
 Route::get('/jobPosition', [App\Http\Controllers\JobPositionController::class, 'recruiterIndex'])->name('jobPosition.index');
 Route::get('/jobPosition/create', [App\Http\Controllers\JobPositionController::class, 'create'])->name('jobPosition.create');

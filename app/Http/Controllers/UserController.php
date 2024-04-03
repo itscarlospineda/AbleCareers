@@ -18,9 +18,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::with('roles')->get();
+        $users = User::whereDoesntHave('roles', function ($query) {
+            $query->where('role.id', 5)->orWhere('role.role_name', 'superUsuario');
+        })->get();
+    
         return view('admin.userlist', compact('users'));
     }
+    
 
 
     public function postulantIndex()
@@ -77,10 +81,11 @@ class UserController extends Controller
 
     public function edit($user_id)
     {
-    $user = User::findOrFail($user_id);
-    $roles = Role::where('is_active', 'ACTIVE')->get();
-    return view('admin.admineditusers', compact('user', 'roles'));
+        $user = User::findOrFail($user_id);
+        $roles = Role::where('is_active', 'ACTIVE')->get();
+        return view('admin.admineditusers', compact('user', 'roles'));
     }
+    
 
     public function update(Request $request, $id)
     {
@@ -111,13 +116,16 @@ class UserController extends Controller
 
     public function destroy($user_id)
     {
-        // Encuentra y elimina el usuario
-        User::find($user_id)->delete();
+        // Encuentra y actualiza el estado del usuario a INACTIVE
+        $user = User::findOrFail($user_id);
+        $user->is_active = 'INACTIVE';
+        $user->save();
 
         // Redirige al usuario a la página de índice de usuarios con un mensaje de éxito
-        return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User deactivated successfully');
     }
+
 
     /*
      *

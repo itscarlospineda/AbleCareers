@@ -35,4 +35,5 @@ class Job_Position extends Model
     {
         return $this->jopoResumes()->where('resume_id', $userId)->exists();
     }
+    
 }

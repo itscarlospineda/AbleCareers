@@ -31,12 +31,14 @@ Route::get('/requests', [App\Http\Controllers\UserRequestController::class, 'ind
 
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('admin.users.index');
 Route::get('/users/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('admin.users.edit');
-Route::put('/users/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('admin.users.update');
+Route::put('/users/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('admin.users.update');
 
 
 Route::get('/hasroles', function () {
     return view('admin.hasroles');
 });
+
+Route::put('/users/manage/{id}', [App\Http\Controllers\ResumeController::class, 'destroy'])->name('admin.users.destroy');
 
 
 /*

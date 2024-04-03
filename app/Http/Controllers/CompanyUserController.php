@@ -95,6 +95,26 @@ class CompanyUserController extends Controller
         return view('home.managerhome', compact('employeesCount', 'postsCount', 'user'));
 
     }
+    public function recruiterIndex()
+    {
+        $currentUserCompany = Auth::user();
+        $userCompanyAsUser = User::findOrFail($currentUserCompany->id);
+        $userCompany = $userCompanyAsUser
+            ->companyUser()
+            ->where('user_id', $currentUserCompany->id)
+            ->where('is_active', 'ACTIVE')
+            ->first();
+        $existingPosts = Job_Position::all()
+            ->where('company_id', $userCompany->comp_id)
+            ->where('is_active', 'ACTIVE');
+
+        $postsCount = $existingPosts->count();
+        $user = $userCompanyAsUser;
+
+
+        return view('home.recruiterhome', compact('postsCount', 'user'));
+
+    }
 
     /**
      * Redirecciona a la vista de creacion de CompanyUser
