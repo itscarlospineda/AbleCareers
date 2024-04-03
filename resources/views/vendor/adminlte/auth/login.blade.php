@@ -20,17 +20,14 @@
 @endif
 
 @section('auth_header', __('adminlte::adminlte.login_message'))
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" href="css/style.css">
 
-    <style>
-        body {
-          background: linear-gradient(45deg, #1f1f1f, #a303a3);
-        }
-      </style>
+
 
 @section('auth_body')
 <section class="ftco-section">
@@ -40,7 +37,7 @@
                 <div class="login-logo">
                     <a href="">
                         <img src="http://ablecareers.test/vendor/adminlte/dist/img/AbleCareersLogo.png" alt="AbleCareers Logo" height="50">
-                        <b>Able</b>Careers
+                        <b style="color: hsl(291, 26%, 95%)">Able</b><b style="color: hsl(291, 26%, 95%)">Careers</b>
                     </a>
                 </div>
             </div>
