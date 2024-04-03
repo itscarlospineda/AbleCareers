@@ -27,11 +27,11 @@
                             <table class="table table-striped table-hover" id="example" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">No</th>
+                                        <th scope="col">PID</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Descripcion</th>
-                                        <th scope="col">Post Date</th>
-                                        <th scope="col">Company ID</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Company</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -44,7 +44,7 @@
                                             <td>{{ $jobPosition->name }}</td>
                                             <td>{{ $jobPosition->description }}</td>
                                             <td>{{ $jobPosition->post_date }}</td>
-                                            <td>{{ $jobPosition->company_id }}</td>
+                                            <td>{{ $jobPosition->company->comp_name }}</td>
                                             <td>
                                                 <!-- Botón de editar -->
                                                 <a href="{{ route('jobPosition.edit', ['id' => $jobPosition->id]) }}"
@@ -53,10 +53,12 @@
                                             <td>
                                                 {{-- Boton de eliminar --}}
                                                 <form method="POST"
-                                                    action="{{ route('jobPosition.update_or_destroy', $jobPosition->id) }}" role="form" enctype="multipart/form-data">
+                                                    action="{{ route('jobPosition.update_or_destroy', $jobPosition->id) }}"
+                                                    role="form" enctype="multipart/form-data">
                                                     {{ method_field('PUT') }}
                                                     @csrf
-                                                    <button type="submit" class="btn btn-danger" name="action" value="destroy">Eliminar</button>
+                                                    <button type="submit" class="btn btn-danger" name="action"
+                                                        value="destroy">Eliminar</button>
                                                 </form>
                                             </td>
                                         </tr>

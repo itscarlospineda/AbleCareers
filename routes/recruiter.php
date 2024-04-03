@@ -23,7 +23,7 @@ Route::get('/home', function () {
     return view('home.recruiterhome');
 })->name('recruiter.recruiterhome');
 
-Route::get('/jobPosition', [App\Http\Controllers\JobPositionController::class, 'index'])->name('jobPosition.index');
+Route::get('/jobPosition', [App\Http\Controllers\JobPositionController::class, 'recruiterIndex'])->name('jobPosition.index');
 Route::get('/jobPosition/create', [App\Http\Controllers\JobPositionController::class, 'create'])->name('jobPosition.create');
 Route::get('/jobPosition/{id}/edit', [App\Http\Controllers\JobPositionController::class, 'edit'])->name('jobPosition.edit');
 Route::put('/jobPosition/{id}', [App\Http\Controllers\JobPositionController::class, 'update_or_destroy'])->name('jobPosition.update_or_destroy');
