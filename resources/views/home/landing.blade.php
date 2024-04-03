@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-lg navbar-light mainbar d-flex justify-content-between align-items-center fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand d-flex align-items-center ms-3" href="{{route('landing')}}">
-                    <img src="vendor\adminlte\dist\img\AbleCareersLogo.png" alt="" srcset="" width="50px" height="50px">
+                    <img src="vendor\adminlte\dist\img\AbleCareersLogo.png" alt="idea" srcset="" width="50px" height="50px">
                     <p class="h3 fw-bold m-0 ms-2">AbleCareers</p>
                 </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,12 +45,12 @@
                             <a class="nav-link navBtn" href="#aboutUs">Acerca de Nosotros</a>
                         </li>
                 </ul>
-                <div class="d-flex">
-                    <ul class="nav me-5">
+                <div class="d-flex me-2 justify-content-center">
+                    <ul class="nav mb-0">
                         <li class="nav-item"><a href="{{ route('login') }}" class="nav-link fw-bold authBtn me-2">Login</a></li>
                         <li class="nav-item"><a href="{{ route('register') }}" class="nav-link fw-bold authBtn">Register</a></li>
                     </ul>
-                </div>
+                </div>                
               </div>
             </div>
         </nav>
@@ -73,10 +73,10 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="mx-5 mb-4">
-                    <img src="vendor\adminlte\dist\img\think2-nobg.png" alt="" srcset="">
+                <div class="mx-5 mb-4 mt-2">
+                    <img src="vendor\adminlte\dist\img\think2-nobg.png" class="img-fluid" alt="">
                 </div>
-            </div>
+            </div>            
         </div>
         <div class="row mt-3" id="servicios">
         </div>
@@ -91,8 +91,8 @@
         </div>
         <div class="row gy-4">
             <!--TARJETITA #1-->
-            <div class="col-md-4">
-                <div class="card border-dark">
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card border-dark w-100">
                     <div class="card-body">
                         <p class="card-title">
                             <div class="d-flex align-items-center">
@@ -109,14 +109,14 @@
                     </div> 
                 </div>
             </div>
-
+    
             <!--TARJETITA #2-->
-            <div class="col-md-4">
-                <div class="card border-dark">
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card border-dark w-100">
                     <div class="card-body">
                         <p class="card-title">
                             <div class="d-flex align-items-center">
-                                <span class="badge bg-success badge-pill lightgreen ">
+                                <span class="badge bg-success badge-pill">
                                     <i class="bi bi-person-bounding-box"></i>
                                 </span>
                                 <span class="fw-bold ms-2">Encuentra Puestos de Trabajo</span>
@@ -129,10 +129,10 @@
                     </div> 
                 </div>
             </div>
-
+    
             <!--TARJETITA #3-->
-            <div class="col-md-4">
-                <div class="card border-dark">
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="card border-dark w-100">
                     <div class="card-body">
                         <p class="card-title">
                             <div class="d-flex align-items-center">
@@ -149,9 +149,9 @@
                     </div> 
                 </div>
             </div>
-
         </div>
     </div>
+    
 
     <!--SECCION 4: VISTA PREVIA DE ULTIMAS OFERTAS DE EMPLEO -->
     <div class="container-fluid my-5 py-5 hero black" id="posts">
@@ -165,12 +165,12 @@
                 </div>
             </center>
         </div>
-
+        
         <div class="container">
-            <div class="row gy-4">
-                <div class="col-md-4">
+            <div class="row gy-4 mt-2">
+                <div class="col-md-4 d-flex flex-column">
                     @foreach($jobLatest as $latest)
-                    <div class="card mb-4">
+                    <div class="card border-dark mb-4 flex-grow-1">
                         <img src="vendor\adminlte\dist\img\think-nobg.png" alt="" class="card-img-top img-dark">
                         <div class="card-body">
                             <h5 class="card-title">{{$latest->name}}</h5>
@@ -180,10 +180,10 @@
                     </div>
                     @endforeach
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 d-flex flex-column">
                     @foreach($jobPositions as $key => $jobPos)
                         @if($key > 0)
-                        <div class="card mb-4">
+                        <div class="card border-dark mb-4 flex-grow-1">
                             <div class="card-body">
                                 <h5 class="card-title">{{$jobPos->name}}</h5>
                                 <p class="card-text lightgreen">{{$jobPos->company->comp_name }}</p>
@@ -194,8 +194,8 @@
                     @endforeach
                 </div>
             </div>
-            
         </div>
+        
 
         <div class="row" id="aboutUs">
         </div>
@@ -221,7 +221,10 @@
     <!--SECCION 6: FOOTER Y DEDICATORIAS -->
         <footer class="footer bg-color text-center">
             <div class="container">
-                    <p class="display-5">AbleCareers</p>
+                    <p class="display-5">
+                        <img src="vendor\adminlte\dist\img\AbleCareersLogo.png" alt="idea" srcset="" width="50px" height="50px">
+                        AbleCareers
+                    </p>
             <div class="row justify-content-between me-3">
                 <div class="col-md-3">
                     <ul>
@@ -247,7 +250,7 @@
                 </div>
             </div>
             
-            <p>&copy;&nbsp;All rights reserved.</p>
+            <p>&copy;&nbsp;2024 - Todos los derechos reservados.</p>
             </div>
         </footer>
     
