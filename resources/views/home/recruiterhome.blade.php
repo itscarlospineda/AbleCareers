@@ -40,53 +40,42 @@
 <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
 <!-- Chart code -->
-<script>
-    am5.ready(function () {
-  
-      // Create root element
-      var root = am5.Root.new("chartdiv");
-  
-      // Set themes
-      root.setThemes([
-        am5themes_Animated.new(root)
-      ]);
-  
-      // Create chart
-      var chart = root.container.children.push(
-        am5percent.PieChart.new(root, {
-          endAngle: 270
-        })
-      );
-  
-      // Create series
-      var series = chart.series.push(
-        am5percent.PieSeries.new(root, {
-          valueField: "value",
-          categoryField: "category",
-          endAngle: 270
-        })
-      );
-  
-      series.states.create("hidden", {
-        endAngle: -90
-      });
-  
-      // Set data
-      series.data.setAll([{
-        category: "Soporte Técnico",
-        value: 10
-      }, {
-        category: "Dev FrontEnd",
-        value: 15
-      }, {
-        category: "Dev Backend",
-        value: 8
-      }]);
-  
-      series.appear(1000, 100);
-  
-    }); // end am5.ready()
-  </script>
+<p class="h1 m-0 card-header">BIENVENIDO </p>
+
+<div class="card card-success">
+    <div class="card-header">
+        <p class="h1 card-title">COMPANY - </p>
+    </div>
+    <div class="card-body">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3></h3>
+                <p class=" h2">Empleados</p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-user-group"></i>
+            </div>
+            <a href="" class="small-box-footer">
+                Administrar
+                <i class="fa-solid fa-arrow-circle-right"></i>
+            </a>
+        </div>
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3></h3>
+                <p>Posts Creados</p>
+            </div>
+            <div class="icon">
+                <i class="fa-solid fa-address-book"></i>
+            </div>
+            <a href="" class="small-box-footer">
+                Administrar
+                <i class="fa-solid fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
 
 <!-- HTML -->
 <div class="row">
