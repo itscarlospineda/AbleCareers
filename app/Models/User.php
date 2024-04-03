@@ -104,7 +104,12 @@ class User extends Authenticatable
 
     public function userRequests()
     {
-        return $this->hasMany(UserRequest::class,'user_id','id');
+        return $this->hasMany(UserRequest::class, 'user_id', 'id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasManyThrough(Notifications_Applicants::class, Resume::class);
     }
 
 }

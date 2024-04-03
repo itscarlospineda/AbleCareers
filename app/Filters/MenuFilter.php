@@ -47,6 +47,9 @@ class MenuFilter
 
     protected function buildPostulantMenu()
     {
+        $user = Auth::user();
+        $userAsUser = User::findOrFail($user->id);
+        $notificationCount = $userAsUser->notifications()->count();
         $menuPostulant = [
             [
                 'type' => 'fullscreen-widget',
@@ -75,7 +78,7 @@ class MenuFilter
                 'text' => 'Notificaciones',
                 'url' => '/postulant/notificacion',
                 'icon' => 'fas fa-fw fa-bell',
-                'label' => 4,
+                'label' => $notificationCount,
                 'label_color' => 'success',
             ],
             [
