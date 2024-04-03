@@ -73,7 +73,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Notificaciones',
-                'url' => '',
+                'url' => '/postulant/notificacion',
                 'icon' => 'fas fa-fw fa-bell',
                 'label' => 4,
                 'label_color' => 'success',

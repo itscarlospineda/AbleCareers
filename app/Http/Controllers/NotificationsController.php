@@ -6,6 +6,8 @@ use App\Models\JopoResume;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Notifications_Applicants;
+use App\Models\Resume;
+use App\Models\Job_Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -35,7 +37,19 @@ class NotificationsController extends Controller
     $NewNotification->save();
 
 
-    return  compact('NewNotification');
+    return redirect()->route('jobPosition.recruiterShowPost');
   }
-
+   
+  public function getPostulanteNotifications(){
+    $user = Auth::user();
+    $resume = Resume::where('user_id',$user->id )->first();
+    $notificaciones = Notifications_Applicants::where('resume_id',$resume->id)->get();
+    
+    foreach ($notificaciones as $notificacion) {
+      $jobPosition = Job_Position::find($notificacion->job_position_id);
+      // Agregar el nombre del puesto a la notificación
+      $notificacion->job_position_name = $jobPosition ? $jobPosition->name : 'Nombre no disponible';
+  }
+    return view('common.notification', ['notificaciones' => $notificaciones]);
+  }
 }
