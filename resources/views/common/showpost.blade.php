@@ -1,7 +1,6 @@
 @php
     use App\Models\JopoResume;
 @endphp
-
 @extends('adminlte::page')
 
 @section('title', 'Detalles del Puesto')
@@ -26,7 +25,11 @@
                     <p>{{ $jobPosition->description }}</p>
 
                     <!-- Lógica de aplicación -->
-                    @if (JopoResume::whereHas('resume', function ($query) {
+                    @if ($resumes->isEmpty())
+                        <div class="alert alert-warning" role="alert">
+                            Debes crear un currículum primero para poder aplicar a este puesto.
+                        </div>
+                    @elseif (JopoResume::whereHas('resume', function ($query) {
                             $query->where('user_id', auth()->id());
                         })->where('job_position_id', $jobPosition->id)->exists())
                         <button class="btn btn-primary" disabled>Aplicando</button>
@@ -51,7 +54,7 @@
         </div>
         <!-- Botón para volver a la página anterior -->
         <div class="mt-3">
-            <a href="{{ route('postslist') }}" class="btn btn-secondary">Volver</a>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Volver</a>
         </div>
     </div>
 
@@ -68,32 +71,38 @@
                 </div>
                 <div class="modal-body">
                     <!-- Lista de Currículums -->
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Información</th>
-                                <th>Foto</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($resumes as $resume)
+                    @if ($resumes->isEmpty())
+                        <div class="alert alert-warning" role="alert">
+                            Debes crear un currículum primero para poder aplicar a este puesto.
+                        </div>
+                    @else
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $resume->info }}</td>
-                                    <td><img src="{{ asset($resume->photo) }}" alt="Foto del resumen"
-                                            style="max-width: 100px; max-height: 100px;"></td>
-                                    <td>
-                                        <form action="{{ route('jobpositions.apply') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="resume_id" value="{{ $resume->id }}">
-                                            <input type="hidden" name="job_position_id" value="{{ $jobPosition->id }}">
-                                            <button type="submit" class="btn btn-success apply-button">Seleccionar</button>
-                                        </form>
-                                    </td>
+                                    <th>Información</th>
+                                    <th>Foto</th>
+                                    <th>Acción</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($resumes as $resume)
+                                    <tr>
+                                        <td>{{ $resume->info }}</td>
+                                        <td><img src="{{ asset($resume->photo) }}" alt="Foto del resumen"
+                                                style="max-width: 100px; max-height: 100px;"></td>
+                                        <td>
+                                            <form action="{{ route('jobpositions.apply') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="resume_id" value="{{ $resume->id }}">
+                                                <input type="hidden" name="job_position_id" value="{{ $jobPosition->id }}">
+                                                <button type="submit" class="btn btn-success apply-button">Seleccionar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
                 </div>
             </div>
         </div>

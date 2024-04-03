@@ -264,7 +264,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Administrar Usuarios',
-                'url' => '',
+                'url' => '/admin/users',
                 'icon' => 'fa-solid fa-user-gear',
                 'label_color' => 'success',
             ],

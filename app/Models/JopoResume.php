@@ -30,4 +30,9 @@ class JopoResume extends Model
     {
         return $this->belongsTo(Resume::class, 'resume_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'comp_id');
+    }
+    
 }

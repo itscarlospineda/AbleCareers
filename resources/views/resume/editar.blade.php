@@ -7,8 +7,9 @@
 @stop
 
 @section('content')
-
-    <!-- Formulario para actualizar los datos del resumen -->
+<div class="card">
+    <div class="card-body">
+        <!-- Formulario para actualizar los datos del resumen -->
     <form action="{{ route('resume.update_or_destroy', $resume->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -112,6 +113,7 @@
 
         <a href="{{ route('resume.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
+    </div>
 </div>
 @stop
 
