@@ -13,9 +13,11 @@
 
 @section('auth_header', __('adminlte::adminlte.register_message'))
 
+
 @section('auth_body')
     <form action="{{ $register_url }}" method="post">
         @csrf
+        <body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
 
         {{-- Name field --}}
         <div class="input-group mb-3">
