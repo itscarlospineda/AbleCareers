@@ -32,9 +32,8 @@
 		    <header class="resume-header pt-4 pt-md-0">
 			    <div class="row">
 				    <div class="col-block col-md-auto resume-picture-holder text-center text-md-start">
-
-				        <!--<img class="picture" src="assets/images/profile.jpg" alt="">-->
-				    </div><!--//col-->
+					<img src="{{ asset("/$resume->photo") }}" alt="Foto del resumen" style="max-width: 200%; max-height: 100px;">
+						</div><!--//col-->
 				    <div class="col">
 					    <div class="row p-4 justify-content-center justify-content-md-between">
 						    <div class="primary-info col-auto">
