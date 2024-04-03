@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\CompanyUser;
 use App\Models\JopoResume;
 use App\Models\Role;
 use App\Models\User;
@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
+
     public function index()
     {
-        $users = User::where('is_active', '!=', 'INACTIVE')->get();
-        return view('admin\userlist', compact('users'));
+        $users = User::with('roles')->get();
+        return view('admin.userlist', compact('users'));
     }
+
 
     public function postulantIndex()
     {
@@ -75,21 +77,34 @@ class UserController extends Controller
 
     public function edit($user_id)
     {
-        $user = User::find($user_id);
-
-        return view('user.edit', compact('user'));
+    $user = User::findOrFail($user_id);
+    $roles = Role::where('is_active', 'ACTIVE')->get();
+    return view('admin.admineditusers', compact('user', 'roles'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+
+        $user = User::findOrFail($request->user()->id);
+
+        if ($user->role_id == 1) {
+
+            
+        }
+
+        if ($user->role_id == 2) {
+
+            
+        }
+
+        /*
         // Valida los datos del formulario
         $validatedData = $request->validate(User::$rules);
-
         // Actualiza el usuario con los datos proporcionados
-        $user->update($validatedData);
+        $user->update($validatedData);*/
 
         // Redirige al usuario a la página de índice de usuarios con un mensaje de éxito
-        return redirect()->route('users.index')
+        return redirect()->route('admin.userlist')
             ->with('success', 'User updated successfully');
     }
 

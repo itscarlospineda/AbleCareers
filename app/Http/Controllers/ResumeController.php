@@ -33,7 +33,9 @@ class ResumeController extends Controller
         // Obtener el resumen específico por su ID
         //$resume = Resume::findOrFail($id);
         $resumes = Resume::all();
-        return view('common.showresume')->with('resumes',$resumes);
+        $resume = $resumes->where('id', $id)->first();
+
+        return view('common.showresume')->with(['resume' => $resume]);
         // Cargar la vista PDF con el resumen obtenido
         //$pdf = PDF::loadView('common.showresume', compact('resume'));
 
@@ -101,7 +103,7 @@ class ResumeController extends Controller
                 Storage::delete($resume->photo);
                 $fileName = time() . $request->file('photo')->getClientOriginalName();
                 $path = $request->file('photo')->storeAs('images', $fileName, 'public');
-                $requestData["photo"] = '/storage/images/' . $fileName;
+                $requestData["photo"] = 'storage/images/' . $fileName;
             }
 
             $resume->update($requestData);

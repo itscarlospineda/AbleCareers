@@ -30,6 +30,8 @@ Route::post('/roles', [App\Http\Controllers\RoleController::class, 'store'])->na
 Route::get('/requests', [App\Http\Controllers\UserRequestController::class, 'index'])->name('admin.requests.index');
 
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('admin.users.index');
+Route::get('/users/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('admin.users.edit');
+Route::put('/users/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('admin.users.update');
 
 
 Route::get('/hasroles', function () {

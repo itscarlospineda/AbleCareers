@@ -7,8 +7,9 @@
 @stop
 
 @section('content')
-    
-    <!-- Formulario para capturar los datos del resumen -->
+    <div class="card">
+        <div class="card-body">
+            <!-- Formulario para capturar los datos del resumen -->
     <form action="{{ route('resume.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -104,7 +105,8 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a href="{{ route('resume.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
-</div>
+        </div>
+    </div>
 @stop
 
 @section('css')

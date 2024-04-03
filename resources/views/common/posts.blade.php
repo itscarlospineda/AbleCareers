@@ -13,7 +13,9 @@
         <p class="h5">Encuentra variedad de plazas vacantes en esta página.</p>
     </div>
 
-    @foreach ($jobPositions as $jobPos)
+<div class="card">
+    <div class="card-body">
+        @foreach ($jobPositions as $jobPos)
     <div class="col" style="padding-top: 20px;">
         <div class="card border-dark">
             <div class="card-body">
@@ -21,7 +23,7 @@
                     <div class="col-md-2">
                         <img src="/data_analysis.jpg" alt="" srcset="" height="100px" width="155px">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <p class="h5">{{ $jobPos->name }}</p>
                         @if ($jobPos->company)
                             <p class="text-dark">Empresa: {{ $jobPos->company->comp_name }}</p>
@@ -31,7 +33,7 @@
                         <p class="text-primary">Fecha y Hora de Publicación: {{ $jobPos->post_date }}</p> <hr>
                         <p class="card-text">{{ \Illuminate\Support\Str::limit($jobPos->description, 50, $end='...') }}</p>
                     </div>
-                    <div class="col-md-2 align-self-center">
+                    <div class="col-md-3 align-self-center">
                         <a href="{{ route('jobpositions.showdetails', ['id' => $jobPos->id]) }}" class="btn btn-success">
                             <i class="fa-solid fa-square-plus"></i>
                             &nbsp;
@@ -42,9 +44,9 @@
                         })->where('job_position_id', $jobPos->id)->exists())
                             <button class="btn btn-primary" disabled>Aplicando</button>
                             <br>
-                            <span class="text-success">
-                                <i class="fa-solid fa-building-circle-check"></i>
-                                &nbsp;
+                            <span class="text-success"> <br>
+                                <i class="fa-solid fa-building-circle-check"></i> 
+                                &nbsp; 
                                 Ya has aplicado a esta posición
                             </span>
                         @endif
@@ -54,6 +56,8 @@
         </div>
     </div>
     @endforeach
+    </div>
 </div>
+    
 
 @endsection
