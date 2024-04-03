@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Job_Position;
@@ -262,4 +263,26 @@ class JobPositionController extends Controller
         toastr()->success('Credenciales actualizadas exitosamente', 'Editar Perfil');
         return redirect()->back();
     }
+
+
+    public function getPostulantesXPuestosXCategoria()
+    {   
+        $categories = Category::all();
+
+        $results = Job_Position::join('jopo_category', 'Job_Position.id', '=', 'jopo_category.job_position_id')
+            ->join('jopo_resume','Job_Position.id','=','jopo_resume.job_position_id')
+            ->join('category','jopo_category.category_id','=','category.id')
+            ->select('Job_Position.name as jobPosition', 'category.name as category', 'jopo_resume.resume_id', 'category.id as idCategory')
+            ->get();
+           
+           
+
+
+            //ver en consola
+           // dd($results);
+            return ($results);
+            
+        }
+    
+
 }

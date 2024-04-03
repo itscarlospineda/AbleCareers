@@ -123,6 +123,12 @@ class MenuFilter
                 'icon' => 'fa-solid fa-user-gear',
                 'label_color' => 'success',
             ],
+            [
+                'text' => 'prueba',
+                'url' => 'recruiter/jobPosition/prueba',
+                'icon' => 'fa-solid fa-user-gear',
+                'label_color' => 'success',
+            ],
 
         ];
         return $menuRecruiter;
