@@ -20,7 +20,7 @@
 
     <!-- Theme CSS -->
     <!--<link id="theme-style" rel="stylesheet" href="">-->
-	@vite(['../resources/Pillar-BS5-v3.0/assets/css/pillar-3.css', '../resources/Pillar-BS5-v3.0/assets/fontawesome/js/all.min.js'])
+	@vite(['resources/Pillar-BS5-v3.0/assets/css/pillar-3.css', 'resources/Pillar-BS5-v3.0/assets/fontawesome/js/all.min.js'])
 
 
 </head> .
