@@ -113,8 +113,8 @@ class CompanyUserController extends Controller
         $user = $userCompanyAsUser;
 
         $postulantes = DB::table('job_position')
-        ->join('jopo_category', 'Job_Position.id', '=', 'jopo_category.job_position_id')
-        ->join('jopo_resume', 'Job_Position.id', '=', 'jopo_resume.job_position_id')
+        ->join('jopo_category', 'job_position.id', '=', 'jopo_category.job_position_id')
+        ->join('jopo_resume', 'job_position.id', '=', 'jopo_resume.job_position_id')
         ->join('category', 'jopo_category.category_id', '=', 'category.id')
         ->groupBy('category')
         ->select(DB::raw('count(*) as amount, category.name as category'))

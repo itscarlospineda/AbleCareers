@@ -268,7 +268,7 @@ class JobPositionController extends Controller
             ->get();
 
         // Pasar las posiciones de trabajo y los resúmenes a la vista
-        return view('recruiter.postlist', compact('jobPositions'));
+        return view('recruiter.postList', compact('jobPositions'));
     }
 
     public function showPostulantes($id)

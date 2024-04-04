@@ -4,28 +4,28 @@
 
 @section('content')
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico"> 
-    
+    <link rel="shortcut icon" href="favicon.ico">
+
     <!-- Google Font -->
-    
-    
+
+
     <!-- FontAwesome JS-->
 	<!--<script defer src="Pillar-BS5-v3.0/assets/fontawesome/js/all.min.js"></script>
-       
-    <!-- Theme CSS -->  
+
+    <!-- Theme CSS -->
     <!--<link id="theme-style" rel="stylesheet" href="">-->
-	@vite(['resources/Pillar-BS5-v3.0/assets/css/pillar-3.css', 'resources/Pillar-BS5-v3.0/assets/fontawesome/js/all.min.js'])
+	@vite(['../resources/Pillar-BS5-v3.0/assets/css/pillar-3.css', '../resources/Pillar-BS5-v3.0/assets/fontawesome/js/all.min.js'])
 
 
 </head> .
 
-<body>	
+<body>
 	@if ($resume)
     <article class="resume-wrapper text-center position-relative">
 	    <div class="resume-wrapper-inner mx-auto text-start bg-white shadow-lg">
@@ -48,7 +48,7 @@
 								<center>
 									<img src="{{ asset("/$resume->photo") }}" alt="Foto del resumen" class="img-fluid" style="margin-top: -15px; max-width: 200px; max-height: 200px; overflow: hidden; border-radius: 50%;">
 								</center>
-								
+
 							    <!--<ul class="resume-social list-unstyled">
 					                <li class="mb-3"><a class="text-link" href="#"><span class="fa-container text-center me-2"><i class="fab fa-linkedin-in fa-fw"></i></span>linkedin.com/in/stevedoe</a></li>
 					                <li class="mb-3"><a class="text-link" href="#"><span class="fa-container text-center me-2"><i class="fab fa-github-alt fa-fw"></i></span>github.com/username</a></li>
@@ -57,7 +57,7 @@
 							    </ul>
 						    </div>--><!--//secondary-info-->
 					    </div><!--//row-->
-					    
+
 				    </div><!--//col-->
 			    </div><!--//row-->
 		    </header>
@@ -66,7 +66,7 @@
 				    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">INTRODUCCION</h2>
 				    <div class="resume-section-content">
 					    <p class="mb-0"> {{$resume->info}}</p>
-						
+
 					</div>
 			    </section><!--//summary-section-->
 			    <div class="row">
@@ -76,7 +76,7 @@
 						    <div class="resume-section-content">
 							    <div class="resume-timeline position-relative">
 								    <article class="resume-timeline-item position-relative pb-5">
-									    
+
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
 										        <h3 class="resume-position-title font-weight-bold mb-1">{{$resume->work_experience}}</h3>
@@ -106,9 +106,9 @@
 									    </div>--><!--//resume-timeline-item-desc-->
 
 								    </article><!--//resume-timeline-item-->
-								    
+
 								    <article class="resume-timeline-item position-relative pb-5">
-									    
+
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
 										        <h3 class="resume-position-title font-weight-bold mb-1">{{$resume->work_two_experience}}</h3>
@@ -132,11 +132,11 @@
 									    </div>--><!--//resume-timeline-item-desc-->
 
 								    </article><!--//resume-timeline-item-->
-								    
-  
+
+
 							    </div><!--//resume-timeline-->
-							    
-							    
+
+
 
 						    </div>
 					    </section><!--//experience-section-->
@@ -146,7 +146,7 @@
 						    <div class="resume-section-content">
 							    <div class="resume-timeline position-relative">
 								    <article class="resume-timeline-item position-relative pb-5">
-									    
+
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
 										        <h3 class="resume-position-title font-weight-bold mb-1">{{$resume->education}}</h3>
@@ -176,9 +176,9 @@
 									    </div>--><!--//resume-timeline-item-desc-->
 
 								    </article><!--//resume-timeline-item-->
-								    
+
 								    <article class="resume-timeline-item position-relative pb-5">
-									    
+
 									    <div class="resume-timeline-item-header mb-2">
 										    <div class="d-flex flex-column flex-md-row">
 										        <h3 class="resume-position-title font-weight-bold mb-1">{{$resume->education_two}}</h3>
@@ -202,8 +202,8 @@
 									    </div>--><!--//resume-timeline-item-desc-->
 
 								    </article><!--//resume-timeline-item-->
-								    
-								    
+
+
 							    </div><!--//resume-timeline-->
 
 						    </div>
@@ -235,7 +235,7 @@
 											    <div class="progress-bar theme-progress-bar-dark" role="progressbar" style="width: 96%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 											</div>
 								        </li>
-								        
+
 								        <li class="mb-2">
 								            <div class="resume-skill-name">Node.js</div>
 									        <div class="progress resume-progress">
@@ -250,7 +250,7 @@
 								        </li>
 							        </ul>
 						        </div><!--//resume-skill-item-->
-						        
+
 						        <!--<div class="resume-skill-item">
 						            <h4 class="resume-skills-cat font-weight-bold">Backend</h4>
 							        <ul class="list-unstyled">
@@ -280,7 +280,7 @@
 								        </li>
 							        </ul>
 						        </div><!--//resume-skill-item-->
-						        
+
 						        <!--<div class="resume-skill-item">
 						            <h4 class="resume-skills-cat font-weight-bold">Others</h4>
 						            <ul class="list-inline">
@@ -332,7 +332,7 @@
 							    </ul>
 						    </div>
 					    </section><!--//education-section-->
-					    
+
 					    <!--<section class="resume-section language-section mb-5">
 						    <h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3">Language</h2>
 						    <div class="resume-section-content">
@@ -353,15 +353,15 @@
 							    </ul>
 						    </div>
 					    </section><!--//interests-section-->
-					    
+
 				    </div>
 			    </div><!--//row-->
 		    </div><!--//resume-body-->
-		    
-		    
+
+
 	    </div>
-    </article> 
+    </article>
 	@endif
 </body>
-</html> 
+</html>
 @endsection
