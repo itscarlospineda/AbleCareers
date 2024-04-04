@@ -2,11 +2,18 @@
 
 @section('title', 'Editar Perfil')
 
-@section('content')
-<div class="col-md-12" style="padding-top: 20px; padding-left: 20px;">
-    <div class="col">
-        <p class="h2">Editar Perfil de Usuario</p>
+@section('content_header')
+<div class="card">
+    <div class="card-header bg-success">
+        <center>
+            <p class="h2" style="color: white;"> Editar Perfil de Usuario</p>
+        </center>
     </div>
+</div>
+@stop
+
+@section('content')
+
 
     <div class="card">
         <div class="card-body text-dark ">
