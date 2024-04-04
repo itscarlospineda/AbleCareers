@@ -269,12 +269,6 @@ class MenuFilter
                 'label_color' => 'success',
             ],
             [
-                'text' => 'Crear Usuario',
-                'url' => '',
-                'icon' => 'fa-solid fa-user-plus',
-                'label_color' => 'success',
-            ],
-            [
                 'text' => 'Administrar Compañias',
                 'url' => '/admin/company',
                 'icon' => 'fa-solid fa-toolbox',

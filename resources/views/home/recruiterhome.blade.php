@@ -68,7 +68,7 @@
           <div class="icon">
               <i class="fa-solid fa-address-book"></i>
           </div>
-          <a href="{{ route('manager.postlist.showpost') }}" class="small-box-footer">
+          <a href="{{ route('jobPosition.index') }}" class="small-box-footer">
               Administrar
               <i class="fa-solid fa-arrow-circle-right"></i>
           </a>
@@ -76,7 +76,7 @@
     </div>
 </div>
 
-{{--  
+{{--
 <!-- HTML -->
 <div class="row">
   <div class="col-md-8">

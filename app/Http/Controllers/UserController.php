@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CompanyUser;
+use App\Models\Job_Position;
 use App\Models\JopoResume;
+use App\Models\Company;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\user_has_role;
@@ -21,10 +23,10 @@ class UserController extends Controller
         $users = User::whereDoesntHave('roles', function ($query) {
             $query->where('role.id', 5)->orWhere('role.role_name', 'superUsuario');
         })->get();
-    
+
         return view('admin.userlist', compact('users'));
     }
-    
+
 
 
     public function postulantIndex()
@@ -32,11 +34,36 @@ class UserController extends Controller
         $user = Auth::user();
         $userAsUser = User::findOrFail($user->id);
         //APARTADO DE REQUEST
-        $postulantRequestCount = $userAsUser->userRequests->where('request_status','denegado')->count();
+        $postulantRequestCount = $userAsUser->userRequests->where('request_status', 'denegado')->count();
         $applyCount = JopoResume::whereIn('resume_id', $userAsUser->resumes()->pluck('id'))
-        ->where('is_active', 'ACTIVE')
-        ->count();
-        return view('home.commonhome', compact('user','applyCount','postulantRequestCount'));
+            ->where('is_active', 'ACTIVE')
+            ->count();
+        return view('home.commonhome', compact('user', 'applyCount', 'postulantRequestCount'));
+    }
+
+    public function adminIndex()
+    {
+        $userLog = Auth::user();
+        $user = User::findOrFail($userLog->id);
+        //CONTEO DE USER
+        $activeUsers = User::whereHas('roles', function ($query) {
+            $query->where('role_id', '!=', 5);
+        })
+            ->where('is_active', 'ACTIVE')
+            ->get();
+        $usersCount = $activeUsers->count();
+        //CONTEO DE COMPANY
+        $activeCompanies = Company::all()->where('is_active', 'ACTIVE');
+        $companiesCount = $activeCompanies->count();
+
+        //CONTEO DE POSTS
+        $activeJobPositions = Job_Position::all()->where('is_active', 'ACTIVE');
+        $postsCount = $activeJobPositions->count();
+
+        //SOLICITUDES PARA SER COMPANY
+        $pendingRequests = UserRequest::all()->where('request_status', 'aplicando');
+        $pendingRequestsCount = $pendingRequests->count();
+        return view('admin.adminhome', compact('companiesCount', 'usersCount', 'postsCount','pendingRequestsCount','user',));
     }
 
 
@@ -85,7 +112,7 @@ class UserController extends Controller
         $roles = Role::where('is_active', 'ACTIVE')->get();
         return view('admin.admineditusers', compact('user', 'roles'));
     }
-    
+
 
     public function update(Request $request, $id)
     {
@@ -94,12 +121,12 @@ class UserController extends Controller
 
         if ($user->role_id == 1) {
 
-            
+
         }
 
         if ($user->role_id == 2) {
 
-            
+
         }
 
         /*

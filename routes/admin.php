@@ -20,9 +20,7 @@
 |
 */
 
-Route::get('/home', function () {
-    return view('admin.adminhome');
-})->name('admin.adminhome');
+Route::get('/home', [App\Http\Controllers\UserController::class,'adminIndex'])->name('admin.adminhome');
 
 Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('admin.roles.index');
 Route::post('/roles', [App\Http\Controllers\RoleController::class, 'store'])->name('admin.roles.store');
@@ -99,7 +97,7 @@ Route::post('/userRequest', [App\Http\Controllers\UserRequestController::class, 
 |
 |
 */
-Route::get('/browse/posts', [App\Http\Controllers\JobPositionController::class, 'showPost'])->name('postslist');
+Route::get('/browse/posts', [App\Http\Controllers\JobPositionController::class, 'showPost'])->name('admin.postslist');
 
 /*
 |--------------------------------------------------------------------------
