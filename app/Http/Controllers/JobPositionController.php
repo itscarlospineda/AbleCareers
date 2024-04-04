@@ -237,7 +237,7 @@ class JobPositionController extends Controller
             ->where('company_id', $compID)
             ->get();
 
-        return view('manager.postlist', compact('jobPositions'));
+        return view('manager.postList', compact('jobPositions'));
     }
 
     public function showDetails($id)
