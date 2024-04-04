@@ -3,14 +3,24 @@
 @section('title', 'Vista de Resumes')
 
 @section('content_header')
-    <p class="h2"> Control de Resumes</p>
+<div class="card">
+    <div class="card-header bg-success">
+        <center>
+            <p class="h2" style="color: white;"> Control de Resumes</p>
+        </center>
+    </div>
+    <div class="card-body">
+        <p>En este espacio, podrás crear, actualizar y ver tus hojas de vida
+            antes de enviarlas a cualquier solicitud de empleo de tu gusto.
+        </p>
+    </div>
+</div>
 @stop
 
 @section('content')
-
-    <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    </head>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
 
     <div class="card">
         <div class="card-body">

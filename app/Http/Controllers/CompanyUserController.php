@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CompanyUserController
@@ -111,8 +112,16 @@ class CompanyUserController extends Controller
         $postsCount = $existingPosts->count();
         $user = $userCompanyAsUser;
 
+        $postulantes = DB::table('job_position')
+        ->join('jopo_category', 'Job_Position.id', '=', 'jopo_category.job_position_id')
+        ->join('jopo_resume', 'Job_Position.id', '=', 'jopo_resume.job_position_id')
+        ->join('category', 'jopo_category.category_id', '=', 'category.id')
+        ->groupBy('category')
+        ->select(DB::raw('count(*) as amount, category.name as category'))
+        ->get();
 
-        return view('home.recruiterhome', compact('postsCount', 'user'));
+
+        return view('home.recruiterhome', compact('postsCount', 'user','postulantes'));
 
     }
 
