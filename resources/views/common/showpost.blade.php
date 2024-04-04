@@ -5,13 +5,24 @@
 
 @section('title', 'Detalles del Puesto')
 
-@section('content')
-    <div class="col-md-12" style="padding-top: 20px; padding-left: 30px;">
-        <div class="col">
-            <p class="h2">Detalles del Puesto</p>
-        </div>
+@section('content_header')
+<div class="card">
+    <div class="card-header bg-success">
+        <center>
+            <p class="h2" style="color: white;"> Detalles del Puesto</p>
+        </center>
+    </div>
+    <div class="card-body">
+        <p>En esta sección, te brindamos todos los detalles correspondientes al puesto
+            en cuestión.
+        </p>
+    </div>
+</div>
+@stop
 
-        <div class="card border-dark">
+@section('content')
+
+        <div class="card">
             <div class="card-body">
                 @if ($jobPosition)
                     <p class="h5">{{ $jobPosition->name }}</p>
@@ -42,8 +53,12 @@
                     @else
                         <!-- Botón para abrir el modal -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                            &nbsp;
                             Aplicar
                         </button>
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i>
+                                &nbsp;Cancelar</a>
                     @endif
                 @else
                     <div class="alert alert-danger" role="alert">
@@ -53,9 +68,7 @@
             </div>
         </div>
         <!-- Botón para volver a la página anterior -->
-        <div class="mt-3">
-            <a href="{{ url()->previous() }}" class="btn btn-secondary">Volver</a>
-        </div>
+        
     </div>
 
     <!-- Modal -->

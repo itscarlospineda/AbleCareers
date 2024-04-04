@@ -3,10 +3,15 @@
 @section('title', 'Crear Resume')
 
 @section('content_header')
-    <p class="h2">Crear Nuevo Resume</p>
+<div class="card-header bg-success">
+    <center>
+        <p class="h2" style="color: white;">Crear Nuevo Resume</p>
+    </center>
+</div>
 @stop
 
 @section('content')
+
     <div class="card">
         <div class="card-body">
             <!-- Formulario para capturar los datos del resumen -->
@@ -17,23 +22,20 @@
                     <textarea style="height: 100px; resize:none" name="info" class="form-control" placeholder="Ingrese información"></textarea>
                 </div>
 
-                <hr>
-                <p class="h3">Sección de Educación</p>
-                <div class="form-group">
-                    <label for="education">Lugar de Educación #1:</label>
-                    <input type="text" class="form-control" id="education" name="education"
-                        placeholder="Ingrese lugar de educación">
-                </div>
-                <div class="form-group">
-                    <label for="education_years">Título y Años (####-####) de Educación #1:</label>
-                    <input type="text" class="form-control" id="education_years" name="education_years"
-                        placeholder="Ingrese título y tiempo de estudio">
-                </div>
-                <div class="form-group">
-                    <label for="education_pos">Descripción de Educación #1:</label>
-                    <textarea style="height: 70px; resize:none" name="education_pos" class="form-control"
-                        placeholder="Ingrese una breve descripción"></textarea>
-                </div>
+        <hr> <br>
+        <p class="h3">Sección de Educación</p> <br>
+        <div class="form-group">
+            <label for="education">Lugar de Educación #1:</label>
+            <input type="text" class="form-control" id="education" name="education" placeholder="Ingrese lugar de educación">
+        </div>
+        <div class="form-group">
+            <label for="education_years">Título y Años (####-####) de Educación #1:</label>
+            <input type="text" class="form-control" id="education_years" name="education_years" placeholder="Ingrese título y tiempo de estudio">
+        </div>
+        <div class="form-group">
+            <label for="education_pos">Descripción de Educación #1:</label>
+            <textarea style="height: 70px; resize:none" name="education_pos" class="form-control" placeholder="Ingrese una breve descripción"></textarea>
+        </div>
 
                 <div class="form-group">
                     <label for="education_two">Lugar de Educación #2:</label>
@@ -51,42 +53,36 @@
                         placeholder="Ingrese una breve descripción"></textarea>
                 </div>
 
-                <hr>
-                <p class="h3">Experiencia Laboral</p>
-                <div class="form-group">
-                    <label for="work_experience">Lugar de Trabajo #1:</label>
-                    <input type="text" class="form-control" id="work_experience" name="work_experience"
-                        placeholder="Ingrese experiencia laboral">
-                </div>
-                <div class="form-group">
-                    <label for="work_years">Puesto Asignado y Años Laborados #1:</label>
-                    <input type="text" class="form-control" id="work_years" name="work_years"
-                        placeholder="Ingrese rol y años de experiencia laboral">
-                </div>
-                <div class="form-group">
-                    <label for="work_pos">Descripción de Trabajo #1:</label>
-                    <textarea style="height: 70px; resize:none" name="work_pos" class="form-control"
-                        placeholder="Ingrese breve información de su puesto laboral"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="work_two_experience">Lugar de Trabajo #2:</label>
-                    <input type="text" class="form-control" id="work_two_experience" name="work_two_experience"
-                        placeholder="Ingrese experiencia laboral">
-                </div>
-                <div class="form-group">
-                    <label for="work_two_years">Puesto Asignado y Años Laborados #2:</label>
-                    <input type="text" class="form-control" id="work_two_years" name="work_two_years"
-                        placeholder="Ingrese rol y años de experiencia laboral">
-                </div>
-                <div class="form-group">
-                    <label for="work_two_pos">Descripción de Trabajo #2:</label>
-                    <textarea style="height: 70px; resize:none" name="work_two_pos" class="form-control"
-                        placeholder="Ingrese breve información de su puesto laboral"></textarea>
-                </div>
+        <hr>
+        <p class="h3">Experiencia Laboral</p>
+        <div class="form-group">
+            <label for="work_experience">Lugar de Trabajo #1:</label>
+            <input type="text" class="form-control" id="work_experience" name="work_experience" placeholder="Ingrese experiencia laboral">
+        </div>
+        <div class="form-group">
+            <label for="work_years">Puesto Asignado y Años Laborados #1:</label>
+            <input type="text" class="form-control" id="work_years" name="work_years" placeholder="Ingrese rol y años de experiencia laboral">
+        </div>
+        <div class="form-group">
+            <label for="work_pos">Descripción de Trabajo #1:</label>
+            <textarea style="height: 70px; resize:none" name="work_pos" class="form-control" placeholder="Ingrese breve información de su puesto laboral"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="work_two_experience">Lugar de Trabajo #2:</label>
+            <input type="text" class="form-control" id="work_two_experience" name="work_two_experience" placeholder="Ingrese experiencia laboral">
+        </div>
+        <div class="form-group">
+            <label for="work_two_years">Puesto Asignado y Años Laborados #2:</label>
+            <input type="text" class="form-control" id="work_two_years" name="work_two_years" placeholder="Ingrese rol y años de experiencia laboral">
+        </div>
+        <div class="form-group">
+            <label for="work_two_pos">Descripción de Trabajo #2:</label>
+            <textarea style="height: 70px; resize:none" name="work_two_pos" class="form-control" placeholder="Ingrese breve información de su puesto laboral"></textarea>
+        </div>
 
 
-                <hr>
-                <p class="h3">Sección de Información Adicional</p>
+        <hr>
+        <p class="h3">Sección de Información Adicional</p>
 
                 <div class="form-group">
                     <label for="extra">Extra:</label>
@@ -114,14 +110,14 @@
                         placeholder="Ingrese número de celular de referencia">
                 </div>
 
-                <div class="form-group">
-                    <label for="photo">Foto:</label>
-                    <input type="file" class="form-control-file" id="photo" name="photo">
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('resume.index') }}" class="btn btn-secondary">Cancelar</a>
-            </form>
+        <div class="form-group">
+            <label for="photo">Foto:</label>
+            <input type="file" class="form-control-file" id="photo" name="photo">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{ route('resume.index') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
         </div>
     </div>
 @stop

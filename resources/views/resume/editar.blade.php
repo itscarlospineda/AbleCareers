@@ -3,7 +3,11 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <p class="h2"> Editar Resume</p>
+<div class="card-header bg-success">
+    <center>
+        <p class="h2" style="color: white;">Editar Resume</p>
+    </center>
+</div>
 @stop
 
 @section('content')
@@ -19,7 +23,7 @@
                 </div>
 
                 <hr>
-                <p class="h3">Sección de Educación</p>
+                <p class="h3">Sección de Educación</p> <br>
                 <div class="form-group">
                     <label for="education">Lugar de Educación #1:</label>
                     <input type="text" class="form-control" id="education" name="education"
@@ -117,21 +121,33 @@
                         placeholder="Ingrese número de celular de referencia" value="{{ $resume->reference_two_num }}">
                 </div>
 
-                <br>
-                <br>
-                <div class="form-group">
-                    <label for="photo">Foto:</label>
-                    <input type="file" class="form-control-file" id="photo" name="photo">
-                </div>
-                <br>
-                <br>
-                <button type="submit" class="btn btn-primary" name="action" value="update">Actualizar</button>
-                <button type="submit" class="btn btn-danger" name="action" value="destroy">Eliminar</button>
-
-                <a href="{{ route('resume.index') }}" class="btn btn-secondary">Cancelar</a>
-            </form>
+        <br>
+        <br>
+        <div class="form-group">
+            <label for="photo">Foto:</label>
+            <input type="file" class="form-control-file" id="photo" name="photo" value="{{ $resume->photo}}">
         </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary" name="action" value="update">
+            <i class="fa-solid fa-pen"></i>
+            &nbsp;
+            Actualizar
+        </button>
+        <button type="submit" class="btn btn-danger" name="action" value="destroy">
+            <i class="fa-solid fa-user-xmark"></i>
+            &nbsp;
+            Eliminar
+        </button>
+
+        <a href="{{ route('resume.index') }}" class="btn btn-secondary">
+            <i class="fa-solid fa-xmark"></i>
+            &nbsp;
+            Cancelar
+        </a>
+    </form>
     </div>
+</div>
 @stop
 
 @section('css')

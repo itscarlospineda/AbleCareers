@@ -74,26 +74,24 @@
 
     {{-- SI YA APLICO Y LO RECHAZARON NO SE MOSTRARA --}}
     @if ($postulantRequestCount == 0)
-        <div class="container offers">
-            <div class="card mb-3 mt-5" style="max-width: 100%;">
-                <div class="row g-0">
-                    <div class="pt-4 ms-4 col-md-3">
-                        <img src="{{ asset('images/company_request.png') }}" class="card-img img-fluid rounded-start"
-                            alt="company_request.png">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <p class="card-text display-4">¿Eres dueño o administrador de una empresa?</p>
-                            <p class="card-text h5">Puedes aplicar a ser parte de nuestra red de empresas y contar con
-                                mayores
-                                beneficios.
-                            </p> <br>
-                            <a href="{{ route('postulant.companyrequest') }}" class="btn btn-danger">
-                                <i class="fa-solid fa-file-circle-plus"></i>
-                                &nbsp;
-                                Aplicar
-                            </a>
-                        </div>
+    <div class="container offers">
+        <div class="card mb-3 mt-5" style="max-width: 100%;">
+            <div class="row g-0">
+                <div class="pt-4 mt-1 mx-4 col-md-3">
+                    <img src="{{ asset('images/company_request.png') }}" class="card-img img-fluid rounded-start"
+                        alt="company_request.png">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text display-4">¿Eres dueño o administrador de una empresa?</p>
+                        <p class="card-text h5">Puedes aplicar a ser parte de nuestra red de empresas y contar con mayores
+                            beneficios.
+                        </p> <br>
+                        <a href="{{ route('postulant.companyrequest') }}" class="btn btn-danger">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                            &nbsp;
+                            Aplicar
+                        </a>
                     </div>
                 </div>
             </div>

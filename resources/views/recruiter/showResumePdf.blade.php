@@ -25,9 +25,16 @@
                       <textarea class="form-control" id="comentario" name="comentario" rows="1"></textarea>
                   </div>
                   <button type="submit" class="btn btn-primary btn-block" >Enviar</button>
-                  <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
-                    ¡El formulario se ha enviado con éxito! <button id="okButton" class="btn btn-success">OK</button>
-                  </div>
+									<div id="successMessage" class="alert alert-success mt-3" style="display: none;">
+										<div class="row">
+												<div class="col-auto">
+														<span id="successText">¡El mensaje se ha enviado con éxito!</span>
+												</div>
+												<div class="col text-right">
+														<button id="okButton" class="btn btn-success rounded">OK</button>
+												</div>
+										</div>
+								</div>
               </form>
           </div>
       </div>
@@ -52,7 +59,7 @@
 </script>
 
 <style>
-  /* Estilo para el mensaje de éxito */
+
   #successMessage {
     color: #155724;
     background-color: #d4edda;
