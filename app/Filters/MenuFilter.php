@@ -110,7 +110,7 @@ class MenuFilter
             ],
             [
                 'text' => 'Posts',
-                'url' =>'/recruiter/jobPosition',
+                'url' => '/recruiter/jobPosition',
                 'icon' => 'fa-solid fa-signs-post',
                 'label_color' => 'success',
             ],

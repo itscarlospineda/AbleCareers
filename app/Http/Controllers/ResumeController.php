@@ -45,12 +45,12 @@ class ResumeController extends Controller
 
     public function pdfShowRecruiter($id, $idJobPos)
     {
-       
+
         $resumes = Resume::all();
         $resume = $resumes->where('id', $id)->first();
-    
-    return view('recruiter.showResumePdf')->with(['resume' => $resume, 'idJobPos' => $idJobPos]);
-     
+
+        return view('recruiter.showResumePdf')->with(['resume' => $resume, 'idJobPos' => $idJobPos]);
+
     }
 
 

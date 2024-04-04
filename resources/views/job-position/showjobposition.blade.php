@@ -1,7 +1,7 @@
 @extends('layouts.recruiter')
 
 @section('template_title')
-    {{ $jobPosition->name ?? __('Show') . " " . __('Job Position') }}
+    {{ $jobPosition->name ?? __('Show') . ' ' . __('Job Position') }}
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Name:</strong>
                             {{ $jobPosition->name }}

@@ -16,7 +16,7 @@ class userhasroleController extends Controller
             'role_id' => $data['role_id'],
         ]);
     }
-    
+
     public function createOrUpdateCEO(array $data)
     {
         // Buscar si el usuario ya tiene asignado el rol de CEO (ID 4)
@@ -25,7 +25,7 @@ class userhasroleController extends Controller
         // Verificar si se encontró un registro existente
         if ($existingRecord) {
             // Borrar el registro existente
-        $existingRecord->delete();
+            $existingRecord->delete();
         }
 
         // Crear un nuevo registro con el rol de CEO
@@ -91,34 +91,34 @@ class userhasroleController extends Controller
         if ($data['role'] === 'manager') {
             return user_has_role::create([
                 'user_id' => $data['user_id'],
-                'role_id' => 3, 
-        ]);
+                'role_id' => 3,
+            ]);
         } elseif ($data['role'] === 'recruiter') {
-        return user_has_role::create([
-            'user_id' => $data['user_id'],
-            'role_id' => 2, 
-        ]);
+            return user_has_role::create([
+                'user_id' => $data['user_id'],
+                'role_id' => 2,
+            ]);
         }
     }
 
 
 
-    
+
 
     public function update_or_destroy(Request $request, $id)
     {
         $action = $request->input('action');
         $tieneCargo = user_has_role::findOrFail($id);
-        
+
         if ($action == 'update') {
             $tieneCargo->update($request->all());
             return redirect()->route('user_has_role.index')->with('success', 'El registro ha sido actualizado exitosamente.');
-        } 
+        }
         if ($action == 'destroy') {
             $tieneCargo->delete();
             return redirect()->route('user_has_role.index')->with('success', 'El registro ha sido eliminado exitosamente.');
         }
     }
-    
+
 }
 

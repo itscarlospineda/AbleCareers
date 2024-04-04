@@ -4,79 +4,81 @@
 
 @section('content')
 
-<!-- Styles -->
-<style>
-  #chartdiv {
-    width: 100%;
-    height: 450px;
-  }
+    <!-- Styles -->
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 450px;
+        }
 
-  .chart-card {
-    margin-top: 20px;
-  }
+        .chart-card {
+            margin-top: 20px;
+        }
 
-  .filter-bar {
-    background-color: #007bff;
-    color: white;
-    height: 100%;
-    width: 220px; /* Aumentar el ancho */
-    float: right;
-    padding: 10px;
-    margin-right: -10px; /* Eliminar el margen */
-  }
+        .filter-bar {
+            background-color: #007bff;
+            color: white;
+            height: 100%;
+            width: 220px;
+            /* Aumentar el ancho */
+            float: right;
+            padding: 10px;
+            margin-right: -10px;
+            /* Eliminar el margen */
+        }
 
-  .filter-item {
-    margin-bottom: 10px;
-  }
+        .filter-item {
+            margin-bottom: 10px;
+        }
 
-  .filter-select {
-    width: 100%;
-  }
-</style>
+        .filter-select {
+            width: 100%;
+        }
+    </style>
 
-<!-- Resources -->
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 
-<!-- Chart code -->
-<p class="h1 m-0 card-header">BIENVENIDO </p>
+    <!-- Chart code -->
+    <p class="h1 m-0 card-header">BIENVENIDO </p>
 
-<div class="card card-success">
-    <div class="card-header">
-        <p class="h1 card-title">COMPANY - </p>
-    </div>
-    <div class="card-body">
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3></h3>
-                <h3> 3</h3>
-              </div>
-            <div class="icon">
-                <i class="fa-solid fa-user-group"></i>
-            </div>
-            <a href="" class="small-box-footer">
-                Administrar
-                <i class="fa-solid fa-arrow-circle-right"></i>
-            </a>
+    <div class="card card-success">
+        <div class="card-header">
+            <p class="h1 card-title">COMPANY - </p>
         </div>
-        <div class="small-box bg-info">
-          <div class="inner">
-              <h3>{{ $postsCount }}</h3>
-              <p>Posts Creados</p>
-          </div>
-          <div class="icon">
-              <i class="fa-solid fa-address-book"></i>
-          </div>
-          <a href="{{ route('jobPosition.index') }}" class="small-box-footer">
-              Administrar
-              <i class="fa-solid fa-arrow-circle-right"></i>
-          </a>
-      </div>
+        <div class="card-body">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3></h3>
+                    <h3> 3</h3>
+                </div>
+                <div class="icon">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <a href="" class="small-box-footer">
+                    Administrar
+                    <i class="fa-solid fa-arrow-circle-right"></i>
+                </a>
+            </div>
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $postsCount }}</h3>
+                    <p>Posts Creados</p>
+                </div>
+                <div class="icon">
+                    <i class="fa-solid fa-address-book"></i>
+                </div>
+                <a href="{{ route('jobPosition.index') }}" class="small-box-footer">
+                    Administrar
+                    <i class="fa-solid fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
-</div>
 
-{{--
+    {{--
 <!-- HTML -->
 <div class="row">
   <div class="col-md-8">

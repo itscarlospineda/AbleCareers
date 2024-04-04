@@ -9,7 +9,8 @@
 
         <div class="card-body">
             <!-- Formulario para actualizar los datos de categoria -->
-            <form action="{{ route('admin.company.update_or_destroy',$company->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.company.update_or_destroy', $company->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

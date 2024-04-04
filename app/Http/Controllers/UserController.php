@@ -6,6 +6,7 @@ use App\Models\CompanyUser;
 use App\Models\Job_Position;
 use App\Models\JopoResume;
 use App\Models\Company;
+use App\Models\Notifications_Applicants;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\user_has_role;
@@ -38,7 +39,13 @@ class UserController extends Controller
         $applyCount = JopoResume::whereIn('resume_id', $userAsUser->resumes()->pluck('id'))
             ->where('is_active', 'ACTIVE')
             ->count();
-        return view('home.commonhome', compact('user', 'applyCount', 'postulantRequestCount'));
+        $acceptedCount = Notifications_Applicants::whereIn('resume_id', $userAsUser->resumes()->pluck('id'))
+            ->where('estado', 'aceptado')
+            ->count();
+        $deniedCount = Notifications_Applicants::whereIn('resume_id', $userAsUser->resumes()->pluck('id'))
+            ->where('estado', 'rechazado')
+            ->count();
+        return view('home.commonhome', compact('user', 'applyCount', 'postulantRequestCount', 'acceptedCount', 'deniedCount'));
     }
 
     public function adminIndex()
@@ -63,7 +70,7 @@ class UserController extends Controller
         //SOLICITUDES PARA SER COMPANY
         $pendingRequests = UserRequest::all()->where('request_status', 'aplicando');
         $pendingRequestsCount = $pendingRequests->count();
-        return view('admin.adminhome', compact('companiesCount', 'usersCount', 'postsCount','pendingRequestsCount','user',));
+        return view('admin.adminhome', compact('companiesCount', 'usersCount', 'postsCount', 'pendingRequestsCount', 'user', ));
     }
 
 

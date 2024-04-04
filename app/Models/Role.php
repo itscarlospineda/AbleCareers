@@ -10,7 +10,9 @@ class Role extends Model
     protected $table = 'role'; // Especifica el nombre de la tabla
 
     protected $fillable = [
-        'role_name', 'role_desc', 'is_active',
+        'role_name',
+        'role_desc',
+        'is_active',
     ];
     public function users()
     {

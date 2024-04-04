@@ -23,10 +23,10 @@
                 <div class="card border-dark">
                     <!--<div class="card-header"><h5 class="card-title">Solicitudes de Empresa</h5></div>
 
-                                                  <div class="container mt-3">
-                                                        <a class="btn btn-success col-auto" href="/createcategories">
-                                                            <i class="bi bi-journal-arrow-up"></i>&nbsp;Crear Nuevo</a>
-                                                  </div>-->
+                                                      <div class="container mt-3">
+                                                            <a class="btn btn-success col-auto" href="/createcategories">
+                                                                <i class="bi bi-journal-arrow-up"></i>&nbsp;Crear Nuevo</a>
+                                                      </div>-->
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -43,7 +43,7 @@
                                     @foreach ($activeCompanyRecruiters as $companyUser)
                                         <tr>
                                             <td class="fw-bold">{{ $companyUser->id }}</td>
-                                            <td>{{ $companyUser->user->name }} {{$companyUser->user->lastName}}</td>
+                                            <td>{{ $companyUser->user->name }} {{ $companyUser->user->lastName }}</td>
                                             @foreach ($companyUser->user->roles as $role)
                                                 <td>{{ $role->role_name }}</td>
                                             @endforeach

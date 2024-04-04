@@ -1,23 +1,24 @@
 @extends('adminlte::page')
 
 @section('content')
-<head>
 
-    <link rel="stylesheet" href="//cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
-</head>
+    <head>
 
-<div class="col">
-    <section class="py-4">
+        <link rel="stylesheet" href="//cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+    </head>
 
-      <div class="col py-4">
+    <div class="col">
+        <section class="py-4">
+
+            <div class="col py-4">
                 <h1>Creación de categorias</h1> <br>
             </div>
 
             <div class="col">
                 <div class="card-body text-dark ">
 
-                    <form action="{{ route('admin.category.store')}}" method="POST">
-                    @csrf
+                    <form action="{{ route('admin.category.store') }}" method="POST">
+                        @csrf
 
                         <div class="mb-3">
                             <label for="title" class="form-label">Nombre de categoria</label>
@@ -35,17 +36,16 @@
                     </form>
                 </div>
             </div>
-        </div>
     </div>
-</div>
+    </div>
+    </div>
 
     </section>
-  </div>
+    </div>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
-  <script>let table = new DataTable('#example');</script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="//cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#example');
+    </script>
 @endsection
-
-

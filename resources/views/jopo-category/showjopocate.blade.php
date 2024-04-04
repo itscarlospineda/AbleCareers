@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('template_title')
-    {{ $jopoCategory->name ?? __('Show') . " " . __('Jopo Category') }}
+    {{ $jopoCategory->name ?? __('Show') . ' ' . __('Jopo Category') }}
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Category Id:</strong>
                             {{ $jopoCategory->category_id }}

@@ -17,13 +17,16 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{ $recruiter->name }}">
                     <label for="lastName">Apellido</label>
 
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ $recruiter->phoneNumber }}">
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                        value="{{ $recruiter->phoneNumber }}">
                     <label for="email">Correo</label>
 
-                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{ $recruiter->lastName }}">
+                    <input type="text" class="form-control" id="lastName" name="lastName"
+                        value="{{ $recruiter->lastName }}">
                     <label for="phoneNumber">Telefono</label>
 
-                    <input type="text" class="form-control" id="email" name="email" value="{{ $recruiter->email }}">
+                    <input type="text" class="form-control" id="email" name="email"
+                        value="{{ $recruiter->email }}">
                     <label for="oldPassword">Clave Anterior</label>
 
                     <input type="password" class="form-control" id="oldPassword" name="oldPassword" value="">
@@ -31,8 +34,9 @@
 
                     <input type="password" class="form-control" id="newPassword" name="newPassword" value="">
                     <label for="confirmNewPassword">Confirme clave Nueva</label>
-                    
-                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" value="">
+
+                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword"
+                        value="">
                 </div>
 
                 <br>
@@ -41,7 +45,7 @@
                     &nbsp;
                     Actualizar
                 </button>
-        
+
             </form>
         </div>
 

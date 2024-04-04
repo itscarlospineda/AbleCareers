@@ -16,7 +16,8 @@
                     <label for="name">Nombre</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ $manager->name }}">
                     <label for="lastName">Apellido</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{ $manager->lastName }}">
+                    <input type="text" class="form-control" id="lastName" name="lastName"
+                        value="{{ $manager->lastName }}">
                     <label for="phoneNumber">Telefono</label>
                     <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
                         value="{{ $manager->phoneNumber }}">

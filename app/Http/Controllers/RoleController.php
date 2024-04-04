@@ -34,14 +34,14 @@ class RoleController extends Controller
     {
         $action = $request->input('action');
         $role = Role::findOrFail($id);
-        
+
         if ($action == 'update') {
             /* VALIDACIONES PARA ACTUALIZACIÓN */
             $role->name = $request->name;
             $role->desc = $request->desc;
             $role->save();
             return back()->with('message', 'El rol ha sido actualizado exitosamente.');
-        } 
+        }
         if ($action == 'destroy') {
             $role->is_active = false;
             $role->save();

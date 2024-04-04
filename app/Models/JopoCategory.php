@@ -26,9 +26,9 @@ class JopoCategory extends Model
 
     static $rules = [
         'id' => 'required',
-		'category_id' => 'required',
-		'job_position_id' => 'required',
-		'is_active' => 'required|string',
+        'category_id' => 'required',
+        'job_position_id' => 'required',
+        'is_active' => 'required|string',
     ];
 
     protected $perPage = 20;
@@ -38,7 +38,7 @@ class JopoCategory extends Model
      *
      * @var array
      */
-    protected $fillable = ['category_id','job_position_id','is_active'];
+    protected $fillable = ['category_id', 'job_position_id', 'is_active'];
 
 
     /**

@@ -16,7 +16,8 @@
                         <span class="card-title">{{ __('Create') }} Jopo Category</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('jopo-categories.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('jopo-categories.store') }}" role="form"
+                            enctype="multipart/form-data">
                             @csrf
 
                             @include('jopo-category.form')

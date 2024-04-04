@@ -70,7 +70,7 @@ class JobPositionController extends Controller
         $activeUser = Auth::user();  //Usuario Logeado
         $user = User::findOrFail($activeUser->id); //Busca el usuario activo
         $companyName = $user->company->comp_name;  //Captura el nombre de la compañia relacionada al usuario activo
-        return view('ceo.ceo-createPost',compact('companies', 'companyName'));
+        return view('ceo.ceo-createPost', compact('companies', 'companyName'));
     }
 
     /**

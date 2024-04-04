@@ -27,13 +27,13 @@ class Company extends Model
 {
     protected $table = 'company';
     static $rules = [
-		'comp_name' => 'required|string',
-		'comp_mail' => 'required|string',
-		'comp_phone' => 'required|string',
-		'comp_city' => 'required|string',
-		'comp_depart' => 'required|string',
-		'user_id' => 'required',
-		'is_active' => 'required',
+        'comp_name' => 'required|string',
+        'comp_mail' => 'required|string',
+        'comp_phone' => 'required|string',
+        'comp_city' => 'required|string',
+        'comp_depart' => 'required|string',
+        'user_id' => 'required',
+        'is_active' => 'required',
     ];
 
     protected $perPage = 20;
@@ -43,7 +43,7 @@ class Company extends Model
      *
      * @var array
      */
-    protected $fillable = ['comp_name','comp_mail','comp_phone','comp_city','comp_depart','user_id','is_active'];
+    protected $fillable = ['comp_name', 'comp_mail', 'comp_phone', 'comp_city', 'comp_depart', 'user_id', 'is_active'];
 
 
     /**

@@ -15,7 +15,7 @@ class Job_Position extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class, 'company_id','id');
+        return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
     // Método para determinar si el trabajo ya ha sido aplicado
@@ -35,5 +35,5 @@ class Job_Position extends Model
     {
         return $this->jopoResumes()->where('resume_id', $userId)->exists();
     }
-    
+
 }
